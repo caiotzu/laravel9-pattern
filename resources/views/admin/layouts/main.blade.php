@@ -12,23 +12,31 @@
     <meta name="keywords" content="Pattern, Laravel 9, Tailwind">
     <meta name="author" content="Caio Costa">
 
-    @yield('adminLoginHead')
+    @yield('adminHead')
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    @yield('adminLoginCss')
+    @yield('adminCss')
 
     @vite('resources/css/app.css')
   </head>
 
-  <body class="login">
-    @yield('adminLoginContent')
+  <body class="py-5 md:py-0">
+    @switch($layout_scheme)
+      @case('top-menu')
+        @include('admin.layouts.top-menu')
+        @break
+      @case('simple-menu')
+        @include('admin.layouts.simple-menu')
+        @break
+      @default
+        @include('admin.layouts.side-menu')
+    @endswitch
 
-    @include('./layouts/components/dark-mode-switcher')
-    @include('./layouts/components/main-color-switcher')
-
+    @include('./admin/layouts/components/layout-mode-switcher')
+    @include('./admin/layouts/components/dark-mode-switcher')
+    @include('./admin/layouts/components/main-color-switcher')
     @vite('resources/js/app.js')
 
-    @yield('adminLoginJs')
+    @yield('adminJs')
   </body>
 </html>
-

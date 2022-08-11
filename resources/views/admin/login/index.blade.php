@@ -43,7 +43,7 @@
           </div>
           <div class="intro-x mt-5 xl:mt-8 text-center xl:text-left">
             <button id="btn-login" class="btn btn-primary py-3 px-4 w-full xl:w-32 xl:mr-3 align-top">
-              <i class="fa-solid fa-right-to-bracket"></i>&nbsp;&nbsp;Entrar
+              Entrar
             </button>
           </div>
         </div>
@@ -78,7 +78,7 @@
         }).then(res => {
           location.href = '/admin/home'
         }).catch(err => {
-          $('#btn-login').html(`<i class="fa-solid fa-right-to-bracket"></i>&nbsp;&nbsp;Entrar`)
+          $('#btn-login').html(`Entrar`)
           if (err.response.data.message != 'Wrong email or password.') {
             for (const [key, val] of Object.entries(err.response.data.errors)) {
               $(`#${key}`).addClass('border-danger')

@@ -13,7 +13,7 @@
             <i data-lucide="x-circle" class="w-8 h-8 text-white transform -rotate-90"></i>
         </a>
         <ul class="scrollable__content py-2">
-            @foreach ($side_menu as $menuKey => $menu)
+            @foreach ($admin_side_menu as $menuKey => $menu)
                 @if ($menu == 'devider')
                     <li class="menu__devider my-6"></li>
                 @else

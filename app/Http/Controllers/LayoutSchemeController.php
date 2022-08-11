@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ColorSchemeController extends Controller {
+class LayoutSchemeController extends Controller {
   /**
    * Show specified view.
    *
@@ -14,7 +14,7 @@ class ColorSchemeController extends Controller {
    */
   public function switch(Request $request) {
     session([
-      'color_scheme' => $request->color_scheme
+      'layout_scheme' => $request->layout_scheme
     ]);
 
     return back();

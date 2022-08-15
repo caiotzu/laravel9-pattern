@@ -18,37 +18,37 @@
           <li class="menu__devider my-6"></li>
         @else
           <li>
-            <a href="{{ isset($menu['route_name']) ? route($menu['route_name'], $menu['params']) : 'javascript:;' }}" class="{{ $first_level_active_index == $menuKey ? 'menu menu--active' : 'menu' }}">
+            <a href="{{ isset($menu['route_name']) ? route($menu['route_name'], $menu['params']) : 'javascript:;' }}" class="{{ $admin_first_level_active_index == $menuKey ? 'menu menu--active' : 'menu' }}">
               <div class="menu__icon">
                 <i data-lucide="{{ $menu['icon'] }}"></i>
               </div>
               <div class="menu__title">
                 {{ $menu['title'] }}
                 @if (isset($menu['sub_menu']))
-                  <i data-lucide="chevron-down" class="menu__sub-icon {{ $first_level_active_index == $menuKey ? 'transform rotate-180' : '' }}"></i>
+                  <i data-lucide="chevron-down" class="menu__sub-icon {{ $admin_first_level_active_index == $menuKey ? 'transform rotate-180' : '' }}"></i>
                 @endif
               </div>
             </a>
             @if (isset($menu['sub_menu']))
-              <ul class="{{ $first_level_active_index == $menuKey ? 'menu__sub-open' : '' }}">
+              <ul class="{{ $admin_first_level_active_index == $menuKey ? 'menu__sub-open' : '' }}">
                 @foreach ($menu['sub_menu'] as $subMenuKey => $subMenu)
                   <li>
-                    <a href="{{ isset($subMenu['route_name']) ? route($subMenu['route_name'], $subMenu['params']) : 'javascript:;' }}" class="{{ $second_level_active_index == $subMenuKey ? 'menu menu--active' : 'menu' }}">
+                    <a href="{{ isset($subMenu['route_name']) ? route($subMenu['route_name'], $subMenu['params']) : 'javascript:;' }}" class="{{ $admin_second_level_active_index == $subMenuKey ? 'menu menu--active' : 'menu' }}">
                       <div class="menu__icon">
                         <i data-lucide="activity"></i>
                       </div>
                       <div class="menu__title">
                         {{ $subMenu['title'] }}
                         @if (isset($subMenu['sub_menu']))
-                          <i data-lucide="chevron-down" class="menu__sub-icon {{ $second_level_active_index == $subMenuKey ? 'transform rotate-180' : '' }}"></i>
+                          <i data-lucide="chevron-down" class="menu__sub-icon {{ $admin_second_level_active_index == $subMenuKey ? 'transform rotate-180' : '' }}"></i>
                         @endif
                       </div>
                     </a>
                     @if (isset($subMenu['sub_menu']))
-                      <ul class="{{ $second_level_active_index == $subMenuKey ? 'menu__sub-open' : '' }}">
+                      <ul class="{{ $admin_second_level_active_index == $subMenuKey ? 'menu__sub-open' : '' }}">
                         @foreach ($subMenu['sub_menu'] as $lastSubMenuKey => $lastSubMenu)
                           <li>
-                            <a href="{{ isset($lastSubMenu['route_name']) ? route($lastSubMenu['route_name'], $lastSubMenu['params']) : 'javascript:;' }}" class="{{ $third_level_active_index == $lastSubMenuKey ? 'menu menu--active' : 'menu' }}">
+                            <a href="{{ isset($lastSubMenu['route_name']) ? route($lastSubMenu['route_name'], $lastSubMenu['params']) : 'javascript:;' }}" class="{{ $admin_third_level_active_index == $lastSubMenuKey ? 'menu menu--active' : 'menu' }}">
                               <div class="menu__icon">
                                 <i data-lucide="zap"></i>
                               </div>

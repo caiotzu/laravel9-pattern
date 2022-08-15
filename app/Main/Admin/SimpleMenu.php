@@ -14,16 +14,18 @@ class SimpleMenu {
       'dashboard' => [
         'icon' => 'home',
         'title' => 'Dashboard',
-        // 'sub_menu' => [
-        //   'dashboard-overview-1' => [
-        //     'icon' => '',
-        //     'route_name' => 'dashboard-overview-1',
-        //     'params' => [
-        //         'layout' => 'side-menu',
-        //     ],
-        //     'title' => 'Overview 1'
-        //   ],
-        // ]
+      ],
+      'settings' => [
+        'icon' => 'settings',
+        'title' => 'Configurações',
+        'sub_menu' => [
+          'users' => [
+            'icon' => 'users',
+            'route_name' => 'admin.users.index',
+            'params' => [],
+            'title' => 'Usuários'
+          ],
+        ]
       ],
     ];
   }

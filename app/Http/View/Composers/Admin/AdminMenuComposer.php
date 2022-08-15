@@ -24,9 +24,9 @@ class AdminMenuComposer
       $view->with('admin_top_menu', TopMenu::menu());
       $view->with('admin_side_menu', SideMenu::menu());
       $view->with('admin_simple_menu', SimpleMenu::menu());
-      $view->with('first_level_active_index', $activeMenu['first_level_active_index']);
-      $view->with('second_level_active_index', $activeMenu['second_level_active_index']);
-      $view->with('third_level_active_index', $activeMenu['third_level_active_index']);
+      $view->with('admin_first_level_active_index', $activeMenu['first_level_active_index']);
+      $view->with('admin_second_level_active_index', $activeMenu['second_level_active_index']);
+      $view->with('admin_third_level_active_index', $activeMenu['third_level_active_index']);
       $view->with('page_name', $pageName);
       $view->with('layout', $layout);
     }

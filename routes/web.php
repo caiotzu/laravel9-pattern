@@ -11,6 +11,7 @@ use App\Http\Controllers\ColorSchemeController;
 use App\Http\Controllers\Admin\ {
   AdminAuthController,
   AdminHomeController,
+  AdminUserController,
 };
 
 // themes route
@@ -31,6 +32,10 @@ use App\Http\Controllers\Admin\ {
         Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.auth.logout');
 
         Route::get('/home', [AdminHomeController::class, 'index'])->name('admin.home.index');
+
+        // settings routes
+          Route::get('/users', [AdminUserController::class, 'index'])->name('admin.users.index');
+        //---
       });
     //---
   });

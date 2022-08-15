@@ -1,28 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+
 // imports theme
 use App\Http\Controllers\DarkModeController;
 use App\Http\Controllers\LayoutSchemeController;
 use App\Http\Controllers\ColorSchemeController;
-
 
 // imports admin
 use App\Http\Controllers\Admin\ {
   AdminAuthController,
   AdminHomeController,
 };
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 // themes route
   Route::get('dark-mode-switcher', [DarkModeController::class, 'switch'])->name('dark-mode-switcher');

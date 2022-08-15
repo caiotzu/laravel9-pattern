@@ -23,8 +23,10 @@
   <body class="login">
     @yield('adminLoginContent')
 
-    @include('./layouts/components/dark-mode-switcher')
-    @include('./layouts/components/main-color-switcher')
+    <div class="invisible  md:visible">
+      @include('./admin/layouts/components/dark-mode-switcher')
+      @include('./admin/layouts/components/main-color-switcher')
+    </div>
 
     @vite('resources/js/app.js')
 

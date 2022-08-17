@@ -34,7 +34,7 @@ use App\Http\Controllers\Admin\ {
         Route::get('/home', [AdminHomeController::class, 'index'])->name('admin.home.index');
 
         // settings routes
-          Route::get('/users', [AdminUserController::class, 'index'])->name('admin.users.index');
+          Route::get('/users', [AdminUserController::class, 'index'])->name('admin.users.index')->middleware('check.admin.permission:USER_INDEXss');
         //---
       });
     //---

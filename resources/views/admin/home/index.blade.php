@@ -5,6 +5,10 @@
 @endsection
 
 @section('adminContent')
+@if($errors->any())
+    {{ implode('', $errors->all('<div>:message</div>')) }}
+@endif
+
 <div class="grid grid-cols-12">
   <div class="col-span-12 mt-8">
     <div class="box p-5 text-center">

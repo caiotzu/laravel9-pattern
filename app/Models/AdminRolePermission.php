@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class AdminRolePermission extends Model {
 
-  public function role() {
+  public function adminRole() {
     return $this->belongsTo(AdminRole::class, 'role_id', 'id');
   }
 
-  public function permission() {
+  public function adminPermission() {
     return $this->belongsTo(AdminPermission::class, 'permission_id', 'id');
   }
 }

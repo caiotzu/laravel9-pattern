@@ -24,8 +24,8 @@ class AdminAuthController extends Controller {
     }
 
     $arrPermissions = [];
-    foreach(Auth::guard('admin')->user()->role->rolePermissions as $permission) {
-      array_push($arrPermissions, $permission->permission->key);
+    foreach(Auth::guard('admin')->user()->adminRole->adminRolePermissions as $permission) {
+      array_push($arrPermissions, $permission->adminPermission->key);
     }
     Session::put('userPermission', $arrPermissions);
   }

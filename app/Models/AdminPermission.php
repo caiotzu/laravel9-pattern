@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AdminPermission extends Model {
 
-  public function rolePermissions() {
+  public function adminRolePermissions() {
     return $this->hasMany(AdminRolePermission::class, 'permission_id', 'id');
   }
 }

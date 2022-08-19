@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class AdminRole extends Model {
 
-  public function users() {
+  public function adminUsers() {
     return $this->hasMany(AdminUser::class, 'role_id', 'id');
   }
 
-  public function rolePermissions() {
+  public function adminRolePermissions() {
     return $this->hasMany(AdminRolePermission::class, 'role_id', 'id');
   }
 }

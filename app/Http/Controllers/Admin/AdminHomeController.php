@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminHomeController extends Controller {
   public function index() {
-    // dd('chegou aqui, montar o index', Auth::guard('admin')->user()->name);
     return view('admin.home.index');
   }
 }

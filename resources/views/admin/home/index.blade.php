@@ -6,7 +6,35 @@
 
 @section('adminContent')
 @if($errors->any())
-    {{ implode('', $errors->all('<div>:message</div>')) }}
+  <div id="errorMessage" class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mt-4 relative" role="alert">
+    <p class="font-bold text-lg mb-2 relative">Erro</p>
+    <p>{!! implode('<br>', $errors->all('<span class="text-lg">&raquo;</span> :message')) !!}</p>
+    <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+      <a onClick="(function(){document.getElementById('errorMessage').remove();return false;})();return false;">
+        <i data-lucide="x" role="button"></i>
+      </a>
+    </span>
+  </div>
+@endif
+
+@if(isset($successMessage))
+<div id="successMessage" class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mt-4 relative" role="alert">
+  <p class="font-bold text-lg mb-2 relative">Sucesso</p>
+  <p>
+    @if(is_array($successMessage))
+      @foreach($successMessage as $message)
+        <span class="text-lg">&raquo;</span> {{$message}}<br/>
+      @endforeach
+    @else
+      <span class="text-lg">&raquo;</span> {{$successMessage}}
+    @endif
+  </p>
+  <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
+    <a onClick="(function(){document.getElementById('successMessage').remove();return false;})();return false;">
+      <i data-lucide="x" role="button"></i>
+    </a>
+  </span>
+</div>
 @endif
 
 <div class="grid grid-cols-12">

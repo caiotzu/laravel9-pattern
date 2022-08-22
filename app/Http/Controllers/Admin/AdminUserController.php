@@ -3,12 +3,60 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+
+use App\Http\Controllers\Controller;
+
+use App\Http\Requests\StoreAdminUserRequest;
+
+use App\Services\AdminUserService;
+use App\Services\AdminRoleService;
+
+use Exception;
 
 class AdminUserController extends Controller {
 
+  protected $adminUserService;
+  protected $adminRoleService;
+
+  public function __construct(AdminUserService $adminUserService, AdminRoleService $adminRoleService) {
+    $this->adminUserService = $adminUserService;
+    $this->adminRoleService = $adminRoleService;
+  }
+
   public function index() {
-    return view('admin.user.index');
+    try {
+      $users = $this->adminUserService->listAllAdminUsers();
+      return view('admin.user.index', compact('users'));
+    } catch (Exception $e) {
+      return redirect()->route('admin.home.index')->withErrors('Não foi possível carregar a lista de usuários');
+    }
+  }
+
+  public function create() {
+    try {
+      $roles = $this->adminRoleService->listAllAdminRoles();
+      return view('admin.user.create', compact('roles'));
+    } catch (Exception $e) {
+      return redirect()->route('admin.users.index')->withErrors('Não foi possível carregar o formulário de cadastro do usuário');
+    }
+  }
+
+  public function store(StoreAdminUserRequest $request) {
+    try {
+      $user = $this->adminUserService->createAdminUser($request->all());
+      $users = $this->adminUserService->listAllAdminUsers();
+
+      return view('admin.user.index', compact('users'))->with([
+        'successMessage' => 'O usuário <strong>'.$user->name.'</strong> foi cadastrado com sucesso!'
+      ]);
+
+    } catch (Exception $e) {
+      return back()->withErrors('Ocorreu um erro ao cadastrar os dados do usuário')->withInput();
+    }
+  }
+
+  public function edit($id) {
+    dd($id);
   }
 }

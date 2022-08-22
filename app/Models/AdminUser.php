@@ -10,9 +10,11 @@ class AdminUser extends Authenticatable {
   }
 
   protected $fillable = [
+    'role_id',
     'name',
     'email',
     'password',
+    'active'
   ];
 
   protected $hidden = [

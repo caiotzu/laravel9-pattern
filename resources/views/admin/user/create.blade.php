@@ -1,7 +1,7 @@
 @extends('../admin/layouts/main')
 
 @section('adminHead')
-    <title>Home - Pattern Laravel 9</title>
+    <title>User - Pattern Laravel 9</title>
 @endsection
 
 @section('adminContent')
@@ -39,13 +39,27 @@
 
 <div class="grid grid-cols-12">
   <div class="col-span-12 mt-8">
-    <div class="box p-5 text-center">
-      <p class="text-3xl font-bold text-gray-600">
-        Seja bem-vindo {{ auth()->guard('admin')->user()->name}}!
-      </p>
-      <p class="text-sm text-gray-400">
-        Área exclusiva para administradores
-      </p>
+    <div class="box p-5">
+      <div class="flex justify-between p-1 border-b border-slate-200/60 dark:border-darkmode-400">
+        <p class="text-2xl font-bold text-gray-600">
+          Cadastro de usuário
+        </p>
+      </div>
+      <form action="{{ route('admin.users.store') }}" method="post" class="mt-3">
+        <div class="grid grid-cols-12 mt-3 mb-3">
+          @include('admin.user._partials.form')
+        </div>
+        <div class="flex justify-center	pt-5 border-t border-slate-200/60 dark:border-darkmode-400">
+          @if(in_array('USER_CREATE',Session::get('userPermission')))
+            <button class="btn btn-primary w-32 mr-2 mb-2 ">
+              Salvar
+            </button>
+          @endif
+          <a href="{{ route('admin.users.index') }}" class="btn btn-secondary w-32 mr-2 mb-2 ">
+            Cancelar
+          </a>
+        </div>
+      </form>
     </div>
   </div>
 </div>

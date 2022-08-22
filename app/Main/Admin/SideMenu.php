@@ -14,11 +14,13 @@ class SideMenu {
       'dashboard' => [
         'icon' => 'home',
         'title' => 'Dashboard',
+        'other_route' => [],
         'permissions' => [],
       ],
       'settings' => [
         'icon' => 'settings',
         'title' => 'Configurações',
+        'other_route' => [],
         'permissions' => [
           'USER_MENU'
         ],
@@ -26,12 +28,27 @@ class SideMenu {
           'users' => [
             'icon' => 'users',
             'route_name' => 'admin.users.index',
+            'other_route' => [
+              'admin.users.create',
+              'admin.users.edit',
+            ],
             'params' => [],
             'title' => 'Usuários',
             'permissions' => [
               'USER_MENU'
             ]
           ],
+          // 'permissions' => [
+          //   'icon' => 'unlock',
+          //   'route_name' => 'admin.users.index',
+          //   'other_route' => [
+          //   ],
+          //   'params' => [],
+          //   'title' => 'Permissões',
+          //   'permissions' => [
+          //     'USER_MENU'
+          //   ]
+          // ],
         ],
       ],
     ];

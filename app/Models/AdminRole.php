@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class AdminRole extends Model {
 
+  protected $fillable = [
+    'description',
+  ];
+
   public function adminUsers() {
     return $this->hasMany(AdminUser::class, 'role_id', 'id');
   }

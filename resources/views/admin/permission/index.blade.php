@@ -1,7 +1,7 @@
 @extends('../admin/layouts/main')
 
 @section('adminHead')
-    <title>User - Pattern Laravel 9</title>
+    <title>Permission - Pattern Laravel 9</title>
 @endsection
 
 @section('adminContent')
@@ -42,11 +42,11 @@
     <div class="box p-5">
       <div class="flex justify-between p-1 border-b border-slate-200/60 dark:border-darkmode-400">
         <p class="text-2xl font-bold text-gray-600">
-          Listagem de usuários
+          Listagem de permissões
         </p>
 
-        @if(in_array('USER_CREATE',Session::get('userPermission')))
-          <a href="{{ route('admin.users.create') }}" class="btn btn-primary w-32 mr-2 mb-2 ">
+        @if(in_array('PERMISSION_CREATE',Session::get('userPermission')))
+          <a href="{{ route('admin.permissions.create') }}" class="btn btn-primary w-32 mr-2 mb-2 ">
             Adicionar
           </a>
         @endif
@@ -55,26 +55,14 @@
         <table class="table">
           <thead>
             <tr>
-              <th class="whitespace-nowrap">Nome</th>
-              <th class="whitespace-nowrap">E-mail</th>
               <th class="whitespace-nowrap">Função</th>
-              <th class="whitespace-nowrap">Status</th>
               <th class="whitespace-nowrap text-center">Ações</th>
             </tr>
           </thead>
           <tbody>
-            @foreach($users as $user)
+            @foreach($roles as $role)
               <tr>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
-                <td>{{ $user->adminRole->description }}</td>
-                <td>
-                  @if($user->active)
-                    <span class="bg-green-200 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">Ativo</span>
-                  @else
-                    <span class="bg-red-200 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">Inativo</span>
-                  @endif
-                </td>
+                <td>{{ $role->description }}</td>
                 <td>
                   <div class="text-center">
                     <div class="dropdown inline-block" data-tw-placement="bottom-start">
@@ -83,9 +71,9 @@
                       </button>
                       <div class="dropdown-menu w-48">
                         <ul class="dropdown-content">
-                          @if(in_array('USER_EDIT',Session::get('userPermission')))
+                          @if(in_array('PERMISSION_EDIT',Session::get('userPermission')))
                             <li>
-                              <a href="{{route('admin.users.edit', $user->id)}}" class="dropdown-item">
+                              <a href="{{route('admin.permissions.edit', $role->id)}}" class="dropdown-item">
                                 <i data-lucide="edit-2" class="w-4 h-4 mr-2"></i> Editar
                               </a>
                             </li>
@@ -103,7 +91,7 @@
       </div>
 
       <div class="pt-5 border-t border-slate-200/60 dark:border-darkmode-400">
-        {{ $users->links() }}
+        {{ $roles->links() }}
       </div>
     </div>
   </div>

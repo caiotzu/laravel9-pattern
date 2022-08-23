@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\StoreAdminUserRequest;
@@ -27,7 +24,8 @@ class AdminUserController extends Controller {
 
   public function index() {
     try {
-      $users = $this->adminUserService->listAllAdminUsers();
+      $users = $this->adminUserService->listAllAdminUsersWithPagination();
+
       return view('admin.user.index', compact('users'));
     } catch (Exception $e) {
       return redirect()->route('admin.home.index')->withErrors('Não foi possível carregar a lista de usuários');

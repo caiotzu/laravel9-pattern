@@ -2,13 +2,18 @@
 
 namespace App\Services;
 
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 
 use App\Models\AdminUser;
 
 class AdminUserService {
-  public function listAllAdminUsers() {
-    return AdminUser::paginate(10);
+  public function listAllAdminUsers(): Collection {
+    return AdminUser::with('adminRole')->get();
+  }
+
+  public function listAllAdminUsersWithPagination(): LengthAwarePaginator {
+    return AdminUser::with('adminRole')->paginate(10);
   }
 
   public function getAdminUserById(Int $id): AdminUser {

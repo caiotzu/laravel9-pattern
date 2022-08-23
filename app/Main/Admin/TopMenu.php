@@ -20,7 +20,8 @@ class TopMenu {
         'icon' => 'settings',
         'title' => 'Configurações',
         'permissions' => [
-          'USER_MENU'
+          'USER_MENU',
+          'PERMISSION_MENU'
         ],
         'sub_menu' => [
           'users' => [
@@ -30,6 +31,19 @@ class TopMenu {
             'title' => 'Usuários',
             'permissions' => [
               'USER_MENU'
+            ]
+          ],
+          'permissions' => [
+            'icon' => 'unlock',
+            'route_name' => 'admin.permissions.index',
+            'other_route' => [
+              'admin.permissions.create',
+              'admin.permissions.edit',
+            ],
+            'params' => [],
+            'title' => 'Permissões',
+            'permissions' => [
+              'PERMISSION_MENU'
             ]
           ],
         ],

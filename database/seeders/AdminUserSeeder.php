@@ -17,10 +17,10 @@ class AdminUserSeeder extends Seeder
      */
     public function run()
     {
-        $roleId = DB::table('admin_roles')->where('description', 'Admin')->first();
+        $role = DB::table('admin_roles')->where('description', 'Administrador')->first();
 
         DB::table("admin_users")->insert([
-            "role_id" => $roleId->id,
+            "role_id" => $role->id,
             "name"  => "Caio Costa",
             "email" => "caio@tdex.com.br",
             "password" => bcrypt("Tdex@dev1"),

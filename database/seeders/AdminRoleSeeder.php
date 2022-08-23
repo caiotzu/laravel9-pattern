@@ -17,7 +17,7 @@ class AdminRoleSeeder extends Seeder
     public function run()
     {
         DB::table("admin_roles")->insert([
-            "description" => "Admin",
+            "description" => "Administrador",
             "created_at" => date("Y-m-d H:i:s")
         ]);
     }

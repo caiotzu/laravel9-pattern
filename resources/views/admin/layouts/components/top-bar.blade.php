@@ -24,7 +24,7 @@
         <ul class="dropdown-content bg-primary/80 before:block before:absolute before:bg-black before:inset-0 before:rounded-md before:z-[-1] text-white">
           <li class="p-2">
               <div class="font-medium">{{ auth()->guard('admin')->user()->name }}</div>
-              <div class="text-xs text-white/60 mt-0.5 dark:text-slate-500">Administrador</div>
+              <div class="text-xs text-white/60 mt-0.5 dark:text-slate-500">{{ auth()->guard('admin')->user()->adminRole->description }}</div>
           </li>
           <li>
             <hr class="dropdown-divider border-white/[0.08]">

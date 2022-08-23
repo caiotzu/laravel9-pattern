@@ -22,12 +22,26 @@
     <div class="box p-5">
       <div class="flex justify-between p-1 border-b border-slate-200/60 dark:border-darkmode-400">
         <p class="text-2xl font-bold text-gray-600">
-          Cadastro de usuário
+          Edição do usuário - {{ $user->name }}
         </p>
       </div>
-      <form action="{{ route('admin.users.store') }}" method="post" class="mt-3">
+      <form action="{{ route('admin.users.update', $user->id) }}" method="post" class="mt-3">
+        @method('PUT')
         <div class="grid grid-cols-12 mt-3 mb-3">
           @include('admin.user._partials.form')
+
+          <div class="col-span-4 p-2">
+            <div class="form-check mt-2">
+              <input id="active" name="active" class="form-check-input" type="checkbox"
+                @if(!!old())
+                  @if(old('active') == 'on') checked @endif
+                @elseif($user->active)
+                  checked
+                @endif
+              >
+              <label class="form-check-label" for="active">Ativo</label>
+            </div>
+          </div>
         </div>
         <div class="flex justify-center	pt-5 border-t border-slate-200/60 dark:border-darkmode-400">
           @if(in_array('USER_CREATE',Session::get('userPermission')))

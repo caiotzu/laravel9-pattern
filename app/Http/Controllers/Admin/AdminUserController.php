@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\StoreAdminUserRequest;
+use App\Http\Requests\UpdateAdminUserRequest;
 
 use App\Services\AdminUserService;
 use App\Services\AdminRoleService;
@@ -45,9 +46,8 @@ class AdminUserController extends Controller {
   public function store(StoreAdminUserRequest $request) {
     try {
       $user = $this->adminUserService->createAdminUser($request->all());
-      $users = $this->adminUserService->listAllAdminUsers();
 
-      return view('admin.user.index', compact('users'))->with([
+      return redirect()->route('admin.users.index')->with([
         'successMessage' => 'O usuário <strong>'.$user->name.'</strong> foi cadastrado com sucesso!'
       ]);
 
@@ -57,6 +57,26 @@ class AdminUserController extends Controller {
   }
 
   public function edit($id) {
-    dd($id);
+    try {
+      $user = $this->adminUserService->getAdminUserById($id);
+      $roles = $this->adminRoleService->listAllAdminRoles();
+
+      return view('admin.user.edit', compact('roles', 'user'));
+    } catch (Exception $e) {
+      return back()->withErrors('Usuário não encontrado')->withInput();
+    }
+  }
+
+  public function update(UpdateAdminUserRequest $request, $id) {
+    try {
+      $user = $this->adminUserService->updateAdminUser($id, $request->all());
+
+      return redirect()->route('admin.users.index')->with([
+        'successMessage' => 'O usuário <strong>'.$user->name.'</strong> foi atualizado com sucesso!'
+      ]);
+
+    } catch (Exception $e) {
+      return back()->withErrors('Não foi possível atualizar os dados do usuário')->withInput();
+    }
   }
 }

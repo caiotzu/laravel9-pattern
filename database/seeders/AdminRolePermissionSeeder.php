@@ -17,7 +17,7 @@ class AdminRolePermissionSeeder extends Seeder
      */
     public function run()
     {
-        $role = DB::table('admin_roles')->where('description', 'Admin')->first();
+        $role = DB::table('admin_roles')->where('description', 'Administrador')->first();
         $permissions = DB::table('admin_permissions')->get();
         $arrRolePermission = [];
 

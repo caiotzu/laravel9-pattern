@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 use App\Models\AdminRole;
+use App\Models\AdminSetting;
 
 class AdminRoleService {
   public function listAllAdminRoles(): Collection {
@@ -13,6 +14,8 @@ class AdminRoleService {
   }
 
   public function listAllAdminRolesWithPagination(): LengthAwarePaginator {
-    return AdminRole::paginate(10);
+    $settings = AdminSetting::where('key', 'recordPerPage')->first();
+    $recordPerPage = $settings->value ?? 10;
+    return AdminRole::paginate($recordPerPage);
   }
 }

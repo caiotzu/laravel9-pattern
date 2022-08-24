@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\UpdateAdminSystemRequest;
 
 use App\Services\AdminSettingService;
 
@@ -28,7 +28,7 @@ class AdminSystemController extends Controller {
     }
   }
 
-  public function update(Request $request) {
+  public function update(UpdateAdminSystemRequest $request) {
     try {
       $this->adminSettingService->createOrUpdateAdminSettings($request->except('_method', '_token'));
 

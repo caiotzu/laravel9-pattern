@@ -46,6 +46,19 @@ class SimpleMenu {
               'PERMISSION_MENU'
             ]
           ],
+          'system' => [
+            'icon' => 'airplay',
+            'route_name' => 'admin.systems.index',
+            'other_route' => [
+              'admin.systems.create',
+              'admin.systems.edit',
+            ],
+            'params' => [],
+            'title' => 'Sistema',
+            'permissions' => [
+              'SYSTEM_MENU'
+            ]
+          ],
         ],
       ],
     ];

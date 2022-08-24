@@ -46,6 +46,12 @@ use App\Http\Controllers\Admin\ {
           Route::put('/permissions/{id}', [AdminPermissionController::class, 'update'])->name('admin.permissions.update')->middleware('check.admin.permission:PERMISSION_EDIT');
           Route::post('/permissions', [AdminPermissionController::class, 'store'])->name('admin.permissions.store')->middleware('check.admin.permission:PERMISSION_CREATE');
           Route::get('/permissions', [AdminPermissionController::class, 'index'])->name('admin.permissions.index')->middleware('check.admin.permission:PERMISSION_INDEX');
+
+          Route::get('/systems/create', [AdminPermissionController::class, 'create'])->name('admin.systems.create')->middleware('check.admin.permission:PERMISSION_CREATE');
+          Route::get('/systems/{id}/edit', [AdminPermissionController::class, 'edit'])->name('admin.systems.edit')->middleware('check.admin.permission:PERMISSION_EDIT');
+          Route::put('/systems/{id}', [AdminPermissionController::class, 'update'])->name('admin.systems.update')->middleware('check.admin.permission:PERMISSION_EDIT');
+          Route::post('/systems', [AdminPermissionController::class, 'store'])->name('admin.systems.store')->middleware('check.admin.permission:PERMISSION_CREATE');
+          Route::get('/systems', [AdminPermissionController::class, 'index'])->name('admin.systems.index')->middleware('check.admin.permission:PERMISSION_INDEX');
         //---
       });
     //---

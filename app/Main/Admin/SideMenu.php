@@ -23,7 +23,8 @@ class SideMenu {
         'other_route' => [],
         'permissions' => [
           'USER_MENU',
-          'PERMISSION_MENU'
+          'PERMISSION_MENU',
+          'SYSTEM_MENU'
         ],
         'sub_menu' => [
           'users' => [
@@ -50,6 +51,19 @@ class SideMenu {
             'title' => 'Permissões',
             'permissions' => [
               'PERMISSION_MENU'
+            ]
+          ],
+          'system' => [
+            'icon' => 'airplay',
+            'route_name' => 'admin.systems.index',
+            'other_route' => [
+              'admin.systems.create',
+              'admin.systems.edit',
+            ],
+            'params' => [],
+            'title' => 'Sistema',
+            'permissions' => [
+              'SYSTEM_MENU'
             ]
           ],
         ],

@@ -57,6 +57,21 @@ class AdminPermissionSeeder extends Seeder
             "description" => "Permite atualizar uma permissão já cadastrada",
             "created_at" => date("Y-m-d H:i:s")
           ],
+          [
+            'key' => "SYSTEM_MENU",
+            "description" => "Permite visualizar o menu de sistema",
+            "created_at" => date("Y-m-d H:i:s")
+          ],
+          [
+            'key' => "SYSTEM_INDEX",
+            "description" => "Permite visualizar as configurações do sistema",
+            "created_at" => date("Y-m-d H:i:s")
+          ],
+          [
+            'key' => "SYSTEM_EDIT",
+            "description" => "Permite atualizar as configurações do sistema",
+            "created_at" => date("Y-m-d H:i:s")
+          ],
         ]);
     }
 }

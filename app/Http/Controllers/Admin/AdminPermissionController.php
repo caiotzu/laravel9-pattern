@@ -5,11 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\StoreAdminPermissionRequest;
-use App\Http\Requests\UpdateAdminUserRequest;
+use App\Http\Requests\UpdateAdminPermissionRequest;
 
 use App\Services\AdminRoleService;
 use App\Services\AdminPermissionService;
-
 
 use Exception;
 
@@ -35,7 +34,7 @@ class AdminPermissionController extends Controller {
 
   public function create() {
     try {
-      $permissions = $this->adminPermissionService->listAllPermissionsGroupedByView();
+      $permissions = $this->adminPermissionService->listAllAdminPermissionsGroupedByView();
 
       return view('admin.permission.create', compact('permissions'));
     } catch (Exception $e) {
@@ -45,7 +44,7 @@ class AdminPermissionController extends Controller {
 
   public function store(StoreAdminPermissionRequest $request) {
     try {
-      $this->adminPermissionService->createRolePermission($request->except('_method', '_token'));
+      $this->adminPermissionService->createAdminRolePermission($request->except('_method', '_token'));
 
       return redirect()->route('admin.permissions.index')->with([
         'successMessage' => 'As permissões para a função <strong>'.$request->description.'</strong> foram cadastradas com sucesso!'
@@ -58,25 +57,24 @@ class AdminPermissionController extends Controller {
 
   public function edit($id) {
     try {
-      $user = $this->adminUserService->getAdminUserById($id);
-      $roles = $this->adminRoleService->listAllAdminRoles();
+      [$role, $permissions] = $this->adminPermissionService->listAllAdminPermissionsGroupedByViewAndThatTheRoleHasAccess($id);
 
-      return view('admin.user.edit', compact('roles', 'user'));
+      return view('admin.permission.edit', compact('role', 'permissions'));
     } catch (Exception $e) {
-      return back()->withErrors('Usuário não encontrado')->withInput();
+      return back()->withErrors('Não foi possível carregar o formulário de edição das permissões, função não encontrada')->withInput();
     }
   }
 
-  public function update(UpdateAdminUserRequest $request, $id) {
+  public function update(UpdateAdminPermissionRequest $request, $id) {
     try {
-      $user = $this->adminUserService->updateAdminUser($id, $request->all());
+      $this->adminPermissionService->updateAdminRolePermission($id, $request->except('_method', '_token'));
 
-      return redirect()->route('admin.users.index')->with([
-        'successMessage' => 'O usuário <strong>'.$user->name.'</strong> foi atualizado com sucesso!'
+      return redirect()->route('admin.permissions.index')->with([
+        'successMessage' => 'As permissões para a função <strong>'.$request->description.'</strong> foram atualizadas com sucesso!'
       ]);
 
     } catch (Exception $e) {
-      return back()->withErrors('Não foi possível atualizar os dados do usuário')->withInput();
+      return back()->withErrors('Ocorreu um erro ao atualizar as permissões')->withInput();
     }
   }
 }

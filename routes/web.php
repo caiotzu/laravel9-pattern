@@ -41,7 +41,6 @@ use App\Http\Controllers\Admin\ {
           Route::post('/users', [AdminUserController::class, 'store'])->name('admin.users.store')->middleware('check.admin.permission:USER_CREATE');
           Route::get('/users', [AdminUserController::class, 'index'])->name('admin.users.index')->middleware('check.admin.permission:USER_INDEX');
 
-
           Route::get('/permissions/create', [AdminPermissionController::class, 'create'])->name('admin.permissions.create')->middleware('check.admin.permission:PERMISSION_CREATE');
           Route::get('/permissions/{id}/edit', [AdminPermissionController::class, 'edit'])->name('admin.permissions.edit')->middleware('check.admin.permission:PERMISSION_EDIT');
           Route::put('/permissions/{id}', [AdminPermissionController::class, 'update'])->name('admin.permissions.update')->middleware('check.admin.permission:PERMISSION_EDIT');

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('company_name', 60);
             $table->string('state_registration', 9);
             $table->string('municipal_registration', 11);
+            $table->boolean('active')->default(true);
             $table->timestamps($precision = 0);
         });
     }

@@ -79,7 +79,7 @@
           location.href = '/admin/home'
         }).catch(err => {
           $('#btn-login').html(`Entrar`)
-          if (err.response.data.message != 'Wrong email or password.') {
+          if (err.response.data.message != 'E-mail ou senha incorretos.') {
             for (const [key, val] of Object.entries(err.response.data.errors)) {
               $(`#${key}`).addClass('border-danger')
               $(`#error-${key}`).html(val)

@@ -2,10 +2,11 @@
 
 namespace App\Http\Middleware;
 
-use Session;
-use Closure;
+
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
+use Closure;
 
 class CheckAdminPermission
 {

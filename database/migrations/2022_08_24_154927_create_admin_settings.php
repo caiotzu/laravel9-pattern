@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('key', 50);
             $table->text('value');
-            $table->text('description');
+            $table->text('description')->nullable(true);
             $table->timestamps($precision = 0);
         });
     }

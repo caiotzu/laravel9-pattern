@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 
 use Illuminate\Support\Facades\DB;
 
-class AdminRoleSeeder extends Seeder
+class AdminSettingSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,8 +15,10 @@ class AdminRoleSeeder extends Seeder
      */
     public function run()
     {
-        DB::table("admin_roles")->insert([
-            "description" => "Administrador",
+        DB::table("admin_settings")->insert([
+            'key' => 'recordPerPage',
+            'value' => '10',
+            "description" => "Define a quantidade de registros por página que o sistema irá adotar",
             "created_at" => date("Y-m-d H:i:s")
         ]);
     }

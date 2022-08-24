@@ -4,6 +4,18 @@
     <title>Permission - Pattern Laravel 9</title>
 @endsection
 
+@section('adminBreadcrumb')
+  <li class="breadcrumb-item active" aria-current="page">
+    <a href="{{ route('admin.home.index') }}">Home</a>
+  </li>
+  <li class="breadcrumb-item">
+    <a href="{{ route('admin.permissions.index') }}">Permissões</a>
+  </li>
+  <li class="breadcrumb-item" aria-current="page">
+    <a href="{{ route('admin.permissions.create') }}">Cadastro</a>
+  </li>
+@endsection
+
 @section('adminContent')
 @if($errors->any())
   <div id="errorMessage" class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mt-4 relative" role="alert">

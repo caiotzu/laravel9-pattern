@@ -14,19 +14,49 @@ class TopMenu {
       'dashboard' => [
         'icon' => 'home',
         'title' => 'Dashboard',
+        'other_route' => [],
         'permissions' => [],
+      ],
+      'records' => [
+        'icon' => 'edit',
+        'title' => 'Cadastros',
+        'other_route' => [],
+        'permissions' => [
+          'COMPANY_MENU',
+        ],
+        'sub_menu' => [
+          'companies' => [
+            'icon' => 'building',
+            'route_name' => 'admin.companies.index',
+            'other_route' => [
+              'admin.companies.create',
+              'admin.companies.edit',
+            ],
+            'params' => [],
+            'title' => 'Empresas',
+            'permissions' => [
+              'COMPANY_MENU',
+            ]
+          ],
+        ],
       ],
       'settings' => [
         'icon' => 'settings',
         'title' => 'Configurações',
+        'other_route' => [],
         'permissions' => [
           'USER_MENU',
-          'PERMISSION_MENU'
+          'PERMISSION_MENU',
+          'SYSTEM_MENU'
         ],
         'sub_menu' => [
           'users' => [
             'icon' => 'users',
             'route_name' => 'admin.users.index',
+            'other_route' => [
+              'admin.users.create',
+              'admin.users.edit',
+            ],
             'params' => [],
             'title' => 'Usuários',
             'permissions' => [
@@ -47,7 +77,7 @@ class TopMenu {
             ]
           ],
           'system' => [
-            'icon' => 'airplay',
+            'icon' => 'monitor',
             'route_name' => 'admin.systems.index',
             'other_route' => [
               'admin.systems.create',

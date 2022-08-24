@@ -35,6 +35,14 @@ use App\Http\Controllers\Admin\ {
 
         Route::get('/home', [AdminHomeController::class, 'index'])->name('admin.home.index');
 
+        // records route
+          Route::get('/companies/create', [AdminUserController::class, 'create'])->name('admin.companies.create')->middleware('check.admin.permission:COMPANY_CREATE');
+          Route::get('/companies/{id}/edit', [AdminUserController::class, 'edit'])->name('admin.companies.edit')->middleware('check.admin.permission:COMPANY_EDIT');
+          Route::put('/companies/{id}', [AdminUserController::class, 'update'])->name('admin.companies.update')->middleware('check.admin.permission:COMPANY_EDIT');
+          Route::post('/companies', [AdminUserController::class, 'store'])->name('admin.companies.store')->middleware('check.admin.permission:COMPANY_CREATE');
+          Route::get('/companies', [AdminUserController::class, 'index'])->name('admin.companies.index')->middleware('check.admin.permission:COMPANY_INDEX');
+        //---
+
         // settings routes
           Route::get('/users/create', [AdminUserController::class, 'create'])->name('admin.users.create')->middleware('check.admin.permission:USER_CREATE');
           Route::get('/users/{id}/edit', [AdminUserController::class, 'edit'])->name('admin.users.edit')->middleware('check.admin.permission:USER_EDIT');

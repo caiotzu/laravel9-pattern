@@ -1,11 +1,11 @@
 @csrf
 
-<div class="col-span-4 p-2">
+<div class="col-span-12 md:col-span-4 p-2">
   <label for="group_name" class="form-label">Nome do grupo <span class="text-red-500">*</span></label>
   <input id="group_name" name="group_name" type="text" class="form-control w-full" value="{{ old('group_name', $companyGroup->group_name ?? '') }}">
 </div>
 
-<div class="col-span-4 p-2">
+<div class="col-span-12 md:col-span-4 p-2">
   <label for="profile_id" class="form-label">Perfil <span class="text-red-500">*</span></label>
   <select class="form-select" id="profile_id" name="profile_id">
     @foreach($profiles as $profile)

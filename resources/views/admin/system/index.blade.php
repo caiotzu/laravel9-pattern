@@ -78,7 +78,7 @@
               </ul>
               <div class="tab-content border-l border-r border-b">
                 <div id="tab-general" class="tab-pane leading-relaxed p-5 grid grid-cols-12 active" role="tabpanel" aria-labelledby="role">
-                  <div class="col-span-4 p-2">
+                  <div class="col-span-12 md:col-span-4 p-2">
                     <label for="recordPerPage" class="form-label">
                       Registro por pagina<span class="text-red-500">*</span>
                       <a href="javascript:;" data-theme="light" class="tooltip inline-flex ml-1 text-blue-400" title="{{ $settings['recordPerPage']['description'] ?? '' }}">

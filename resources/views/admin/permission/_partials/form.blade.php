@@ -31,7 +31,7 @@
     </ul>
     <div class="tab-content border-l border-r border-b">
       <div id="tab-role" class="tab-pane leading-relaxed p-5 grid grid-cols-12 active" role="tabpanel" aria-labelledby="role">
-        <div class="col-span-4 p-2">
+        <div class="col-span-12 md:col-span-4 p-2">
           <label for="description" class="form-label">Função<span class="text-red-500">*</span></label>
           <input id="description" name="description" type="text" class="form-control w-full" value="{{ old('description', $role->description ?? '') }}">
         </div>

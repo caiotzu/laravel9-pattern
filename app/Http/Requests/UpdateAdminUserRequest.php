@@ -23,6 +23,9 @@ class UpdateAdminUserRequest extends FormRequest {
         'required',
         'email',
         "unique:admin_users,email,{$id},id"
+      ],
+      'role_id' => [
+        'required',
       ]
     ];
   }
@@ -37,6 +40,8 @@ class UpdateAdminUserRequest extends FormRequest {
       'email.max' => 'O campo e-mail não pode conter mais de 100 caracteres',
       'email.email' => 'O campo e-mail não está no formato correto',
       'email.unique' => 'Este e-mail já está cadastrado para outro usuário',
+
+      'role_id.required' => 'O campo regra é obrigatório',
     ];
   }
 }

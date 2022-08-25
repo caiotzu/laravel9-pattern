@@ -91,6 +91,26 @@ class AdminPermissionSeeder extends Seeder
             "description" => "Permite atualizar uma empresa já cadastrada",
             "created_at" => date("Y-m-d H:i:s")
           ],
+          [
+            'key' => "COMPANYGROUP_MENU",
+            "description" => "Permite visualizar o menu de grupos de empresas",
+            "created_at" => date("Y-m-d H:i:s")
+          ],
+          [
+            'key' => "COMPANYGROUP_INDEX",
+            "description" => "Permite visualizar as listagens dos grupos de empresas",
+            "created_at" => date("Y-m-d H:i:s")
+          ],
+          [
+            'key' => "COMPANYGROUP_CREATE",
+            "description" => "Permite cadastrar um novo grupo de empresas",
+            "created_at" => date("Y-m-d H:i:s")
+          ],
+          [
+            'key' => "COMPANYGROUP_EDIT",
+            "description" => "Permite atualizar um grupo de empresas já cadastrada",
+            "created_at" => date("Y-m-d H:i:s")
+          ],
         ]);
     }
 }

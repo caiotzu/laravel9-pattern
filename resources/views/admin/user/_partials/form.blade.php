@@ -11,7 +11,7 @@
 </div>
 
 <div class="col-span-4 p-2">
-  <label for="role_id" class="form-label">Regra</label>
+  <label for="role_id" class="form-label">Regra <span class="text-red-500">*</span></label>
   <select class="form-select" id="role_id" name="role_id">
     @foreach($roles as $role)
     @if(!!old())

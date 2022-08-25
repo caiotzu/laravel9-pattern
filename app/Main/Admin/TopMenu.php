@@ -25,6 +25,19 @@ class TopMenu {
           'COMPANY_MENU',
         ],
         'sub_menu' => [
+          'companyGroups' => [
+            'icon' => 'layers',
+            'route_name' => 'admin.companyGroups.index',
+            'other_route' => [
+              'admin.companyGroups.create',
+              'admin.companyGroups.edit',
+            ],
+            'params' => [],
+            'title' => 'Grupos Empresas',
+            'permissions' => [
+              'COMPANYGROUP_MENU',
+            ]
+          ],
           'companies' => [
             'icon' => 'building',
             'route_name' => 'admin.companies.index',

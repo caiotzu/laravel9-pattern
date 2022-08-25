@@ -48,6 +48,61 @@
 
 <div class="grid grid-cols-12">
   <div class="col-span-12 mt-8">
+    <div class="box p-5 mb-4">
+      <div class="flex justify-between p-1 border-b border-slate-200/60 dark:border-darkmode-400">
+        <p class="text-2xl font-bold text-gray-600">
+          Filtro
+        </p>
+      </div>
+      <form action="{{ route('admin.companyGroups.index') }}" method="get" class="mt-3 grid grid-cols-12">
+        <div class="col-span-12 md:col-span-4 p-2">
+          <label for="company_group_id" class="form-label">Grupo empresa <span class="text-red-500">*</span></label>
+          <select class="tom-select w-full" id="company_group_id" name="company_group_id">
+            @foreach($companyGroups as $companyGroup)
+            @if(!!old())
+              @if(old('id') == $companyGroup->id)
+                <option value="{{ $companyGroup->id }}" selected>{{ $companyGroup->group_name }}</option>
+              @else
+                <option value="{{ $companyGroup->id }}">{{ $companyGroup->group_name }}</option>
+              @endif
+            @elseif(isset($data['company_group_id']) && $data['company_group_id'] == $companyGroup->id)
+                <option value="{{ $companyGroup->id }}" selected>{{ $companyGroup->group_name }}</option>
+              @else
+                <option value="{{ $companyGroup->id }}" >{{ $companyGroup->group_name }}</option>
+              @endif
+            @endforeach
+          </select>
+        </div>
+
+        <div class="col-span-12 md:col-span-4 p-2">
+          <label for="profile_id" class="form-label">Perfil <span class="text-red-500">*</span></label>
+          <select class="form-select py-2.5" id="profile_id" name="profile_id">
+            @foreach($profiles as $profile)
+            @if(!!old())
+              @if(old('profile_id') == $profile->id)
+                <option value="{{ $profile->id }}" selected>{{ $profile->description }}</option>
+              @else
+                <option value="{{ $profile->id }}">{{ $profile->description }}</option>
+              @endif
+            @elseif(isset($data['profile_id']) && $data['profile_id'] == $profile->id)
+                <option value="{{ $profile->id }}" selected>{{ $profile->description }}</option>
+              @else
+                <option value="{{ $profile->id }}" >{{ $profile->description }}</option>
+              @endif
+            @endforeach
+          </select>
+        </div>
+
+        <div class="col-span-12 pt-5 mt-3 border-t border-slate-200/60 dark:border-darkmode-400">
+          @if(in_array('COMPANYGROUP_FILTER',Session::get('userPermission')))
+            <button class="btn btn-primary w-32 mr-2 mb-2 w-full">
+              Filtrar
+            </button>
+          @endif
+        </div>
+      </form>
+    </div>
+
     <div class="box p-5">
       <div class="flex justify-between p-1 border-b border-slate-200/60 dark:border-darkmode-400">
         <p class="text-2xl font-bold text-gray-600">
@@ -70,47 +125,53 @@
             </tr>
           </thead>
           <tbody>
-            @foreach($companyGroups as $companyGroup)
-              <tr>
-                <td>{{ $companyGroup->group_name }}</td>
-                <td>
-                  @if($companyGroup->profile->description == 'REVENDA')
-                    <span class="bg-indigo-200 text-indigo-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-200 dark:text-indigo-900">Revenda</span>
-                  @elseif($companyGroup->profile->description == 'ITE')
-                    <span class="bg-cyan-200 text-cyan-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-cyan-200 dark:text-cyan-900">Ite</span>
-                  @else
-                    <span class="bg-purple-200 text-purple-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-purple-200 dark:text-purple-900">Montadora</span>
-                  @endif
-                </td>
-                <td>
-                  <div class="text-center">
-                    <div class="dropdown inline-block" data-tw-placement="bottom-start">
-                      <button class="dropdown-toggle btn btn-primary" aria-expanded="false" data-tw-toggle="dropdown">
-                        Ações <i data-lucide="chevron-down" class="w-4 h-4 ml-2"></i>
-                      </button>
-                      <div class="dropdown-menu w-48">
-                        <ul class="dropdown-content">
-                          @if(in_array('COMPANYGROUP_EDIT',Session::get('userPermission')))
+            @if(count($filteredList) > 0)
+              @foreach($filteredList as $companyGroup)
+                <tr>
+                  <td>{{ $companyGroup->group_name }}</td>
+                  <td>
+                    @if($companyGroup->profile->description == 'REVENDA')
+                      <span class="bg-indigo-200 text-indigo-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-200 dark:text-indigo-900">Revenda</span>
+                    @elseif($companyGroup->profile->description == 'ITE')
+                      <span class="bg-cyan-200 text-cyan-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-cyan-200 dark:text-cyan-900">Ite</span>
+                    @else
+                      <span class="bg-purple-200 text-purple-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-purple-200 dark:text-purple-900">Montadora</span>
+                    @endif
+                  </td>
+                  <td>
+                    <div class="text-center">
+                      <div class="dropdown inline-block" data-tw-placement="bottom-start">
+                        <button class="dropdown-toggle btn btn-primary" aria-expanded="false" data-tw-toggle="dropdown">
+                          Ações <i data-lucide="chevron-down" class="w-4 h-4 ml-2"></i>
+                        </button>
+                        <div class="dropdown-menu w-48">
+                          <ul class="dropdown-content">
+                            @if(in_array('COMPANYGROUP_EDIT',Session::get('userPermission')))
+                              <li>
+                                <a href="{{route('admin.companyGroups.edit', $companyGroup->id)}}" class="dropdown-item">
+                                  <i data-lucide="edit-2" class="w-4 h-4 mr-2"></i> Editar
+                                </a>
+                              </li>
+                            @endif
                             <li>
-                              <a href="{{route('admin.companyGroups.edit', $companyGroup->id)}}" class="dropdown-item">
-                                <i data-lucide="edit-2" class="w-4 h-4 mr-2"></i> Editar
-                              </a>
-                            </li>
-                          @endif
-                          <li>
-                        </ul>
+                          </ul>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </td>
+                  </td>
+                </tr>
+              @endforeach
+            @else
+              <tr class="text-center">
+                <td colspan="3">Nenhum registro encontrado.</td>
               </tr>
-            @endforeach
+            @endif
           </tbody>
         </table>
       </div>
 
       <div class="pt-5 border-t border-slate-200/60 dark:border-darkmode-400">
-        {{ $companyGroups->links() }}
+        {{ $filteredList->links() }}
       </div>
     </div>
   </div>

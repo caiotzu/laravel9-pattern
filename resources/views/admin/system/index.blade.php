@@ -85,7 +85,7 @@
                         (?)
                       </a>
                     </label>
-                    <input id="recordPerPage" name="recordPerPage" type="number" class="form-control w-full" value="{{ old('recordPerPage', $settings['recordPerPage']['value'] ?? '') }}">
+                    <input id="recordPerPage" name="recordPerPage" type="number" class="form-control w-full py-2.5" value="{{ old('recordPerPage', $settings['recordPerPage']['value'] ?? '') }}">
                   </div>
                 </div>
               </div>

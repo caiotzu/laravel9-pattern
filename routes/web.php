@@ -38,11 +38,11 @@ use App\Http\Controllers\Admin\ {
         Route::get('/home', [AdminHomeController::class, 'index'])->name('admin.home.index');
 
         // records route
-        Route::get('/companyGroups/create', [AdminCompanyGroupController::class, 'create'])->name('admin.companyGroups.create')->middleware('check.admin.permission:COMPANYGROUP_CREATE');
-        Route::get('/companyGroups/{id}/edit', [AdminCompanyGroupController::class, 'edit'])->name('admin.companyGroups.edit')->middleware('check.admin.permission:COMPANYGROUP_EDIT');
-        Route::put('/companyGroups/{id}', [AdminCompanyGroupController::class, 'update'])->name('admin.companyGroups.update')->middleware('check.admin.permission:COMPANYGROUP_EDIT');
-        Route::post('/companyGroups', [AdminCompanyGroupController::class, 'store'])->name('admin.companyGroups.store')->middleware('check.admin.permission:COMPANYGROUP_CREATE');
-        Route::get('/companyGroups', [AdminCompanyGroupController::class, 'index'])->name('admin.companyGroups.index')->middleware('check.admin.permission:COMPANYGROUP_INDEX');
+          Route::get('/companyGroups/create', [AdminCompanyGroupController::class, 'create'])->name('admin.companyGroups.create')->middleware('check.admin.permission:COMPANYGROUP_CREATE');
+          Route::get('/companyGroups/{id}/edit', [AdminCompanyGroupController::class, 'edit'])->name('admin.companyGroups.edit')->middleware('check.admin.permission:COMPANYGROUP_EDIT');
+          Route::put('/companyGroups/{id}', [AdminCompanyGroupController::class, 'update'])->name('admin.companyGroups.update')->middleware('check.admin.permission:COMPANYGROUP_EDIT');
+          Route::post('/companyGroups', [AdminCompanyGroupController::class, 'store'])->name('admin.companyGroups.store')->middleware('check.admin.permission:COMPANYGROUP_CREATE');
+          Route::get('/companyGroups', [AdminCompanyGroupController::class, 'index'])->name('admin.companyGroups.index')->middleware('check.admin.permission:COMPANYGROUP_INDEX');
 
           Route::get('/companies/create', [AdminCompanyController::class, 'create'])->name('admin.companies.create')->middleware('check.admin.permission:COMPANY_CREATE');
           Route::get('/companies/{id}/edit', [AdminCompanyController::class, 'edit'])->name('admin.companies.edit')->middleware('check.admin.permission:COMPANY_EDIT');

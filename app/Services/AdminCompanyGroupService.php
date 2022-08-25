@@ -9,10 +9,11 @@ use App\Models\AdminSetting;
 
 
 class AdminCompanyGroupService {
-  public function listAllCompanyGroupsWithPagination(): LengthAwarePaginator {
+  public function listAllCompanyGroupsWithPagination(Array $filters = []): LengthAwarePaginator {
     $settings = AdminSetting::where('key', 'recordPerPage')->first();
     $recordPerPage = $settings->value ?? 10;
-    return CompanyGroup::with('profile')->paginate($recordPerPage);
+
+    return CompanyGroup::with('profile')->where($filters)->paginate($recordPerPage);
   }
 
   public function getCompanyGroupById(Int $id): CompanyGroup {

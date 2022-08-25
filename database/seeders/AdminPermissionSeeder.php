@@ -23,7 +23,7 @@ class AdminPermissionSeeder extends Seeder
           ],
           [
             'key' => "USER_INDEX",
-            "description" => "Permite visualizar as listagens de usuários",
+            "description" => "Permite visualizar a listagem de usuários",
             "created_at" => date("Y-m-d H:i:s")
           ],
           [
@@ -43,7 +43,7 @@ class AdminPermissionSeeder extends Seeder
           ],
           [
             'key' => "PERMISSION_INDEX",
-            "description" => "Permite visualizar as listagens das permissões",
+            "description" => "Permite visualizar a listagem das permissões",
             "created_at" => date("Y-m-d H:i:s")
           ],
           [
@@ -78,7 +78,7 @@ class AdminPermissionSeeder extends Seeder
           ],
           [
             'key' => "COMPANY_INDEX",
-            "description" => "Permite visualizar as listagens das empresas",
+            "description" => "Permite visualizar a listagem das empresas",
             "created_at" => date("Y-m-d H:i:s")
           ],
           [
@@ -98,7 +98,7 @@ class AdminPermissionSeeder extends Seeder
           ],
           [
             'key' => "COMPANYGROUP_INDEX",
-            "description" => "Permite visualizar as listagens dos grupos de empresas",
+            "description" => "Permite visualizar a listagem dos grupos de empresas",
             "created_at" => date("Y-m-d H:i:s")
           ],
           [
@@ -109,6 +109,11 @@ class AdminPermissionSeeder extends Seeder
           [
             'key' => "COMPANYGROUP_EDIT",
             "description" => "Permite atualizar um grupo de empresas já cadastrada",
+            "created_at" => date("Y-m-d H:i:s")
+          ],
+          [
+            'key' => "COMPANYGROUP_FILTER",
+            "description" => "Permite filtrar a listagem dos grupos de empresas",
             "created_at" => date("Y-m-d H:i:s")
           ],
         ]);

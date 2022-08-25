@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\StoreAdminCompanyGroupRequest;
 use App\Http\Requests\UpdateAdminCompanyGroupRequest;
+use App\Http\Requests\IndexAdminCompanyGroupRequest;
 
 use App\Services\AdminCompanyGroupService;
 use App\Services\ProfileService;
@@ -22,11 +23,21 @@ class AdminCompanyGroupController extends Controller {
     $this->profile = $profile;
   }
 
-  public function index() {
+  public function index(IndexAdminCompanyGroupRequest $request) {
     try {
-      $companyGroups = $this->adminCompanyGroupService->listAllCompanyGroupsWithPagination();
+      $data = $request->all();
+      $filters = [];
 
-      return view('admin.companyGroup.index', compact('companyGroups'));
+      if(count($data) > 0) {
+        $filters[] = ['id', $request->company_group_id];
+        $filters[] = ['profile_id', $request->profile_id];
+      }
+
+      $companyGroups = $this->adminCompanyGroupService->listAllCompanyGroupsWithPagination();
+      $profiles = $this->profile->listAllProfiles();
+      $filteredList = $this->adminCompanyGroupService->listAllCompanyGroupsWithPagination($filters);
+
+      return view('admin.companyGroup.index', compact('companyGroups', 'profiles', 'filteredList', 'data'));
     } catch (Exception $e) {
       return redirect()->route('admin.home.index')->withErrors('Não foi possível carregar a lista de grupos de empresas');
     }

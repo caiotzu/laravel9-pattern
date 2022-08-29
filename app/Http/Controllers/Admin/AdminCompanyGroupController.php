@@ -29,13 +29,12 @@ class AdminCompanyGroupController extends Controller {
       $filters = [];
 
       if($request->company_group_id)
-        $filters[] = ['id', $request->company_group_id];
+        $filters['id'] = $request->company_group_id;
 
       if($request->profile_id)
-        $filters[] = ['profile_id', $request->profile_id];
+        $filters['profile_id'] = $request->profile_id;
 
-
-      $companyGroups = $this->adminCompanyGroupService->listAllCompanyGroupsWithPagination();
+      $companyGroups = $this->adminCompanyGroupService->listAllCompanyGroups();
       $profiles = $this->profile->listAllProfiles();
       $filteredList = $this->adminCompanyGroupService->listAllCompanyGroupsWithPagination($filters);
 

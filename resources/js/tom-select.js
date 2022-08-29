@@ -8,6 +8,9 @@ import TomSelect from "tom-select";
         let options = {
             plugins: {
                 dropdown_input: {},
+                clear_button:{
+                  title:'Remove all selected options',
+                }
             },
         };
 

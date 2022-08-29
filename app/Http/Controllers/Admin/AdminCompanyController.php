@@ -4,28 +4,43 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\IndexAdminCompanyRequest;
 use App\Http\Requests\StoreAdminPermissionRequest;
 use App\Http\Requests\UpdateAdminPermissionRequest;
 
 use App\Services\AdminCompanyService;
+use App\Services\ProfileService;
 
 use Exception;
 
 class AdminCompanyController extends Controller {
 
   protected $adminCompanyService;
-  protected $adminPermissionService;
+  protected $profile;
 
-  public function __construct(AdminCompanyService $adminCompanyService) {
+  public function __construct(AdminCompanyService $adminCompanyService,  ProfileService $profile) {
     $this->adminCompanyService = $adminCompanyService;
+    $this->profile = $profile;
   }
 
-  public function index() {
+  public function index(IndexAdminCompanyRequest $request) {
     try {
-      $companies = $this->adminCompanyService->listAllCompaniesWithPagination();
+      $data = $request->all();
+      $filters = [];
 
-      return view('admin.company.index', compact('companies'));
+      if($request->company_id)
+        $filters['id'] = $request->company_id;
+
+      if($request->profile_id)
+        $filters['profile_id'] = $request->profile_id;
+
+      $companies = $this->adminCompanyService->listAllCompanies();
+      $profiles = $this->profile->listAllProfiles();
+      $filteredList = $this->adminCompanyService->listAllCompaniesWithPagination($filters);
+
+      return view('admin.company.index', compact('companies', 'profiles', 'data', 'filteredList'));
     } catch (Exception $e) {
+      dd($e->getMessage());
       return redirect()->route('admin.home.index')->withErrors('Não foi possível carregar a lista de empresas');
     }
   }

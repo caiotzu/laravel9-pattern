@@ -56,8 +56,14 @@
       </div>
       <form action="{{ route('admin.companyGroups.index') }}" method="get" class="mt-3 grid grid-cols-12">
         <div class="col-span-12 md:col-span-4 p-2">
-          <label for="company_group_id" class="form-label">Grupo empresa <span class="text-red-500">*</span></label>
+          <label for="company_group_id" class="form-label">Grupo empresa</label>
           <select class="tom-select w-full" id="company_group_id" name="company_group_id">
+            @if(isset($data['company_group_id']) && $data['company_group_id'] == '')
+              <option value="" selected>Selecione o grupo</option>
+            @else
+              <option value="">Selecione o grupo</option>
+            @endif
+
             @foreach($companyGroups as $companyGroup)
             @if(!!old())
               @if(old('id') == $companyGroup->id)

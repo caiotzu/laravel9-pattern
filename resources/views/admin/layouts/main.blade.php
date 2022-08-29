@@ -43,6 +43,10 @@
     </div>
     @vite('resources/js/app.js')
 
+    <script type="text/javascript" src="{{ URL::asset('js/plugins/jquery-3.6.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/plugins/jquery.mask.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/layouts/index.js') }}"></script>
+
     @yield('adminJs')
   </body>
 </html>

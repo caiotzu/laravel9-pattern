@@ -8,19 +8,27 @@ use App\Http\Requests\IndexAdminCompanyRequest;
 use App\Http\Requests\StoreAdminPermissionRequest;
 use App\Http\Requests\UpdateAdminPermissionRequest;
 
-use App\Services\AdminCompanyService;
 use App\Services\ProfileService;
+use App\Services\AdminCompanyService;
+use App\Services\AdminCompanyGroupService;
 
 use Exception;
 
 class AdminCompanyController extends Controller {
 
-  protected $adminCompanyService;
   protected $profile;
+  protected $adminCompanyService;
+  protected $adminCompanyGroupService;
 
-  public function __construct(AdminCompanyService $adminCompanyService,  ProfileService $profile) {
-    $this->adminCompanyService = $adminCompanyService;
+
+  public function __construct(
+    AdminCompanyService $adminCompanyService,
+    ProfileService $profile,
+    AdminCompanyGroupService $adminCompanyGroupService
+  ) {
     $this->profile = $profile;
+    $this->adminCompanyService = $adminCompanyService;
+    $this->adminCompanyGroupService = $adminCompanyGroupService;
   }
 
   public function index(IndexAdminCompanyRequest $request) {
@@ -40,18 +48,17 @@ class AdminCompanyController extends Controller {
 
       return view('admin.company.index', compact('companies', 'profiles', 'data', 'filteredList'));
     } catch (Exception $e) {
-      dd($e->getMessage());
       return redirect()->route('admin.home.index')->withErrors('Não foi possível carregar a lista de empresas');
     }
   }
 
   public function create() {
     try {
-      $permissions = $this->adminPermissionService->listAllAdminPermissionsGroupedByView();
+      $companyGroups = $this->adminCompanyGroupService->listAllCompanyGroups();
 
-      return view('admin.permission.create', compact('permissions'));
+      return view('admin.company.create', compact('companyGroups'));
     } catch (Exception $e) {
-      return redirect()->route('admin.permissions.index')->withErrors('Não foi possível carregar o formulário de cadastro das permissões');
+      return redirect()->route('admin.companies.index')->withErrors('Não foi possível carregar o formulário de cadastro da empresa');
     }
   }
 

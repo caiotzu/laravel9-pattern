@@ -148,3 +148,14 @@
 @import "./components/_source-preview.css";
 @import "./components/_full-calendar.css";
 @import "./components/_pristine.css";
+
+
+/*
+ |--------------------------------------------------------------------------
+ | Layouts
+ |--------------------------------------------------------------------------
+ |
+ | Import CSS/SCSS layouts.
+ |
+ */
+@import "./layouts/app.css";

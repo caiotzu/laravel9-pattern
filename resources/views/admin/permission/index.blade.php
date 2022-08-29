@@ -71,9 +71,9 @@
           <tbody>
             @foreach($roles as $role)
               <tr>
-                <td>{{ $role->description }}</td>
-                <td>
-                  <div class="text-center">
+                <td data-title="Função">{{ $role->description }}</td>
+                <td data-title="Ações">
+                  <div class="sm:text-right lg:text-center">
                     <div class="dropdown inline-block" data-tw-placement="bottom-start">
                       <button class="dropdown-toggle btn btn-primary" aria-expanded="false" data-tw-toggle="dropdown">
                         Ações <i data-lucide="chevron-down" class="w-4 h-4 ml-2"></i>

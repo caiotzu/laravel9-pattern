@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class IndexAdminCompanyGroupRequest extends FormRequest {
   public function authorize() {
@@ -12,9 +13,11 @@ class IndexAdminCompanyGroupRequest extends FormRequest {
   public function rules() {
     return [
       'company_group_id' => [
+        'nullable',
         'required_if:profile_id,null',
       ],
       'profile_id' => [
+        'nullable',
         'required_if:company_group_id,null',
       ]
     ];

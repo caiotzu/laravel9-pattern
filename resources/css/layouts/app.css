@@ -1,0 +1,30 @@
+/*** Alterao modo celular ***/
+@media all and (max-width: 800px) {
+  /*** Tabela resposiva ***/
+  table tbody tr td {
+    display: block;
+    text-align: right;
+  }
+
+  table tbody tr td::before {
+    content: attr(data-title);
+    position: absolute;
+    left: 50px;
+    display: block;
+    font-weight: 600;
+  }
+
+  table {
+    border: none;
+  }
+
+  table thead {
+    display: none;
+  }
+
+  table tbody tr {
+    margin-bottom: 10px;
+    display: block;
+    border: solid 1px #dee2e6;
+  }
+}

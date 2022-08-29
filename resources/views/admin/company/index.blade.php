@@ -75,16 +75,16 @@
           <tbody>
             @foreach($companies as $company)
               <tr>
-                <td>{{ $company->trade_name }}</td>
-                <td>{{ $company->cnpj }}</td>
-                <td>
+                <td data-title="Nome fantasia">{{ $company->trade_name }}</td>
+                <td data-title="CNPJ">{{ $company->cnpj }}</td>
+                <td data-title="Tipo">
                   @if(!$company->headquarter_id)
                     <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-200 dark:text-gray-900">Matriz</span>
                   @else
                     <span class="bg-amber-200 text-amber-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-amber-200 dark:text-amber-900">Filial</span>
                   @endif
                 </td>
-                <td>
+                <td data-title="Perfil">
                   @if($company->companyGroup->profile->description == 'REVENDA')
                     <span class="bg-indigo-200 text-indigo-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-200 dark:text-indigo-900">Revenda</span>
                   @elseif($company->companyGroup->profile->description == 'ITE')
@@ -93,15 +93,15 @@
                     <span class="bg-purple-200 text-purple-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-purple-200 dark:text-purple-900">Montadora</span>
                   @endif
                 </td>
-                <td>
+                <td data-title="Status">
                   @if($company->active)
                     <span class="bg-green-200 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">Ativo</span>
                   @else
                     <span class="bg-red-200 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">Inativo</span>
                   @endif
                 </td>
-                <td>
-                  <div class="text-center">
+                <td data-title="Ações">
+                  <div class="sm:text-right lg:text-center">
                     <div class="dropdown inline-block" data-tw-placement="bottom-start">
                       <button class="dropdown-toggle btn btn-primary" aria-expanded="false" data-tw-toggle="dropdown">
                         Ações <i data-lucide="chevron-down" class="w-4 h-4 ml-2"></i>

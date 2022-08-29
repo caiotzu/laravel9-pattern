@@ -74,18 +74,18 @@
           <tbody>
             @foreach($users as $user)
               <tr>
-                <td>{{ $user->name }}</td>
-                <td>{{ $user->email }}</td>
-                <td>{{ $user->adminRole->description }}</td>
-                <td>
+                <td data-title="Nome">{{ $user->name }}</td>
+                <td data-title="E-mail">{{ $user->email }}</td>
+                <td data-title="Função">{{ $user->adminRole->description }}</td>
+                <td data-title="Status">
                   @if($user->active)
                     <span class="bg-green-200 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">Ativo</span>
                   @else
                     <span class="bg-red-200 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">Inativo</span>
                   @endif
                 </td>
-                <td>
-                  <div class="text-center">
+                <td data-title="Ações">
+                  <div class="sm:text-right lg:text-center">
                     <div class="dropdown inline-block" data-tw-placement="bottom-start">
                       <button class="dropdown-toggle btn btn-primary" aria-expanded="false" data-tw-toggle="dropdown">
                         Ações <i data-lucide="chevron-down" class="w-4 h-4 ml-2"></i>

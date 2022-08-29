@@ -128,8 +128,8 @@
             @if(count($filteredList) > 0)
               @foreach($filteredList as $companyGroup)
                 <tr>
-                  <td>{{ $companyGroup->group_name }}</td>
-                  <td>
+                  <td data-title="Nome">{{ $companyGroup->group_name }}</td>
+                  <td data-title="Perfil">
                     @if($companyGroup->profile->description == 'REVENDA')
                       <span class="bg-indigo-200 text-indigo-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-200 dark:text-indigo-900">Revenda</span>
                     @elseif($companyGroup->profile->description == 'ITE')
@@ -138,8 +138,8 @@
                       <span class="bg-purple-200 text-purple-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-purple-200 dark:text-purple-900">Montadora</span>
                     @endif
                   </td>
-                  <td>
-                    <div class="text-center">
+                  <td data-title="Ações">
+                    <div class="sm:text-right lg:text-center">
                       <div class="dropdown inline-block" data-tw-placement="bottom-start">
                         <button class="dropdown-toggle btn btn-primary" aria-expanded="false" data-tw-toggle="dropdown">
                           Ações <i data-lucide="chevron-down" class="w-4 h-4 ml-2"></i>
@@ -171,7 +171,14 @@
       </div>
 
       <div class="pt-5 border-t border-slate-200/60 dark:border-darkmode-400">
-        {{ $filteredList->links() }}
+        @if(request()->company_group_id || request()->profile_id)
+          {{ $filteredList->appends([
+            'company_group_id' => request()->get('company_group_id', ''),
+            'profile_id' => request()->get('profile_id', '')
+          ])->links() }}
+        @else
+          {{ $filteredList->links() }}
+        @endif
       </div>
     </div>
   </div>

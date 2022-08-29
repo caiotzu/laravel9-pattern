@@ -28,10 +28,12 @@ class AdminCompanyGroupController extends Controller {
       $data = $request->all();
       $filters = [];
 
-      if(count($data) > 0) {
+      if($request->company_group_id)
         $filters[] = ['id', $request->company_group_id];
+
+      if($request->profile_id)
         $filters[] = ['profile_id', $request->profile_id];
-      }
+
 
       $companyGroups = $this->adminCompanyGroupService->listAllCompanyGroupsWithPagination();
       $profiles = $this->profile->listAllProfiles();

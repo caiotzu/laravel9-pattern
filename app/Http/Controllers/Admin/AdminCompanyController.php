@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\IndexAdminCompanyRequest;
-use App\Http\Requests\StoreAdminPermissionRequest;
-use App\Http\Requests\UpdateAdminPermissionRequest;
+use App\Http\Requests\StoreAdminCompanyRequest;
+use App\Http\Requests\UpdateAdminCompanyRequest;
 
 use App\Services\ProfileService;
 use App\Services\AdminCompanyService;
@@ -55,46 +55,48 @@ class AdminCompanyController extends Controller {
   public function create() {
     try {
       $companyGroups = $this->adminCompanyGroupService->listAllCompanyGroups();
+      $companies = $this->adminCompanyService->listAllCompanies();
 
-      return view('admin.company.create', compact('companyGroups'));
+      return view('admin.company.create', compact('companyGroups', 'companies'));
     } catch (Exception $e) {
       return redirect()->route('admin.companies.index')->withErrors('Não foi possível carregar o formulário de cadastro da empresa');
     }
   }
 
-  public function store(StoreAdminPermissionRequest $request) {
+  public function store(StoreAdminCompanyRequest $request) {
     try {
-      $this->adminPermissionService->createAdminRolePermission($request->except('_method', '_token'));
+      $this->adminCompanyService->createAdminCompany($request->except('_method', '_token'));
 
-      return redirect()->route('admin.permissions.index')->with([
-        'successMessage' => 'As permissões para a função <strong>'.$request->description.'</strong> foram cadastradas com sucesso!'
+      return redirect()->route('admin.companies.index')->with([
+        'successMessage' => 'A empresa <strong>'.$request->trade_name.'</strong> foi cadastrada com sucesso!'
       ]);
-
     } catch (Exception $e) {
-      return back()->withErrors('Ocorreu um erro ao cadastrar os as permissões')->withInput();
+      return back()->withErrors('Ocorreu um erro ao cadastrar a empresa')->withInput();
     }
   }
 
   public function edit($id) {
     try {
-      [$role, $permissions] = $this->adminPermissionService->listAllAdminPermissionsGroupedByViewAndThatTheRoleHasAccess($id);
+      $companyGroups = $this->adminCompanyGroupService->listAllCompanyGroups();
+      $companies = $this->adminCompanyService->listAllCompaniesExcept($id);
+      $company = $this->adminCompanyService->getCompanyById($id);
 
-      return view('admin.permission.edit', compact('role', 'permissions'));
+      return view('admin.company.edit', compact('companyGroups', 'companies', 'company'));
     } catch (Exception $e) {
-      return back()->withErrors('Não foi possível carregar o formulário de edição das permissões, função não encontrada')->withInput();
+      return back()->withErrors('Empresa não encontrada')->withInput();
     }
   }
 
-  public function update(UpdateAdminPermissionRequest $request, $id) {
+  public function update(UpdateAdminCompanyRequest $request, $id) {
     try {
-      $this->adminPermissionService->updateAdminRolePermission($id, $request->except('_method', '_token'));
+      $this->adminCompanyService->updateAdminCompany($id, $request->except('_method', '_token'));
 
-      return redirect()->route('admin.permissions.index')->with([
-        'successMessage' => 'As permissões para a função <strong>'.$request->description.'</strong> foram atualizadas com sucesso!'
+      return redirect()->route('admin.companies.index')->with([
+        'successMessage' => 'A empresa <strong>'.$request->trade_name.'</strong> foi atualizada com sucesso!'
       ]);
 
     } catch (Exception $e) {
-      return back()->withErrors('Ocorreu um erro ao atualizar as permissões')->withInput();
+      return back()->withErrors('Ocorreu um erro ao atualizar a empresa')->withInput();
     }
   }
 }

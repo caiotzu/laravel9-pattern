@@ -175,7 +175,7 @@
 
       </div>
       <div id="tab-contacts" class="tab-pane leading-relaxed p-5" role="tabpanel" aria-labelledby="contacts">
-        <input type="hidden" name="arrContact" value="[]">
+        <input type="hidden" name="arrContact" value="{{ old('arrContact', $companyContacts ?? "[]") }}">
 
         <div class="grid grid-cols-12">
           <div class="col-span-12 md:col-span-4 p-2">
@@ -198,32 +198,121 @@
           </div>
         </div>
 
-        <div id='teste'></div>
-
-        <div class="grid grid-cols-12">
+         <div class="grid grid-cols-12">
           <table class="table col-span-12" id="tableContact">
             <thead>
               <tr>
                 <th class="whitespace-nowrap">Principal</th>
                 <th class="whitespace-nowrap">Contato</th>
                 <th class="whitespace-nowrap">Tipo</th>
+                <th class="whitespace-nowrap">Status</th>
                 <th class="whitespace-nowrap text-center">Ações</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td data-title="Principal"></td>
-                <td data-title="Contato"></td>
-                <td data-title="Tipo"></td>
-                <td data-title="Ações">
-                </td>
-              </tr>
+              @php
+                $constactsJson = old('arrContact', $companyContacts ?? "[]");
+                $contacts = json_decode($constactsJson);
+              @endphp
+              @foreach($contacts as $k => $contact)
+                <tr data-id="{{$k}}">
+                  <td>
+                    <div class="form-check mt-2">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="{{$contact->type}}_contact"
+                        value="{{$contact->value}}"
+                        data-id="{{$k}}"
+                        {{$contact->main ? 'checked' : ''}}
+                      >
+                      <label class="form-check-label">{{$contact->main ? 'Principal' : '&nbsp;'}}</label>
+                    </div>
+                  </td>
+                  <td data-title="Contato">{{$contact->value}}</td>
+                  <td data-title="Principal">{{$contact->type == 'E' ? 'E-mail' : 'Telefone'}}</td>
+                  <td data-title="Status">
+                    {!!
+                      $contact->active ?
+                      '<span class="bg-green-200 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">Ativo</span>'
+                      :
+                      '<span class="bg-red-200 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">Inativo</span>'
+                    !!}
+                  </td>
+                  <td class="space-x-4">
+                    <div class="flex gap-4 justify-center">
+                      <a href="#" name="btnDeleteContact" data-id="{{$k}}" title="Excluir o endereço">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <g color="#b91c1c">
+                            <path d="M3 6h18"></path>
+                            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                          </g>
+                        </svg>
+                      </a>
+
+                      <a href="#" name="btnEditContact" data-id="{{$k}}" title="Editar o endereço">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <g color="#4338ca">
+                            <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                          </g>
+                        </svg>
+                      </a>
+
+                      <a href="#" name="btnToggleActiveContact" data-id="{{$k}}" title="{{$contact->active ? 'Desativar endereço': 'Ativar endereço'}}">
+                        {!!
+                          $contact->active ?
+                          '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <g color="#b91c1c">
+                              <path d="M18.36 6.64A9 9 0 0 1 20.77 15"></path>
+                              <path d="M6.16 6.16a9 9 0 1 0 12.68 12.68"></path>
+                              <path d="M12 2v4"></path>
+                              <path d="m2 2 20 20"></path>
+                            </g>
+                          </svg>'
+                          :
+                          '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <g color="#15803d">
+                              <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+                              <line x1="12" y1="2" x2="12" y2="12"></line>
+                            </g>
+                          </svg>'
+                        !!}
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+              @endforeach
             </tbody>
           </table>
         </div>
       </div>
       <div id="tab-addresses" class="tab-pane leading-relaxed p-5" role="tabpanel" aria-labelledby="addresses">
         Endereços
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modals -->
+<div id="modalDelete" class="modal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <div class="p-5 text-center">
+          <i data-lucide="x-circle" class="w-16 h-16 text-danger mx-auto mt-3"></i>
+          <div class="text-3xl mt-5">
+            Tem certeza ?
+          </div>
+          <div class="text-slate-500 mt-2">
+            Você realmente deseja excluir esse registro? <br>
+            Este processo não pode ser desfeito.</div>
+          </div>
+        <div class="px-5 pb-8 text-center">
+          <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-24 mr-1">Cancel</button>
+          <button name="confirmDeleteContact" type="button" class="btn btn-danger w-24">Delete</button>
+        </div>
       </div>
     </div>
   </div>

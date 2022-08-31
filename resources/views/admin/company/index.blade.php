@@ -138,7 +138,7 @@
               @foreach($filteredList as $company)
                 <tr>
                   <td data-title="Nome fantasia">{{ $company->trade_name }}</td>
-                  <td data-title="CNPJ">{{ $company->cnpj }}</td>
+                  <td data-title="CNPJ">{{ formatCpfCnpj($company->cnpj) }}</td>
                   <td data-title="Tipo">
                     @if(!$company->headquarter_id)
                       <span class="bg-gray-200 text-gray-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-gray-200 dark:text-gray-900">Matriz</span>

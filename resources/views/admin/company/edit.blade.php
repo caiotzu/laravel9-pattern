@@ -17,6 +17,7 @@
 @endsection
 
 @section('adminContent')
+<div id="divMessage"></div>
 @if($errors->any())
   <div id="errorMessage" class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mt-4 relative" role="alert">
     <p class="font-bold text-lg mb-2 relative">Erro</p>

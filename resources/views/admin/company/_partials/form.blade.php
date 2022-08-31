@@ -174,10 +174,55 @@
         </div>
 
       </div>
-      <div id="tab-contacts" class="tab-pane leading-relaxed p-5 grid grid-cols-12" role="tabpanel" aria-labelledby="contacts">
-        Contatos
+      <div id="tab-contacts" class="tab-pane leading-relaxed p-5" role="tabpanel" aria-labelledby="contacts">
+        <input type="hidden" name="arrContact" value="[]">
+
+        <div class="grid grid-cols-12">
+          <div class="col-span-12 md:col-span-4 p-2">
+            <label for="contact_type" class="form-label">Tipo contato <span class="text-red-500">*</span></label>
+            <select class="form-select py-2.5" id="contact_type" name="contact_type">
+              <option value="E" selected>E-mail</option>
+              <option value="T">Telefone</option>
+            </select>
+          </div>
+
+          <div class="col-span-12 md:col-span-4 p-2">
+            <label for="contact_value" class="form-label">Contato <span class="text-red-500">*</span></label>
+            <input id="contact_value" name="contact_value" type="text" class="form-control w-full py-2.5">
+          </div>
+
+          <div class="col-span-12 md:col-span-4 p-2 md:mt-8">
+            <a name="btnAddContact" class="btn btn-primary w-32 mr-2 mb-2">Adicionar</a>
+            <a name="btnSaveEditContact" class="btn btn-primary w-32 mr-2 mb-2 hidden">Salvar</a>
+            <a name="btnCancelEditContact" class="btn btn-secundary w-32 mr-2 mb-2 hidden">Cancelar</a>
+          </div>
+        </div>
+
+        <div id='teste'></div>
+
+        <div class="grid grid-cols-12">
+          <table class="table col-span-12" id="tableContact">
+            <thead>
+              <tr>
+                <th class="whitespace-nowrap">Principal</th>
+                <th class="whitespace-nowrap">Contato</th>
+                <th class="whitespace-nowrap">Tipo</th>
+                <th class="whitespace-nowrap text-center">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-title="Principal"></td>
+                <td data-title="Contato"></td>
+                <td data-title="Tipo"></td>
+                <td data-title="Ações">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div id="tab-addresses" class="tab-pane leading-relaxed p-5 grid grid-cols-12" role="tabpanel" aria-labelledby="addresses">
+      <div id="tab-addresses" class="tab-pane leading-relaxed p-5" role="tabpanel" aria-labelledby="addresses">
         Endereços
       </div>
     </div>

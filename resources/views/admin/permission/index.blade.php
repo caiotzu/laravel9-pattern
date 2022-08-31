@@ -87,7 +87,6 @@
                               </a>
                             </li>
                           @endif
-                          <li>
                         </ul>
                       </div>
                     </div>

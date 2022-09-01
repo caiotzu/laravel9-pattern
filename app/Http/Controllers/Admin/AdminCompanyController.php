@@ -81,7 +81,21 @@ class AdminCompanyController extends Controller {
       $companies = $this->adminCompanyService->listAllCompaniesExcept($id);
       $company = $this->adminCompanyService->getCompanyById($id);
 
-      return view('admin.company.edit', compact('companyGroups', 'companies', 'company'));
+      $contacts = [];
+      foreach($company->companyContacts as $contact) {
+        array_push($contacts, [
+          'id' => $contact->id,
+          'type'=> $contact->type,
+          'value'=> $contact->value,
+          'main'=> $contact->main,
+          'active'=> $contact->active,
+          'insert' => 'S'
+        ]);
+      }
+      $companyContacts = json_encode($contacts);
+
+
+      return view('admin.company.edit', compact('companyGroups', 'companies', 'company', 'companyContacts'));
     } catch (Exception $e) {
       return back()->withErrors('Empresa não encontrada')->withInput();
     }

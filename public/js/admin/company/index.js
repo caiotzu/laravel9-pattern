@@ -291,8 +291,12 @@ $(function($) {
     let itens = JSON.parse($(':input[name=arrContact]').val()),
         tableContact = $('#tableContact').find('tbody');
 
-    itens[controlId]['main'] = false;
-    itens[controlId]['insert'] = 'N';
+    if(itens[controlId]['id']) {
+      itens[controlId]['main'] = false;
+      itens[controlId]['insert'] = 'N';
+    } else {
+      itens.splice(controlId, 1);
+    }
 
     modal.hide();
     $(':input[name=arrContact]').val(JSON.stringify(itens));

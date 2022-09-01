@@ -51,6 +51,55 @@ class StoreAdminCompanyRequest extends FormRequest {
         'required',
         'max:11'
       ],
+      'arrContact' => [
+        function ($attribute, $value, $fail) {
+          $contacts = json_decode($value);
+          $totalContactEmailMain = 0;
+          $existEmail = false;
+          $totalContactPhoneMain = 0;
+          $existPhone = false;
+
+          foreach($contacts as $contact) {
+            if($contact->insert == 'S') {
+              if($contact->type == 'E') {
+                $existEmail = true;
+
+                if($contact->main && $contact->active)
+                  $totalContactEmailMain++;
+
+                foreach($contact as $field) {
+                  if(!$field)
+                    $fail('Todos os campos do contato devem ser preenchidos');
+                }
+              } else if($contact->type == 'T') {
+                $existPhone = true;
+
+                if($contact->main && $contact->active)
+                  $totalContactPhoneMain++;
+
+                foreach($contact as $field) {
+                  if(!$field)
+                    $fail('Todos os campos do contato devem ser preenchidos');
+                }
+              }
+            }
+          }
+
+          if($existEmail) {
+            if($totalContactEmailMain > 1)
+              $fail('Só pode ter um e-mail cadastrado como principal');
+            else if($totalContactEmailMain == 0)
+              $fail('Obrigatório definir um e-mail como principal e ativo');
+          }
+
+          if($existPhone) {
+            if($totalContactPhoneMain > 1)
+              $fail('Só pode ter um telefone cadastrado como principal');
+            else if($totalContactPhoneMain == 0)
+              $fail('Obrigatório definir telefone como principal e ativo');
+          }
+        },
+      ]
     ];
   }
 

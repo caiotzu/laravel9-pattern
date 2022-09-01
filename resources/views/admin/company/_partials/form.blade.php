@@ -226,7 +226,7 @@
                         data-id="{{$k}}"
                         {{$contact->main ? 'checked' : ''}}
                       >
-                      <label class="form-check-label">{{$contact->main ? 'Principal' : '&nbsp;'}}</label>
+                      <label class="form-check-label">{!!$contact->main ? 'Principal' : '&nbsp;'!!}</label>
                     </div>
                   </td>
                   <td data-title="Contato">{{$contact->value}}</td>

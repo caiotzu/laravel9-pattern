@@ -7,6 +7,12 @@ use App\Http\Controllers\DarkModeController;
 use App\Http\Controllers\LayoutSchemeController;
 use App\Http\Controllers\ColorSchemeController;
 
+// imports general controllers
+use App\Http\Controllers\ {
+  ZipCodeController,
+  CountyController,
+};
+
 // imports admin
 use App\Http\Controllers\Admin\ {
   AdminAuthController,
@@ -67,6 +73,14 @@ use App\Http\Controllers\Admin\ {
           Route::put('/systems', [AdminSystemController::class, 'update'])->name('admin.systems.update')->middleware('check.admin.permission:SYSTEM_EDIT');
           Route::get('/systems', [AdminSystemController::class, 'index'])->name('admin.systems.index')->middleware('check.admin.permission:SYSTEM_INDEX');
         //---
+      });
+    //---
+
+    // ajax routes
+      Route::prefix('ajax')->group(function() {
+        Route::post('/zipCodeSearch', [ZipCodeController::class, 'search']);
+
+        Route::get('/countySearch', [CountyController::class, 'search']);
       });
     //---
   });

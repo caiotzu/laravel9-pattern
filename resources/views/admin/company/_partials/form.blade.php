@@ -288,7 +288,48 @@
         </div>
       </div>
       <div id="tab-addresses" class="tab-pane leading-relaxed p-5" role="tabpanel" aria-labelledby="addresses">
-        Endereços
+        <input type="hidden" name="arrAddress" value="{{ old('arrAddress', $companyAddresses ?? "[]") }}">
+
+        <div class="grid grid-cols-12">
+          <div class="col-span-12 md:col-span-2 p-2">
+            <label for="address_zipCode" class="form-label">Cep <span class="text-red-500">*</span></label>
+            <input id="address_zipCode" name="address_zipCode" type="text" class="form-control w-full py-2.5 cep">
+          </div>
+
+          <div class="col-span-12 md:col-span-8 p-2">
+            <label for="address_address" class="form-label">Logradouro <span class="text-red-500">*</span></label>
+            <input id="address_address" name="address_address" type="text" class="form-control w-full py-2.5" maxlength="100">
+          </div>
+
+          <div class="col-span-12 md:col-span-2 p-2">
+            <label for="address_number" class="form-label">Número <span class="text-red-500">*</span></label>
+            <input id="address_number" name="address_number" type="text" class="form-control w-full py-2.5" maxlength="5">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-12">
+          <div class="col-span-12 md:col-span-8 p-2">
+            <label for="address_neighborhood" class="form-label">Bairro <span class="text-red-500">*</span></label>
+            <input id="address_neighborhood" name="address_neighborhood" type="text" class="form-control w-full py-2.5" maxlength="100">
+          </div>
+
+          <div class="col-span-12 md:col-span-4 p-2">
+            <label for="address_complement" class="form-label">Complemento </label>
+            <input id="address_complement" name="address_complement" type="text" class="form-control w-full py-2.5" maxlength="50">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-12">
+          <div class="col-span-12 md:col-span-6 p-2 form-group">
+            <label for="address_county" class="form-label">Município <span class="text-red-500">*</span></label>
+            {{-- <select class=" w-full" id="address_county" name="address_county"></select> --}}
+            <select class="select2-county form-control" id="address_county" name="address_county">
+              <option value="1">teste</option>
+              <option value="2">teste2</option>
+              <option value="3">teste3</option>
+            </select>
+          </div>
+        </div>
       </div>
     </div>
   </div>

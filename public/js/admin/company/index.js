@@ -1,4 +1,10 @@
+
 $(function($) {
+  const _url = window.location.origin,
+        _token = $(':input[name=_token]').val();
+
+
+  $('.select2-county').select2();
 
   $('select[name=company_type]').on('change', function(e) {
     e.preventDefault();
@@ -444,5 +450,49 @@ $(function($) {
         </svg>
       `);
     }
+  });
+
+  $(':input[name=address_zipCode]').on('blur', function(e) {
+    e.preventDefault();
+
+    const zipCode = $(this).cleanVal(),
+          elmMessage = $('#divMessage');
+
+
+    $('#errorMessage').remove();
+
+    if(zipCode.length < 8) {
+      showMessageBox('CEP inválido', 'D', elmMessage, 'after');
+      return false;
+    }
+
+    $.ajax({
+      url : `${_url}/ajax/zipCodeSearch`,
+      headers: {'X-CSRF-TOKEN': _token},
+      type : 'post',
+      data : { zipCode },
+    })
+    .done(function(responseJson) {
+      const response = JSON.parse(responseJson);
+
+      if(response.error) {
+        showMessageBox(response.message, 'D', elmMsg, 'before');
+        return false;
+      } else {
+        const address = response.response;
+
+        console.log(address);
+        $(':input[name=address_address]').val(address.logradouro);
+        $(':input[name=address_neighborhood]').val(address.bairro);
+
+        const option = $(`<option value="${address.municipio.id}" selected>${address.municipio.id} - ${address.municipio.county}/${address.municipio.uf}</option>`);
+        $('select[name=address_county]').html('').append(option).trigger('change');
+      }
+    })
+    .fail(function(jqXHR, textStatus, response){
+      const message = jqXHR.responseJSON.message || response;
+      showMessageBox(message, 'D', elmMessage, 'after');
+      return false;
+    });
   });
 });

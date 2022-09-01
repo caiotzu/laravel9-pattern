@@ -13,8 +13,6 @@
     <meta name="author" content="Caio Costa">
 
     @yield('adminHead')
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     @yield('adminCss')
 
     @vite('resources/css/app.css')
@@ -47,6 +45,7 @@
     <script type="text/javascript" src="{{ URL::asset('js/plugins/jquery.mask.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/layouts/index.js') }}"></script>
 
+    <script type="text/javascript" src="{{ URL::asset('js/plugins/select2/select2.js') }}"></script>
     @yield('adminJs')
   </body>
 </html>

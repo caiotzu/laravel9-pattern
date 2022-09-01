@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Support\Facades\Auth;
 use Closure;
+use Exception;
 
 class Authenticate {
   public function handle($request, Closure $next) {
@@ -14,6 +15,12 @@ class Authenticate {
         return $next($request);
       } else {
         return redirect('admin');
+      }
+    } else if(in_array($rolePath, ['/ajax'])) {
+      if(Auth::guard('admin')->check() || Auth::guard('web')->check()) {
+        return $next($request);
+      } else {
+        return throw new Exception('Usuário não autenticado para realizar a ação');
       }
     } else {
       if(Auth::guard('web')->check()) {

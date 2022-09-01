@@ -16,6 +16,7 @@ class StoreAdminCompanyGroupRequest extends FormRequest {
         'string',
         'max:50',
         'min:3',
+        'unique:company_groups'
       ],
       'profile_id' => [
         'required',
@@ -29,6 +30,7 @@ class StoreAdminCompanyGroupRequest extends FormRequest {
       'group_name.string' => 'O campo nome do grupo deve ser um texto',
       'group_name.max' => 'O campo nome do grupo não pode conter mais de 50 caracteres',
       'group_name.min' => 'O campo nome do grupo não pode conter menos de 03 caracteres',
+      'group_name.unique' => 'Este nome de grupo já está cadastrado para outro grupo',
 
       'profile_id.required' => 'O campo perfil é obrigatório',
     ];

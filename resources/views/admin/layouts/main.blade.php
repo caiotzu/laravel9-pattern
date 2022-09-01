@@ -43,9 +43,9 @@
 
     <script type="text/javascript" src="{{ URL::asset('js/plugins/jquery-3.6.1.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/plugins/jquery.mask.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/plugins/select2/select2.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/layouts/index.js') }}"></script>
 
-    <script type="text/javascript" src="{{ URL::asset('js/plugins/select2/select2.js') }}"></script>
     @yield('adminJs')
   </body>
 </html>

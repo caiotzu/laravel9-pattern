@@ -322,8 +322,7 @@
         <div class="grid grid-cols-12">
           <div class="col-span-12 md:col-span-6 p-2 form-group">
             <label for="address_county" class="form-label">Município <span class="text-red-500">*</span></label>
-            {{-- <select class=" w-full" id="address_county" name="address_county"></select> --}}
-            <select class="select2-county form-control" id="address_county" name="address_county">
+            <select class="select-2 form-control" id="address_county" name="address_county">
               <option value="1">teste</option>
               <option value="2">teste2</option>
               <option value="3">teste3</option>

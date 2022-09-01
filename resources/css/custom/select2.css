@@ -133,3 +133,34 @@ _::-webkit-full-page-media, _:future, :root .select2-hidden-accessible {
   border-radius: 0.25rem !important;
   outline: 2px solid transparent !important;
 }
+
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+  background-image: url('../../../public/build/assets/images/icons/chevron-down.svg');
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-size: contain;
+  border: none !important;
+  height: 18px !important;
+  width: 60px !important;
+  margin: auto !important;
+  top: 10px !important;
+  left: -5px!important;
+}
+
+.select2-container--default.select2-container--open .select2-selection--single .select2-selection__arrow b {
+  background-image: url('../../../public/build/assets/images/icons/chevron-up.svg');
+  background-repeat: no-repeat;
+  background-color: transparent;
+  background-size: contain;
+  border: none !important;
+  height: 18px !important;
+  width: 60px !important;
+  margin: auto !important;
+  top: 10px !important;
+  left: -5px!important;
+}
+
+.select2-selection__clear {
+  margin-right: 8px !important;
+  color: #4c5669;
+}

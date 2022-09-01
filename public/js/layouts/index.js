@@ -268,3 +268,8 @@ $('.cnpj').mask('00.000.000/0000-00');
 $('.cep').mask('00000-000');
 
 
+$('.select-2').select2({
+  placeholder: 'Selecione um registro',
+  allowClear: true
+});
+

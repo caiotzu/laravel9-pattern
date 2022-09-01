@@ -3,9 +3,6 @@ $(function($) {
   const _url = window.location.origin,
         _token = $(':input[name=_token]').val();
 
-
-  $('.select2-county').select2();
-
   $('select[name=company_type]').on('change', function(e) {
     e.preventDefault();
     const companyType = $('select[name=company_type] option:selected').val();

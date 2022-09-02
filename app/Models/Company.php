@@ -32,4 +32,8 @@ class Company extends Model {
   public function companyContacts() {
     return $this->hasMany(CompanyContact::class, 'company_id', 'id');
   }
+
+  public function Roles() {
+    return $this->hasMany(Role::class, 'company_id', 'id');
+  }
 }

@@ -32,6 +32,30 @@ $(function($) {
     },
   });
 
+  $(':input[name=cnpj]').on('blur', function(e) {
+    const cnpj = $(this).cleanVal(),
+      elmMessage = $('#divMessage');
+
+    if(!isValidCnpj(cnpj)) {
+      $(':input[name=cnpj]').val('');
+      showMessageBox(`O CNPJ (<strong>${formatCpfCnpj(cnpj)}</strong>) é inválido`, 'D', elmMessage, 'after');
+      return false;
+    }
+    $('#errorMessage').remove();
+  });
+
+  $(':input[name=user_cpf]').on('blur', function(e) {
+    const cpf = $(this).cleanVal(),
+      elmMessage = $('#divMessage');
+
+    if(!isValidCpf(cpf)) {
+      $(':input[name=user_cpf]').val('');
+      showMessageBox(`O CPF (<strong>${formatCpfCnpj(cpf)}</strong>) é inválido`, 'D', elmMessage, 'after');
+      return false;
+    }
+    $('#errorMessage').remove();
+  });
+
   $('select[name=company_type]').on('change', function(e) {
     e.preventDefault();
     const companyType = $('select[name=company_type] option:selected').val();

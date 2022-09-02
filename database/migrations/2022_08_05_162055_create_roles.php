@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('company_group_id')->unsigned()->nullable(false);
-            $table->foreign('company_group_id')
+            $table->bigInteger('company_id')->unsigned()->nullable(false);
+            $table->foreign('company_id')
                 ->references('id')
-                ->on('company_groups');
+                ->on('companies');
             $table->string('description', 15);
             $table->timestamps($precision = 0);
         });

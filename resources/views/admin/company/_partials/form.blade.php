@@ -40,6 +40,20 @@
           Endereços
         </button>
       </li>
+      @if(!isset($company->id))
+        <li id="user" class="nav-item flex-1 border-b border-slate-200/60 dark:border-darkmode-400 md:border-none" role="presentation">
+          <button
+            class="nav-link w-full py-2"
+            data-tw-toggle="pill"
+            data-tw-target="#tab-user"
+            type="button" role="tab"
+            aria-controls="tab-user"
+            aria-selected="false"
+          >
+            Usuário responsável
+          </button>
+        </li>
+      @endif
     </ul>
 
     <div class="tab-content border-l border-r border-b">
@@ -424,6 +438,26 @@
           </table>
         </div>
       </div>
+      @if(!isset($company->id))
+        <div id="tab-user" class="tab-pane leading-relaxed p-5" role="tabpanel" aria-labelledby="user">
+          <div class="grid grid-cols-12">
+            <div class="col-span-12 md:col-span-4 p-2">
+              <label for="user_name" class="form-label">Nome <span class="text-red-500">*</span></label>
+              <input id="user_name" name="user_name" type="text" class="form-control w-full py-2.5" value="{{ old('user_name') }}">
+            </div>
+
+            <div class="col-span-12 md:col-span-4 p-2">
+              <label for="user_email" class="form-label">E-mail <span class="text-red-500">*</span></label>
+              <input id="user_email" name="user_email" type="email" class="form-control w-full py-2.5" value="{{ old('user_email') }}">
+            </div>
+
+            <div class="col-span-12 md:col-span-4 p-2">
+              <label for="user_cpf" class="form-label">CPF <span class="text-red-500">*</span></label>
+              <input id="user_cpf" name="user_cpf" type="text" class="form-control w-full py-2.5 cpf" value="{{ old('user_cpf') }}">
+            </div>
+          </div>
+        </div>
+      @endif
     </div>
   </div>
 </div>

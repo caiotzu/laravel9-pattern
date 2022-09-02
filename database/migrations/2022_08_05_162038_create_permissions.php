@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('profile_id')
                 ->references('id')
                 ->on('profiles');
-            $table->string('key', 50)->unique();
+            $table->string('key', 50);
             $table->text('description');
             $table->timestamps($precision = 0);
         });

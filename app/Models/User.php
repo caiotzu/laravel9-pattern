@@ -5,15 +5,9 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable {
-  public function role() {
-    return $this->belongsTo(Role::class, 'role_id', 'id');
-  }
-
-  public function userAccessCompanies() {
-    return $this->hasMany(UserAccessCompany::class, 'user_id', 'id');
-  }
-
   protected $fillable = [
+    'role_id',
+    'cpf',
     'name',
     'email',
     'password',
@@ -24,11 +18,13 @@ class User extends Authenticatable {
     'remember_token',
   ];
 
-  protected $casts = [
-    'email_verified_at' => 'datetime',
-  ];
+  public function role() {
+    return $this->belongsTo(Role::class, 'role_id', 'id');
+  }
 
-  protected $appends = ['photo'];
+  public function userAccessCompanies() {
+    return $this->hasMany(UserAccessCompany::class, 'user_id', 'id');
+  }
 
   public function getPhotoUrlAttribute() {
     if ($this->foto !== null) {

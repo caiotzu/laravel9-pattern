@@ -6,10 +6,15 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
+use App\Models\User;
+use App\Models\Role;
 use App\Models\Company;
+use App\Models\Permission;
+use App\Models\CompanyGroup;
 use App\Models\AdminSetting;
 use App\Models\CompanyContact;
 use App\Models\CompanyAddress;
+use App\Models\RolePermission;
 
 use Exception;
 
@@ -96,11 +101,38 @@ class AdminCompanyService {
             $companyAddress->delete();
           }
         }
+
+        $role = Role::create([
+          'company_id' =>  $company->id,
+          'description' => 'Administrador'
+        ]);
+        $companyGroup = CompanyGroup::findOrFail($dto['company_group_id']);
+        $permissions = Permission::where('profile_id', $companyGroup->profile_id)->get();
+
+        foreach($permissions as $permission) {
+          RolePermission::create([
+            'role_id' => $role->id,
+            'permission_id' => $permission->id
+          ]);
+        }
+
+        $password = 'administrador';
+        $passwordHash = bcrypt($password);
+        $dtoUser = [
+          'role_id' => $role->id,
+          'cpf' => $dto['user_cpf'],
+          'name' => $dto['user_name'],
+          'email' => $dto['user_email'],
+          'password' => $passwordHash,
+          'active' => true
+        ];
+        User::create($dtoUser);
       DB::commit();
 
       return true;
     } catch (Exception $e) {
       DB::rollBack();
+      dd($e->getMessage());
       return throw new Exception($e->getMessage());
     }
   }

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\SearchCountyRequest;
+use App\Http\Requests\GetCountByIdCountyRequest;
+
 use App\Services\CountyService;
 
 use Exception;
@@ -17,7 +19,7 @@ class CountyController extends Controller {
     $this->countyService = $countyService;
   }
 
-  public function search(Request $request) {
+  public function search(SearchCountyRequest $request) {
     try {
       return $this->countyService->countySearch(removeAccent($request->county));
     } catch (Exception $e) {
@@ -25,7 +27,7 @@ class CountyController extends Controller {
     }
   }
 
-  public function getCountyById(Request $request) {
+  public function getCountyById(GetCountByIdCountyRequest $request) {
     try {
       return $this->countyService->getCountyById($request->id);
     } catch (Exception $e) {

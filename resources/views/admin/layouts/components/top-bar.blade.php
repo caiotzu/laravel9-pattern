@@ -43,7 +43,7 @@
           </li>
           <li><hr class="dropdown-divider border-white/[0.08]"></li>
           <li>
-            <a href="{{ route('admin.auth.logout') }}" class="dropdown-item hover:bg-white/5" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <a href="{{ route('admin.auth.logout') }}" class="dropdown-item hover:bg-white/5" onclick="event.preventDefault(); localStorage.clear(); document.getElementById('logout-form').submit();">
               <i data-lucide="log-out" class="w-4 h-4 mr-2"></i> Logout
             </a>
             <form id="logout-form" action="{{ route('admin.auth.logout') }}" method="POST" style="display: none;">

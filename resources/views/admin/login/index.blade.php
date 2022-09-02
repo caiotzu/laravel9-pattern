@@ -76,6 +76,7 @@
           password,
           remember
         }).then(res => {
+          localStorage.setItem('userPermission', JSON.stringify(res.data));
           location.href = '/admin/home'
         }).catch(err => {
           $('#btn-login').html(`Entrar`)

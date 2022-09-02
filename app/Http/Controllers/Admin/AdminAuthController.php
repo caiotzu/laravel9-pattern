@@ -30,6 +30,8 @@ class AdminAuthController extends Controller {
       array_push($arrPermissions, $permission->adminPermission->key);
     }
     Session::put('userPermission', $arrPermissions);
+
+    return $arrPermissions;
   }
 
   public function logout() {

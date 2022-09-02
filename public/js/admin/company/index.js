@@ -1,7 +1,8 @@
 
 $(function($) {
   const _url = window.location.origin,
-        _token = $(':input[name=_token]').val();
+        _token = $(':input[name=_token]').val(),
+        userPermission = JSON.parse(localStorage.getItem('userPermission'));
 
   $('.select-2-county').select2({
     ajax: {

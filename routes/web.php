@@ -9,19 +9,20 @@ use App\Http\Controllers\ColorSchemeController;
 
 // imports general controllers
 use App\Http\Controllers\ {
-  ZipCodeController,
   CountyController,
+  ZipCodeController,
 };
 
 // imports admin
 use App\Http\Controllers\Admin\ {
   AdminAuthController,
-  AdminCompanyController,
-  AdminCompanyGroupController,
-  AdminHomeController,
-  AdminPermissionController,
-  AdminSystemController,
   AdminUserController,
+  AdminHomeController,
+  AdminSystemController,
+  AdminCompanyController,
+  AdminPermissionController,
+  AdminUserProfileController,
+  AdminCompanyGroupController,
 };
 
 // themes route
@@ -42,6 +43,11 @@ use App\Http\Controllers\Admin\ {
         Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.auth.logout');
 
         Route::get('/home', [AdminHomeController::class, 'index'])->name('admin.home.index');
+
+        // user profile
+          Route::get('/userProfile', [AdminUserProfileController::class, 'index'])->name('admin.userProfiles.index');
+        //---
+
 
         // records route
           Route::get('/companyGroups/create', [AdminCompanyGroupController::class, 'create'])->name('admin.companyGroups.create')->middleware('check.admin.permission:COMPANYGROUP_CREATE');

@@ -23,7 +23,6 @@ class ViewServiceProvider extends ServiceProvider {
   public function boot() {
     View::composer('*', 'App\Http\View\Composers\Admin\AdminMenuComposer');
     View::composer('*', 'App\Http\View\Composers\MenuComposer');
-    View::composer('*', 'App\Http\View\Composers\FakerComposer');
     View::composer('*', 'App\Http\View\Composers\DarkModeComposer');
     View::composer('*', 'App\Http\View\Composers\LoggedInUserComposer');
     View::composer('*', 'App\Http\View\Composers\ColorSchemeComposer');

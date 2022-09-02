@@ -20,7 +20,7 @@
     <!-- BEGIN: Account Menu -->
     <div class="intro-x dropdown w-8 h-8">
       <div class="dropdown-toggle w-8 h-8 rounded-full overflow-hidden shadow-lg image-fit zoom-in scale-110" role="button" aria-expanded="false" data-tw-toggle="dropdown">
-        <img alt="Pattern Laravel 9" src="{{ asset('build/assets/images/' . $fakers[9]['photos'][0]) }}">
+        <img alt="Pattern Laravel 9" src="{{ asset('build/assets/images/avatar.jpg') }}">
       </div>
       <div class="dropdown-menu w-56">
         <ul class="dropdown-content bg-primary/80 before:block before:absolute before:bg-black before:inset-0 before:rounded-md before:z-[-1] text-white">
@@ -32,7 +32,7 @@
             <hr class="dropdown-divider border-white/[0.08]">
           </li>
           <li>
-            <a href="" class="dropdown-item hover:bg-white/5 ">
+            <a href="{{ route('admin.userProfiles.index') }}" class="dropdown-item hover:bg-white/5 ">
               <i data-lucide="user" class="w-4 h-4 mr-2"></i> Perfil
             </a>
           </li>

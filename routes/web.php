@@ -81,6 +81,7 @@ use App\Http\Controllers\Admin\ {
         Route::post('/zipCodeSearch', [ZipCodeController::class, 'search']);
 
         Route::get('/countySearch', [CountyController::class, 'search']);
+        Route::get('/getCountyById', [CountyController::class, 'getCountyById']);
       });
     //---
   });

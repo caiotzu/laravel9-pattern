@@ -10,8 +10,15 @@ class UpdateAdminCompanyRequest extends FormRequest {
   }
 
   protected function prepareForValidation() {
+    $addresses = json_decode(request()->arrAddress);
+    foreach($addresses as $key => $address) {
+      $address->zipCode = preg_replace('/\D+/', '', $address->zipCode);
+      $addresses[$key] = $address;
+    }
+
     $this->merge([
-      'cnpj' => preg_replace('/\D+/', '', request()->cnpj)
+      'cnpj' => preg_replace('/\D+/', '', request()->cnpj),
+      'arrAddress' => json_encode($addresses)
     ]);
   }
 
@@ -70,7 +77,7 @@ class UpdateAdminCompanyRequest extends FormRequest {
                   $totalContactEmailMain++;
 
                 foreach($contact as $field) {
-                  if(!$field)
+                  if($field === '' || $field === null)
                     $fail('Todos os campos do contato devem ser preenchidos');
                 }
               } else if($contact->type == 'T') {
@@ -80,7 +87,7 @@ class UpdateAdminCompanyRequest extends FormRequest {
                   $totalContactPhoneMain++;
 
                 foreach($contact as $field) {
-                  if(!$field)
+                  if($field === '' || $field === null)
                     $fail('Todos os campos do contato devem ser preenchidos');
                 }
               }
@@ -99,6 +106,34 @@ class UpdateAdminCompanyRequest extends FormRequest {
               $fail('Só pode ter um telefone cadastrado como principal');
             else if($totalContactPhoneMain == 0)
               $fail('Obrigatório definir telefone como principal e ativo');
+          }
+        },
+      ],
+      'arrAddress' => [
+        function ($attribute, $value, $fail) {
+          $addresses = json_decode($value);
+          $totalAddresstMain = 0;
+          $existAddress = false;
+
+          foreach($addresses as $address) {
+            if($address->insert == 'S') {
+              $existAddress = true;
+
+              if($address->main && $address->active)
+                $totalAddresstMain++;
+
+              foreach($address as $key => $field) {
+                if(($field === '' || $field === null) && $key != 'complement')
+                  $fail('Todos os campos obrigatórios do endereço devem ser preenchidos');
+              }
+            }
+          }
+
+          if($existAddress) {
+            if($totalAddresstMain > 1)
+              $fail('Só pode ter um endereço cadastrado como principal');
+            else if($totalAddresstMain == 0)
+              $fail('Obrigatório definir um endereço como principal e ativo');
           }
         },
       ]

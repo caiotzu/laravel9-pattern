@@ -9,7 +9,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use App\Models\Company;
 use App\Models\AdminSetting;
 use App\Models\CompanyContact;
-
+use App\Models\CompanyAddress;
 
 use Exception;
 
@@ -39,7 +39,7 @@ class AdminCompanyService {
   }
 
   public function getCompanyById(Int $id): Company {
-    return Company::with('companyContacts')->findOrFail($id);
+    return Company::with('companyContacts', 'companyAddresses.county')->findOrFail($id);
   }
 
   public function createAdminCompany(Array $dto) {
@@ -67,6 +67,33 @@ class AdminCompanyService {
             } else {
               CompanyContact::create($dtoContact);
             }
+          }
+        }
+
+        $addresses = json_decode($dto['arrAddress']);
+        foreach($addresses as $address) {
+          $dtoAddress = [
+            'company_id' => $company->id,
+            'county_id' => $address->countyId,
+            'active' => $address->active,
+            'main' => $address->main,
+            'zip_code' => $address->zipCode,
+            'address' => $address->address,
+            'number' => $address->number,
+            'neighborhood' => $address->neighborhood,
+            'complement' => $address->complement,
+          ];
+
+          if($address->insert == 'S') {
+            if(isset($address->id)) {
+              $companyAddress = CompanyAddress::findOrFail($address->id);
+              $companyAddress->update($dtoAddress);
+            } else {
+              CompanyAddress::create($dtoAddress);
+            }
+          } else {
+            $companyAddress = CompanyAddress::findOrFail($address->id);
+            $companyAddress->delete();
           }
         }
       DB::commit();
@@ -109,11 +136,39 @@ class AdminCompanyService {
             $companyContact->delete();
           }
         }
+
+        $addresses = json_decode($dto['arrAddress']);
+        foreach($addresses as $address) {
+          $dtoAddress = [
+            'company_id' => $company->id,
+            'county_id' => $address->countyId,
+            'active' => $address->active,
+            'main' => $address->main,
+            'zip_code' => $address->zipCode,
+            'address' => $address->address,
+            'number' => $address->number,
+            'neighborhood' => $address->neighborhood,
+            'complement' => $address->complement,
+          ];
+
+          if($address->insert == 'S') {
+            if(isset($address->id)) {
+              $companyAddress = CompanyAddress::findOrFail($address->id);
+              $companyAddress->update($dtoAddress);
+            } else {
+              CompanyAddress::create($dtoAddress);
+            }
+          } else {
+            $companyAddress = CompanyAddress::findOrFail($address->id);
+            $companyAddress->delete();
+          }
+        }
       DB::commit();
 
       return true;
     } catch (Exception $e) {
       DB::rollBack();
+      dd($e->getMessage());
       return throw new Exception($e->getMessage());
     }
   }

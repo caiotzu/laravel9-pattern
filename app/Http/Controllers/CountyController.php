@@ -19,7 +19,15 @@ class CountyController extends Controller {
 
   public function search(Request $request) {
     try {
-      return $this->countyService->countySearch($request->county);
+      return $this->countyService->countySearch(removeAccent($request->county));
+    } catch (Exception $e) {
+      return [];
+    }
+  }
+
+  public function getCountyById(Request $request) {
+    try {
+      return $this->countyService->getCountyById($request->id);
     } catch (Exception $e) {
       return [];
     }

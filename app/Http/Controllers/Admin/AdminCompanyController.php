@@ -81,6 +81,7 @@ class AdminCompanyController extends Controller {
       $companies = $this->adminCompanyService->listAllCompaniesExcept($id);
       $company = $this->adminCompanyService->getCompanyById($id);
 
+
       $contacts = [];
       foreach($company->companyContacts as $contact) {
         array_push($contacts, [
@@ -94,8 +95,25 @@ class AdminCompanyController extends Controller {
       }
       $companyContacts = json_encode($contacts);
 
+      $addresses = [];
+      foreach($company->companyAddresses as $address) {
+        array_push($addresses, [
+          'id' => $address->id,
+          'zipCode' => $address->zip_code,
+          'address' => $address->address,
+          'number' => $address->number,
+          'neighborhood' => $address->neighborhood,
+          'complement' => $address->complement,
+          'countyId' => $address->county_id,
+          'county' => $address->county_id.' - '.$address->county->county.'/'.$address->county->uf,
+          'main' => $address->main,
+          'active' => $address->active,
+          'insert' => 'S'
+        ]);
+      }
+      $companyAddresses = json_encode($addresses);
 
-      return view('admin.company.edit', compact('companyGroups', 'companies', 'company', 'companyContacts'));
+      return view('admin.company.edit', compact('companyGroups', 'companies', 'company', 'companyContacts', 'companyAddresses'));
     } catch (Exception $e) {
       return back()->withErrors('Empresa não encontrada')->withInput();
     }

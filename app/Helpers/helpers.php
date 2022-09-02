@@ -211,8 +211,8 @@ if (!function_exists('formatCpfCnpj')) {
   }
 }
 
-if (!function_exists('fnc_remover_acentos')) {
-  function fnc_remover_acentos($str) {
+if (!function_exists('removeAccent')) {
+  function removeAccent($str) {
     $str = strtolower($str);
 
     $str = preg_replace('/[áàãâä]/ui', 'a', $str);

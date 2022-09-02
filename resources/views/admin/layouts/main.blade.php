@@ -30,15 +30,15 @@
         @include('admin.layouts.side-menu')
     @endswitch
 
-    <div class="invisible  xl:visible">
+    {{-- <div class="invisible  xl:visible">
       @include('./admin/layouts/components/layout-mode-switcher')
       @include('./admin/layouts/components/dark-mode-switcher')
       @include('./admin/layouts/components/main-color-switcher')
-    </div>
+    </div> --}}
 
-    <div class="sm:visible xl:invisible">
+    {{-- <div class="sm:visible xl:invisible"> --}}
       @include('./admin/layouts/components/mobile-mode-switcher')
-    </div>
+    {{-- </div> --}}
     @vite('resources/js/app.js')
 
     <script type="text/javascript" src="{{ URL::asset('js/plugins/jquery-3.6.1.min.js') }}"></script>

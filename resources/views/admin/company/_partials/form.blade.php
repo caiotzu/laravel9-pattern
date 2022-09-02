@@ -198,7 +198,7 @@
           </div>
         </div>
 
-         <div class="grid grid-cols-12">
+        <div class="grid grid-cols-12">
           <table class="table col-span-12" id="tableContact">
             <thead>
               <tr>
@@ -230,7 +230,7 @@
                     </div>
                   </td>
                   <td data-title="Contato">{{$contact->value}}</td>
-                  <td data-title="Principal">{{$contact->type == 'E' ? 'E-mail' : 'Telefone'}}</td>
+                  <td data-title="Tipo">{{$contact->type == 'E' ? 'E-mail' : 'Telefone'}}</td>
                   <td data-title="Status">
                     {!!
                       $contact->active ?
@@ -322,12 +322,106 @@
         <div class="grid grid-cols-12">
           <div class="col-span-12 md:col-span-6 p-2 form-group">
             <label for="address_county" class="form-label">Município <span class="text-red-500">*</span></label>
-            <select class="select-2 form-control" id="address_county" name="address_county">
-              <option value="1">teste</option>
-              <option value="2">teste2</option>
-              <option value="3">teste3</option>
+            <select class="select-2-county form-control" id="address_county" name="address_county">
             </select>
           </div>
+
+          <div class="col-span-12 md:col-span-6 p-2 md:mt-8">
+            <a name="btnAddAddress" class="btn btn-primary w-32 mr-2 mb-2">Adicionar</a>
+            <a name="btnSaveEditAddress" class="btn btn-primary w-32 mr-2 mb-2 hidden">Salvar</a>
+            <a name="btnCancelEditAddress" class="btn btn-secundary w-32 mr-2 mb-2 hidden">Cancelar</a>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-12">
+          <table class="table col-span-12" id="tableAddress">
+            <thead>
+              <tr>
+                <th class="whitespace-nowrap">Principal</th>
+                <th class="whitespace-nowrap">Endereço</th>
+                <th class="whitespace-nowrap">Status</th>
+                <th class="whitespace-nowrap text-center">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              @php
+                $addressesJson = old('arrAddress', $companyAddresses ?? "[]");
+                $addresses = json_decode($addressesJson);
+              @endphp
+              @foreach($addresses as $k => $address)
+                <tr data-id="{{$k}}">
+                  <td>
+                    <div class="form-check mt-2">
+                      <input
+                        class="form-check-input"
+                        type="radio"
+                        name="isMainAddress"
+                        value="{{$k}}"
+                        data-id="{{$k}}"
+                        {{$address->main ? 'checked' : ''}}
+                      >
+                      <label class="form-check-label">{!! $address->main ? 'Principal' : '&nbsp;'!!}</label>
+                    </div>
+                  </td>
+                  <td>
+                    {{$address->zipCode}} - {{$address->address}}, nº {{$address->number}} <br>
+                    {{$address->neighborhood}}, {{$address->county}}
+                    {!!$address->complement ? '<br>Complemento: '.$address->complement : ''!!}
+                  </td>
+                  <td data-title="Status">
+                    {!!
+                      $address->active ?
+                      '<span class="bg-green-200 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">Ativo</span>'
+                      :
+                      '<span class="bg-red-200 text-red-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-red-200 dark:text-red-900">Inativo</span>'
+                    !!}
+                   </td>
+                  <td class="space-x-4">
+                    <div class="flex gap-4 justify-center">
+                      <a href="#" name="btnDeleteAddress" data-id="{{$k}}" title="Excluir o endereço">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <g color="#b91c1c">
+                            <path d="M3 6h18"></path>
+                            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                          </g>
+                        </svg>
+                      </a>
+
+                      <a href="#" name="btnEditAddress" data-id="{{$k}}" title="Editar o endereço">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <g color="#4338ca">
+                            <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                          </g>
+                        </svg>
+                      </a>
+
+                      <a href="#" name="btnToggleActiveAddress" data-id="{{$k}}" title="{{$address->active ? 'Desativar endereço': 'Ativar endereço'}}">
+                        {!!
+                          $address->active ?
+                          '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <g color="#b91c1c">
+                              <path d="M18.36 6.64A9 9 0 0 1 20.77 15"></path>
+                              <path d="M6.16 6.16a9 9 0 1 0 12.68 12.68"></path>
+                              <path d="M12 2v4"></path>
+                              <path d="m2 2 20 20"></path>
+                            </g>
+                          </svg>'
+                          :
+                          '<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <g color="#15803d">
+                              <path d="M18.36 6.64a9 9 0 1 1-12.73 0"></path>
+                              <line x1="12" y1="2" x2="12" y2="12"></line>
+                            </g>
+                          </svg>'
+                        !!}
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -351,7 +445,7 @@
           </div>
         <div class="px-5 pb-8 text-center">
           <button type="button" data-tw-dismiss="modal" class="btn btn-outline-secondary w-24 mr-1">Cancel</button>
-          <button name="confirmDeleteContact" type="button" class="btn btn-danger w-24">Delete</button>
+          <button name="confirmDelete" type="button" class="btn btn-danger w-24">Delete</button>
         </div>
       </div>
     </div>

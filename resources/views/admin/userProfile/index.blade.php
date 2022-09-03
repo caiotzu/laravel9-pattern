@@ -2,6 +2,17 @@
 
 @section('adminHead')
     <title>User Profile - Pattern Laravel 9</title>
+    <>
+@endsection
+@section('adminCss')
+  <style>
+    .label-upload-photo {
+      cursor: pointer;
+    }
+    #upload-photo {
+      opacity: 0;
+    }
+  </style>
 @endsection
 
 @section('adminBreadcrumb')
@@ -49,35 +60,49 @@
 <div class="grid grid-cols-12">
   <div class="col-span-12 mt-8">
     <div class="intro-y box px-5 pt-5 mt-5">
-      <div class="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5">
-        <div class="flex flex-1 px-5 items-center justify-center lg:justify-start">
-          <div class="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative">
-              <img alt="Midone - HTML Admin Template" class="rounded-full" src="{{ asset('build/assets/images/avatar.jpg') }}">
-              <div class="absolute mb-1 mr-1 flex items-center justify-center bottom-0 right-0 bg-primary rounded-full p-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="camera" class="lucide lucide-camera w-4 h-4 text-white" data-lucide="camera">
-                  <path d="M14.5 4h-5L7 7H4a2 2 0 00-2 2v9a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2h-3l-2.5-3z"></path>
-                  <circle cx="12" cy="13" r="3"></circle>
-                </svg>
-              </div>
-          </div>
-          <div class="ml-5">
-              <div class="w-24 sm:w-40 truncate sm:whitespace-normal font-medium text-lg">{{ auth()->guard('admin')->user()->name }}</div>
-              <div class="text-slate-500">{{ auth()->guard('admin')->user()->adminRole->description }}</div>
-          </div>
-        </div>
-        <div class="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
-            <div class="font-medium text-center lg:text-left lg:mt-3">Detalhes</div>
-            <div class="flex flex-col justify-center items-center lg:items-start mt-4">
-              <div class="truncate sm:whitespace-normal flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="mail" data-lucide="mail" class="lucide lucide-mail w-4 h-4 mr-2">
-                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                  <polyline points="22,6 12,13 2,6"></polyline>
-                </svg>
-                {{ auth()->guard('admin')->user()->email }}
-              </div>
+      <form action="{{ route('admin.userProfiles.update') }}" method="post" enctype="multipart/form-data" class="mt-3">
+        @csrf
+        @method('PUT')
+
+        <div class="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5">
+          <div class="flex flex-1 px-5 items-center justify-center lg:justify-start">
+            <div class="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative">
+                <img alt="User avatar" class="rounded-full" src="{{ auth()->guard('admin')->user()->avatar ? url('storage/'.auth()->guard('admin')->user()->avatar) : asset('build/assets/images/avatar.jpg') }}">
+                <label for="upload-photo" class="label-upload-photo">
+                  <div class="absolute mb-1 mr-1 flex items-center justify-center bottom-0 right-0 bg-primary rounded-full p-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="camera" class="lucide lucide-camera w-4 h-4 text-white" data-lucide="camera">
+                      <path d="M14.5 4h-5L7 7H4a2 2 0 00-2 2v9a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2h-3l-2.5-3z"></path>
+                      <circle cx="12" cy="13" r="3"></circle>
+                    </svg>
+                  </div>
+                </label>
+                <input type="file" name="avatar" id="upload-photo" accept="image/jpeg"/>
             </div>
+            <div class="ml-5">
+                <div class="w-24 sm:w-40 truncate sm:whitespace-normal font-medium text-lg">{{ auth()->guard('admin')->user()->name }}</div>
+                <div class="text-slate-500">{{ auth()->guard('admin')->user()->adminRole->description }}</div>
+            </div>
+          </div>
+          <div class="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
+              <div class="font-medium text-center lg:text-left lg:mt-3">Detalhes</div>
+              <div class="flex flex-col justify-center items-center lg:items-start mt-4">
+                <div class="truncate sm:whitespace-normal flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="mail" data-lucide="mail" class="lucide lucide-mail w-4 h-4 mr-2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                  </svg>
+                  {{ auth()->guard('admin')->user()->email }}
+                </div>
+              </div>
+          </div>
         </div>
-      </div>
+
+        <div class="flex justify-center	pt-5 border-t border-slate-200/60 dark:border-darkmode-400">
+          <button class="btn btn-primary w-32 mr-2 mb-2 ">
+            Salvar
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

@@ -46,8 +46,8 @@ use App\Http\Controllers\Admin\ {
 
         // user profile
           Route::get('/userProfile', [AdminUserProfileController::class, 'index'])->name('admin.userProfiles.index');
+          Route::put('/userProfile', [AdminUserProfileController::class, 'update'])->name('admin.userProfiles.update');
         //---
-
 
         // records route
           Route::get('/companyGroups/create', [AdminCompanyGroupController::class, 'create'])->name('admin.companyGroups.create')->middleware('check.admin.permission:COMPANYGROUP_CREATE');

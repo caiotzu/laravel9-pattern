@@ -7,6 +7,8 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 use App\Models\AdminUser;
 use App\Models\AdminSetting;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class AdminUserService {
   public function listAllAdminUsers(): Collection {
@@ -36,6 +38,23 @@ class AdminUserService {
     $dto['active'] = isset($dto['active']) ? true : false;
 
     $user = AdminUser::findOrFail($id);
+    $user->update($dto);
+    return $user;
+  }
+
+  public function updateAdminUserProfile(Array $dto) {
+    $user = AdminUser::findOrFail(Auth::guard('admin')->user()->id);
+
+    if(isset($dto['avatar'])) {
+      if(Storage::exists($user->avatar))
+        Storage::delete($user->avatar);
+
+      $path = $dto['avatar']->store('admin/users');
+      $dto['avatar'] = $path;
+
+      auth()->guard('admin')->user()->avatar = $path;
+    }
+
     $user->update($dto);
     return $user;
   }

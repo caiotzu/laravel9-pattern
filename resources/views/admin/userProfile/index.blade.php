@@ -67,7 +67,7 @@
         <div class="flex flex-col lg:flex-row border-b border-slate-200/60 dark:border-darkmode-400 pb-5 -mx-5">
           <div class="flex flex-1 px-5 items-center justify-center lg:justify-start">
             <div class="w-20 h-20 sm:w-24 sm:h-24 flex-none lg:w-32 lg:h-32 image-fit relative">
-                <img alt="User avatar" class="rounded-full" src="{{ auth()->guard('admin')->user()->avatar ? url('storage/'.auth()->guard('admin')->user()->avatar) : asset('build/assets/images/avatar.jpg') }}">
+                <img alt="User avatar" class="rounded-full" src="{{ $user->avatar ? url('storage/'.$user->avatar) : asset('build/assets/images/avatar.jpg') }}">
                 <label for="upload-photo" class="label-upload-photo">
                   <div class="absolute mb-1 mr-1 flex items-center justify-center bottom-0 right-0 bg-primary rounded-full p-2">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="camera" class="lucide lucide-camera w-4 h-4 text-white" data-lucide="camera">
@@ -79,8 +79,8 @@
                 <input type="file" name="avatar" id="upload-photo" accept="image/jpeg"/>
             </div>
             <div class="ml-5">
-                <div class="w-24 sm:w-40 truncate sm:whitespace-normal font-medium text-lg">{{ auth()->guard('admin')->user()->name }}</div>
-                <div class="text-slate-500">{{ auth()->guard('admin')->user()->adminRole->description }}</div>
+                <div class="w-24 sm:w-40 truncate sm:whitespace-normal font-medium text-lg">{{ $user->name }}</div>
+                <div class="text-slate-500">{{ $user->adminRole->description }}</div>
             </div>
           </div>
           <div class="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
@@ -91,9 +91,39 @@
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                     <polyline points="22,6 12,13 2,6"></polyline>
                   </svg>
-                  {{ auth()->guard('admin')->user()->email }}
+                  {{ $user->email }}
                 </div>
               </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-12 my-5">
+          <div class="col-span-12 md:col-span-3 p-2">
+            <label for="name" class="form-label">Nome <span class="text-red-500">*</span></label>
+            <input id="name" name="name" type="text" class="form-control w-full py-2.5" value="{{ old('name', $user->name ?? '') }}">
+          </div>
+
+          <div class="col-span-12 md:col-span-3 p-2">
+            <label for="email" class="form-label">E-mail <span class="text-red-500">*</span></label>
+            <input id="email" name="email" type="email" class="form-control w-full py-2.5" value="{{ old('email', $user->email ?? '') }}">
+          </div>
+
+          <div class="col-span-12 md:col-span-3 p-2">
+            <label for="password" class="form-label">Senha
+              <a
+                href="javascript:;"
+                data-theme="light"
+                class="tooltip inline-flex ml-1 text-blue-400"
+                title="Preencher a senha apenas houver alteração. Para garantir uma melhor seguranda, preencha a senha com letras maiúsculas, minúsculas, números e caracteres especiais.">
+              (?)
+              </a>
+            </label>
+            <input id="password" name="password" type="password" class="form-control w-full py-2.5" value="{{ old('password') }}">
+          </div>
+
+          <div class="col-span-12 md:col-span-3 p-2">
+            <label for="password_confirmation" class="form-label">Confirmação da senha</label>
+            <input id="password_confirmation" name="password_confirmation" type="password" class="form-control w-full py-2.5" value="{{ old('password_confirmation') }}">
           </div>
         </div>
 

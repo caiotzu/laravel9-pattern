@@ -40,9 +40,10 @@ use App\Http\Controllers\Admin\ {
   Route::middleware('auth')->group(function() {
     // admin routes
       Route::prefix('admin')->group(function() {
-        Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.auth.logout');
-
-        Route::get('/home', [AdminHomeController::class, 'index'])->name('admin.home.index');
+        // routes without permission
+          Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.auth.logout');
+          Route::get('/home', [AdminHomeController::class, 'index'])->name('admin.home.index');
+        //---
 
         // user profile
           Route::get('/userProfile', [AdminUserProfileController::class, 'index'])->name('admin.userProfiles.index');

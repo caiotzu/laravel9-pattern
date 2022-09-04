@@ -72,7 +72,6 @@ class AdminUserController extends Controller {
       return redirect()->route('admin.users.index')->with([
         'successMessage' => 'O usuário <strong>'.$user->name.'</strong> foi atualizado com sucesso!'
       ]);
-
     } catch (Exception $e) {
       return back()->withErrors('Não foi possível atualizar os dados do usuário')->withInput();
     }

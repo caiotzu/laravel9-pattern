@@ -4,26 +4,30 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Http\Requests\UpdateAdminUserProfileRequest;
 
+use App\Services\AdminUserProfileService;
 use App\Services\AdminUserService;
-use App\Services\AdminRoleService;
 
 use Exception;
 
 class AdminUserProfileController extends Controller {
 
   protected $adminUserService;
-  protected $adminRoleService;
+  protected $adminUserProfileService;
 
-  public function __construct(AdminUserService $adminUserService, AdminRoleService $adminRoleService) {
+  public function __construct(AdminUserProfileService $adminUserProfileService, AdminUserService $adminUserService) {
     $this->adminUserService = $adminUserService;
-    $this->adminRoleService = $adminRoleService;
+    $this->adminUserProfileService = $adminUserProfileService;
   }
 
   public function index() {
     try {
-      return view('admin.userProfile.index');
+      $user = $this->adminUserService->getAdminUserById(Auth::guard('admin')->user()->id);
+
+      return view('admin.userProfile.index', compact('user'));
     } catch (Exception $e) {
       return redirect()->route('admin.home.index')->withErrors('Não foi possível carregar o perfil do seu usuário');
     }
@@ -31,9 +35,13 @@ class AdminUserProfileController extends Controller {
 
   public function update(UpdateAdminUserProfileRequest $request) {
     try {
-      $this->adminUserService->updateAdminUserProfile($request->except('_method', '_token'));
-      return view('admin.userProfile.index');
+      $user = $this->adminUserProfileService->updateAdminUserProfile($request->except('_method', '_token'));
+
+      return redirect()->route('admin.userProfiles.index')->with([
+        'successMessage' => '<strong>'.$user->name.'</strong> seu perfil foi atualizado com sucesso!'
+      ]);
     } catch (Exception $e) {
+      dd($e->getMessage());
       return back()->withErrors('Ocorreu um erro ao atualizar os dados do usuário')->withInput();
     }
   }

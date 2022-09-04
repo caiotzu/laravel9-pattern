@@ -2,7 +2,6 @@
 
 @section('adminHead')
     <title>User Profile - Pattern Laravel 9</title>
-    <>
 @endsection
 @section('adminCss')
   <style>

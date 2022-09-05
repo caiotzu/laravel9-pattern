@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('password', 255);
             $table->boolean('active')->default(true);
             $table->string('remember_token', 100)->nullable(true);
+            $table->string('avatar')->nullable(true);
             $table->timestamps($precision = 0);
         });
     }

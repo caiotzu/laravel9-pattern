@@ -15,6 +15,8 @@ use App\Models\AdminSetting;
 use App\Models\CompanyContact;
 use App\Models\CompanyAddress;
 use App\Models\RolePermission;
+use App\Models\UserAccessCompany;
+
 
 use Exception;
 
@@ -58,47 +60,30 @@ class AdminCompanyService {
         $contacts = json_decode($dto['arrContact']);
         foreach($contacts as $contact) {
           if($contact->insert == 'S') {
-            $dtoContact = [
+            CompanyContact::create([
               'company_id' => $company->id,
               'type' => $contact->type,
               'value' => $contact->value,
               'active' => $contact->active,
               'main' => $contact->main
-            ];
-
-            if(isset($contact->id)) {
-              $companyContact = CompanyContact::findOrFail($contact->id);
-              $companyContact->update($dtoContact);
-            } else {
-              CompanyContact::create($dtoContact);
-            }
+            ]);
           }
         }
 
         $addresses = json_decode($dto['arrAddress']);
         foreach($addresses as $address) {
-          $dtoAddress = [
-            'company_id' => $company->id,
-            'county_id' => $address->countyId,
-            'active' => $address->active,
-            'main' => $address->main,
-            'zip_code' => $address->zipCode,
-            'address' => $address->address,
-            'number' => $address->number,
-            'neighborhood' => $address->neighborhood,
-            'complement' => $address->complement,
-          ];
-
           if($address->insert == 'S') {
-            if(isset($address->id)) {
-              $companyAddress = CompanyAddress::findOrFail($address->id);
-              $companyAddress->update($dtoAddress);
-            } else {
-              CompanyAddress::create($dtoAddress);
-            }
-          } else {
-            $companyAddress = CompanyAddress::findOrFail($address->id);
-            $companyAddress->delete();
+            CompanyAddress::create([
+              'company_id' => $company->id,
+              'county_id' => $address->countyId,
+              'active' => $address->active,
+              'main' => $address->main,
+              'zip_code' => $address->zipCode,
+              'address' => $address->address,
+              'number' => $address->number,
+              'neighborhood' => $address->neighborhood,
+              'complement' => $address->complement,
+            ]);
           }
         }
 
@@ -118,15 +103,19 @@ class AdminCompanyService {
 
         $password = 'administrador';
         $passwordHash = bcrypt($password);
-        $dtoUser = [
+        $user = User::create([
           'role_id' => $role->id,
           'cpf' => $dto['user_cpf'],
           'name' => $dto['user_name'],
           'email' => $dto['user_email'],
           'password' => $passwordHash,
           'active' => true
-        ];
-        User::create($dtoUser);
+        ]);
+
+        UserAccessCompany::create([
+          'user_id' => $user->id,
+          'company_id' =>$company->id
+        ]);
       DB::commit();
 
       return true;

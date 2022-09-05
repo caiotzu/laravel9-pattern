@@ -1,15 +1,17 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreAdminUserRequest extends FormRequest {
+class UpdateAdminUserRequest extends FormRequest {
   public function authorize() {
     return true;
   }
 
   public function rules() {
+    $id = $this->id ?? '';
+
     return [
       'name' => [
         'required',
@@ -20,11 +22,11 @@ class StoreAdminUserRequest extends FormRequest {
       'email' => [
         'required',
         'email',
-        'unique:admin_users'
+        "unique:admin_users,email,{$id},id"
       ],
       'role_id' => [
         'required',
-      ],
+      ]
     ];
   }
 

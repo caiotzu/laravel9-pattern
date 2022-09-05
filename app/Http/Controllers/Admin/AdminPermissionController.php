@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
-use App\Http\Requests\StoreAdminPermissionRequest;
-use App\Http\Requests\UpdateAdminPermissionRequest;
+use App\Http\Requests\Admin\StoreAdminPermissionRequest;
+use App\Http\Requests\Admin\UpdateAdminPermissionRequest;
 
 use App\Services\AdminRoleService;
 use App\Services\AdminPermissionService;

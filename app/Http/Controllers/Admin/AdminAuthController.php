@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-use App\Http\Request\LoginRequest;
+use App\Http\Requests\Admin\LoginAdminRequest;
 
 use Exception;
 
@@ -16,7 +15,7 @@ class AdminAuthController extends Controller {
     return view('admin.login.index');
   }
 
-  public function login(LoginRequest $request) {
+  public function login(LoginAdminRequest $request) {
     if (!Auth::guard('admin')->attempt([
       'email' => $request->email,
       'password' => $request->password,

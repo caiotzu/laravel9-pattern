@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateAdminPermissionRequest extends FormRequest {
+class StoreAdminPermissionRequest extends FormRequest {
   public function authorize() {
     return true;
   }

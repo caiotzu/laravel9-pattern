@@ -1,24 +1,22 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateAdminCompanyGroupRequest extends FormRequest {
+class StoreAdminCompanyGroupRequest extends FormRequest {
   public function authorize() {
     return true;
   }
 
   public function rules() {
-    $id = $this->id ?? '';
-
     return [
       'group_name' => [
         'required',
         'string',
         'max:50',
         'min:3',
-        "unique:company_groups,group_name,{$id},id"
+        'unique:company_groups'
       ],
       'profile_id' => [
         'required',

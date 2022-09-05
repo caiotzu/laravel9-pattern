@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateAdminCompanyRequest extends FormRequest {
+class StoreAdminCompanyRequest extends FormRequest {
   public function authorize() {
     return true;
   }
@@ -18,13 +18,12 @@ class UpdateAdminCompanyRequest extends FormRequest {
 
     $this->merge([
       'cnpj' => preg_replace('/\D+/', '', request()->cnpj),
+      'user_cpf' => preg_replace('/\D+/', '', request()->user_cpf),
       'arrAddress' => json_encode($addresses)
     ]);
   }
 
   public function rules() {
-    $id = $this->id ?? '';
-
     return [
       'company_group_id' => [
         'required',
@@ -40,7 +39,7 @@ class UpdateAdminCompanyRequest extends FormRequest {
         'required',
         'min:14',
         'max:14',
-        "unique:companies,cnpj,{$id},id"
+        'unique:companies'
       ],
       'trade_name' => [
         'required',
@@ -136,7 +135,23 @@ class UpdateAdminCompanyRequest extends FormRequest {
               $fail('Obrigatório definir um endereço como principal e ativo');
           }
         },
-      ]
+      ],
+      'user_name' => [
+        'required',
+        'string',
+        'max:50',
+        'min:3',
+      ],
+      'user_email' => [
+        'required',
+        'email',
+        "unique:users,email"
+      ],
+      'user_cpf' => [
+        'required',
+        'min:11',
+        'max:11',
+      ],
     ];
   }
 
@@ -153,7 +168,6 @@ class UpdateAdminCompanyRequest extends FormRequest {
       'cnpj.max' => 'O campo cnpj não pode conter mais de 14 caracteres',
       'cnpj.unique' => 'Este cnpj já está cadastrado para outra empresa',
 
-
       'trade_name.required' => 'O campo nome fantasia é obrigatório',
       'trade_name.min' => 'O campo nome fantasia não pode conter menos de 03 caracteres',
       'trade_name.max' => 'O campo nome fantasia não pode conter mais de 60 caracteres',
@@ -167,6 +181,19 @@ class UpdateAdminCompanyRequest extends FormRequest {
 
       'municipal_registration.required' => 'O campo inscrição municipal é obrigatório',
       'municipal_registration.max' => 'O campo inscrição municipal não pode conter mais de 11 caracteres',
+
+      'user_name.required' => 'O nome do usuário responsável é obrigatório',
+      'user_name.max' => 'O nome do usuário responsável não pode conter mais de 50 caracteres',
+      'user_name.min' => 'O nome do usuário responsável não pode conter menos de 03 caracteres',
+
+      'user_email.required' => 'O e-mail do usuário responsável é obrigatório',
+      'user_email.max' => 'O e-mail do usuário responsável não pode conter mais de 100 caracteres',
+      'user_email.email' => 'O e-mail do usuário responsável não está no formato correto',
+      'user_email.unique' => 'Este e-mail do usuário responsável já está cadastrado para outro usuário',
+
+      'user_cpf.required' => 'O cpf do usuário responsável é obrigatório',
+      'user_cpf.min' => 'O cpf do usuário responsável não pode conter menos de 11 caracteres',
+      'user_cpf.max' => 'O cpf do usuário responsável não pode conter mais de 11 caracteres',
     ];
   }
 }

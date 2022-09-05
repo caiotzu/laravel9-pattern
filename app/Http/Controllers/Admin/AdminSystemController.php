@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
-use App\Http\Requests\UpdateAdminSystemRequest;
+use App\Http\Requests\Admin\UpdateAdminSystemRequest;
 
 use App\Services\AdminSettingService;
 

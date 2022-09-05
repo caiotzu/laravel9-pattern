@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
-use App\Http\Requests\StoreAdminCompanyGroupRequest;
-use App\Http\Requests\UpdateAdminCompanyGroupRequest;
-use App\Http\Requests\IndexAdminCompanyGroupRequest;
+use App\Http\Requests\Admin\StoreAdminCompanyGroupRequest;
+use App\Http\Requests\Admin\UpdateAdminCompanyGroupRequest;
+use App\Http\Requests\Admin\IndexAdminCompanyGroupRequest;
 
 use App\Services\AdminCompanyGroupService;
 use App\Services\ProfileService;

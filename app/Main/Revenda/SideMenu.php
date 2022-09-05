@@ -50,19 +50,19 @@ class SideMenu {
           'SYSTEM_MENU'
         ],
         'sub_menu' => [
-          // 'users' => [
-          //   'icon' => 'users',
-          //   'route_name' => 'revenda.users.index',
-          //   'other_route' => [
-          //     'revenda.users.create',
-          //     'revenda.users.edit',
-          //   ],
-          //   'params' => [],
-          //   'title' => 'Usuários',
-          //   'permissions' => [
-          //     'USER_MENU'
-          //   ]
-          // ],
+          'users' => [
+            'icon' => 'users',
+            'route_name' => 'revenda.users.index',
+            'other_route' => [
+              'revenda.users.create',
+              'revenda.users.edit',
+            ],
+            'params' => [],
+            'title' => 'Usuários',
+            'permissions' => [
+              'USER_MENU'
+            ]
+          ],
           'permissions' => [
             'icon' => 'unlock',
             'route_name' => 'revenda.permissions.index',

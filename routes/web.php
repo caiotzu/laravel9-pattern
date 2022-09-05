@@ -33,13 +33,11 @@ use App\Http\Controllers\Admin\ {
 // imports revenda
 use App\Http\Controllers\Revenda\ {
   RevendaHomeController,
+  RevendaUserController,
   RevendaSystemController,
   RevendaPermissionController,
   RevendaUserProfileController,
 };
-
-
-
 
 // themes route
   Route::get('dark-mode-switcher', [DarkModeController::class, 'switch'])->name('dark-mode-switcher');
@@ -119,11 +117,11 @@ use App\Http\Controllers\Revenda\ {
         //---
 
         // settings routes
-          // Route::get('/users/create', [AdminUserController::class, 'create'])->name('admin.users.create')->middleware('check.revenda.permission:USER_CREATE');
-          // Route::get('/users/{id}/edit', [AdminUserController::class, 'edit'])->name('admin.users.edit')->middleware('check.revenda.permission:USER_EDIT');
-          // Route::put('/users/{id}', [AdminUserController::class, 'update'])->name('admin.users.update')->middleware('check.revenda.permission:USER_EDIT');
-          // Route::post('/users', [AdminUserController::class, 'store'])->name('admin.users.store')->middleware('check.revenda.permission:USER_CREATE');
-          // Route::get('/users', [AdminUserController::class, 'index'])->name('admin.users.index')->middleware('check.revenda.permission:USER_INDEX');
+          Route::get('/users/create', [RevendaUserController::class, 'create'])->name('revenda.users.create')->middleware('check.revenda.permission:USER_CREATE');
+          Route::get('/users/{id}/edit', [RevendaUserController::class, 'edit'])->name('revenda.users.edit')->middleware('check.revenda.permission:USER_EDIT');
+          Route::put('/users/{id}', [RevendaUserController::class, 'update'])->name('revenda.users.update')->middleware('check.revenda.permission:USER_EDIT');
+          Route::post('/users', [RevendaUserController::class, 'store'])->name('revenda.users.store')->middleware('check.revenda.permission:USER_CREATE');
+          Route::get('/users', [RevendaUserController::class, 'index'])->name('revenda.users.index')->middleware('check.revenda.permission:USER_INDEX');
 
           Route::get('/permissions/create', [RevendaPermissionController::class, 'create'])->name('revenda.permissions.create')->middleware('check.revenda.permission:PERMISSION_CREATE');
           Route::get('/permissions/{id}/edit', [RevendaPermissionController::class, 'edit'])->name('revenda.permissions.edit')->middleware('check.revenda.permission:PERMISSION_EDIT');

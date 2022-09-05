@@ -12,13 +12,24 @@ use App\Models\AdminSetting;
 
 class UserService {
   public function listAllUsers(): Collection {
-    return User::with('role')->get();
+    return User::with('role.company')
+    ->whereHas('role.company', function ($query) {
+      $companyId = Auth::guard('web')->user()->role->company->id;
+      return $query->where('id', $companyId);
+    })
+    ->get();
   }
 
   public function listAllUsersWithPagination(): LengthAwarePaginator {
     $settings = AdminSetting::where('key', 'recordPerPage')->first();
     $recordPerPage = $settings->value ?? 10;
-    return User::with('adminRole')->paginate($recordPerPage);
+
+    return User::with('role.company')
+    ->whereHas('role.company', function ($query) {
+      $companyId = Auth::guard('web')->user()->role->company->id;
+      return $query->where('id', $companyId);
+    })
+    ->paginate($recordPerPage);
   }
 
   public function getUserById(Int $id): User {

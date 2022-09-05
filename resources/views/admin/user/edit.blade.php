@@ -41,19 +41,6 @@
         @method('PUT')
         <div class="grid grid-cols-12 mt-3 mb-3">
           @include('admin.user._partials.form')
-
-          <div class="col-span-4 p-2">
-            <div class="form-check mt-2">
-              <input id="active" name="active" class="form-check-input" type="checkbox"
-                @if(!!old())
-                  @if(old('active') == 'on') checked @endif
-                @elseif($user->active)
-                  checked
-                @endif
-              >
-              <label class="form-check-label" for="active">Ativo</label>
-            </div>
-          </div>
         </div>
         <div class="flex justify-center	pt-5 border-t border-slate-200/60 dark:border-darkmode-400">
           @if(in_array('USER_EDIT',Session::get('userPermission')))

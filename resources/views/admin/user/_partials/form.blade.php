@@ -29,4 +29,17 @@
   </select>
 </div>
 
-
+@if(isset($user->id))
+  <div class="col-span-4 p-2">
+    <div class="form-check mt-2">
+      <input id="active" name="active" class="form-check-input" type="checkbox"
+        @if(!!old())
+          @if(old('active') == 'on') checked @endif
+        @elseif($user->active)
+          checked
+        @endif
+      >
+      <label class="form-check-label" for="active">Ativo</label>
+    </div>
+  </div>
+@endif

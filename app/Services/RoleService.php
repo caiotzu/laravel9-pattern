@@ -11,7 +11,8 @@ use App\Models\CompanyGroupSetting;
 
 class RoleService {
   public function listAllRoles(): Collection {
-    return Role::get();
+    $companyId = Auth::guard('web')->user()->role->company->id;
+    return Role::where('company_id', $companyId)->get();
   }
 
   public function listAllRolesWithPagination(): LengthAwarePaginator {

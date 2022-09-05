@@ -11,6 +11,11 @@
 </div>
 
 <div class="col-span-12 md:col-span-4 p-2">
+  <label for="cpf" class="form-label">CPF <span class="text-red-500">*</span></label>
+  <input id="cpf" name="cpf" type="text" class="form-control w-full py-2.5 cpf" value="{{ old('cpf', $user->cpf ?? '') }}">
+</div>
+
+<div class="col-span-12 md:col-span-4 p-2">
   <label for="role_id" class="form-label">Regra <span class="text-red-500">*</span></label>
   <select class="form-select py-2.5" id="role_id" name="role_id">
     @foreach($roles as $role)
@@ -29,4 +34,18 @@
   </select>
 </div>
 
+@if(isset($user->id))
+  <div class="col-span-4 p-2 md:mt-11">
+    <div class="form-check mt-2">
+      <input id="active" name="active" class="form-check-input" type="checkbox"
+        @if(!!old())
+          @if(old('active') == 'on') checked @endif
+        @elseif($user->active)
+          checked
+        @endif
+      >
+      <label class="form-check-label" for="active">Ativo</label>
+    </div>
+  </div>
+@endif
 

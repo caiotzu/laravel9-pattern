@@ -1,22 +1,22 @@
-@extends('../admin/layouts/main')
+@extends('../revenda/layouts/main')
 
-@section('adminHead')
+@section('revendaHead')
     <title>User - Pattern Laravel 9</title>
 @endsection
 
-@section('adminBreadcrumb')
+@section('revendaBreadcrumb')
   <li class="breadcrumb-item active" aria-current="page">
-    <a href="{{ route('admin.home.index') }}">Home</a>
+    <a href="{{ route('revenda.home.index') }}">Home</a>
   </li>
   <li class="breadcrumb-item">
-    <a href="{{ route('admin.users.index') }}">Usuários</a>
+    <a href="{{ route('revenda.users.index') }}">Usuários</a>
   </li>
   <li class="breadcrumb-item" aria-current="page">
-    <a href="{{ route('admin.users.create') }}">Cadastro</a>
+    <a href="{{ route('revenda.users.create') }}">Cadastro</a>
   </li>
 @endsection
 
-@section('adminContent')
+@section('revendaContent')
 @if($errors->any())
   <div id="errorMessage" class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mt-4 relative" role="alert">
     <p class="font-bold text-lg mb-2 relative">Erro</p>
@@ -37,9 +37,9 @@
           Cadastro de usuário
         </p>
       </div>
-      <form action="{{ route('admin.users.store') }}" method="post" class="mt-3">
+      <form action="{{ route('revenda.users.store') }}" method="post" class="mt-3">
         <div class="grid grid-cols-12 mt-3 mb-3">
-          @include('admin.user._partials.form')
+          @include('revenda.user._partials.form')
         </div>
         <div class="flex justify-center	pt-5 border-t border-slate-200/60 dark:border-darkmode-400">
           @if(in_array('USER_CREATE',Session::get('userPermission')))
@@ -47,7 +47,7 @@
               Salvar
             </button>
           @endif
-          <a href="{{ route('admin.users.index') }}" class="btn btn-secondary w-32 mr-2 mb-2 ">
+          <a href="{{ route('revenda.users.index') }}" class="btn btn-secondary w-32 mr-2 mb-2 ">
             Cancelar
           </a>
         </div>
@@ -57,5 +57,5 @@
 </div>
 @endsection
 
-@section('adminJs')
+@section('revendaJs')
 @endsection

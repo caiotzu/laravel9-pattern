@@ -1,19 +1,19 @@
-@extends('../admin/layouts/main')
+@extends('../revenda/layouts/main')
 
-@section('adminHead')
+@section('revendaHead')
     <title>User - Pattern Laravel 9</title>
 @endsection
 
-@section('adminBreadcrumb')
+@section('revendaBreadcrumb')
   <li class="breadcrumb-item active">
-    <a href="{{ route('admin.home.index') }}">Home</a>
+    <a href="{{ route('revenda.home.index') }}">Home</a>
   </li>
   <li class="breadcrumb-item" aria-current="page">
-    <a href="{{ route('admin.users.index') }}">Usuários</a>
+    <a href="{{ route('revenda.users.index') }}">Usuários</a>
   </li>
 @endsection
 
-@section('adminContent')
+@section('revendaContent')
 @if($errors->any())
   <div id="errorMessage" class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mt-4 relative" role="alert">
     <p class="font-bold text-lg mb-2 relative">Erro</p>
@@ -55,7 +55,7 @@
         </p>
 
         @if(in_array('USER_CREATE',Session::get('userPermission')))
-          <a href="{{ route('admin.users.create') }}" class="btn btn-primary w-32 mr-2 mb-2 ">
+          <a href="{{ route('revenda.users.create') }}" class="btn btn-primary w-32 mr-2 mb-2 ">
             Adicionar
           </a>
         @endif
@@ -76,7 +76,7 @@
               <tr>
                 <td data-title="Nome">{{ $user->name }}</td>
                 <td data-title="E-mail">{{ $user->email }}</td>
-                <td data-title="Função">{{ $user->adminRole->description }}</td>
+                <td data-title="Função">{{ $user->role->description }}</td>
                 <td data-title="Status">
                   @if($user->active)
                     <span class="bg-green-200 text-green-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-green-200 dark:text-green-900">Ativo</span>
@@ -94,7 +94,7 @@
                         <ul class="dropdown-content">
                           @if(in_array('USER_EDIT',Session::get('userPermission')))
                             <li>
-                              <a href="{{route('admin.users.edit', $user->id)}}" class="dropdown-item">
+                              <a href="{{route('revenda.users.edit', $user->id)}}" class="dropdown-item">
                                 <i data-lucide="edit-2" class="w-4 h-4 mr-2"></i> Editar
                               </a>
                             </li>
@@ -118,5 +118,5 @@
 </div>
 @endsection
 
-@section('adminJs')
+@section('revendaJs')
 @endsection

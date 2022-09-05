@@ -4,23 +4,23 @@ namespace App\Http\Controllers\Revenda;
 
 use App\Http\Controllers\Controller;
 
-use App\Http\Requests\UpdateRevendaSystemRequest;
+use App\Http\Requests\Revenda\UpdateRevendaSystemRequest;
 
-use App\Services\RevendaCompanyGroupSettingService;
+use App\Services\CompanyGroupSettingService;
 
 use Exception;
 
 class RevendaSystemController extends Controller {
 
-  protected $revendaCompanyGroupSettingService;
+  protected $companyGroupSettingService;
 
-  public function __construct(RevendaCompanyGroupSettingService $revendaCompanyGroupSettingService) {
-    $this->revendaCompanyGroupSettingService = $revendaCompanyGroupSettingService;
+  public function __construct(CompanyGroupSettingService $companyGroupSettingService) {
+    $this->companyGroupSettingService = $companyGroupSettingService;
   }
 
   public function index() {
     try {
-      $settings = $this->revendaCompanyGroupSettingService->listAllRevendaCompanyGroupSettingsInArrayFormat();
+      $settings = $this->companyGroupSettingService->listAllCompanyGroupSettingsInArrayFormat();
 
       return view('revenda.system.index', compact('settings'));
     } catch (Exception $e) {
@@ -30,7 +30,7 @@ class RevendaSystemController extends Controller {
 
   public function update(UpdateRevendaSystemRequest $request) {
     try {
-      $this->revendaCompanyGroupSettingService->createOrUpdateRevendaSettings($request->except('_method', '_token'));
+      $this->companyGroupSettingService->createOrUpdateSettings($request->except('_method', '_token'));
 
       return redirect()->route('revenda.systems.index')->with([
         'successMessage' => 'As configurações do <strong>sistema</strong> foram atualizadas com sucesso!'

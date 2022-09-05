@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
-use App\Http\Request\LoginRequest;
+use App\Http\Requests\LoginRequest;
 
 use Exception;
 

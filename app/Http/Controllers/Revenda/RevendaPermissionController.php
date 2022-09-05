@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Revenda;
 
 use App\Http\Controllers\Controller;
 
-use App\Http\Requests\StoreAdminPermissionRequest;
-use App\Http\Requests\UpdateAdminPermissionRequest;
+use App\Http\Requests\Revenda\StoreRevendaPermissionRequest;
+use App\Http\Requests\Revenda\UpdateRevendaPermissionRequest;
 
 use App\Services\RoleService;
 use App\Services\PermissionService;
@@ -42,7 +42,7 @@ class RevendaPermissionController extends Controller {
     }
   }
 
-  public function store(StoreAdminPermissionRequest $request) {
+  public function store(StoreRevendaPermissionRequest $request) {
     try {
       $this->permissionService->createRolePermission($request->except('_method', '_token'));
 
@@ -65,7 +65,7 @@ class RevendaPermissionController extends Controller {
     }
   }
 
-  public function update(UpdateAdminPermissionRequest $request, $id) {
+  public function update(UpdateRevendaPermissionRequest $request, $id) {
     try {
       $this->permissionService->updateRolePermission($id, $request->except('_method', '_token'));
 

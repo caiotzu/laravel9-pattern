@@ -6,26 +6,25 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Auth;
 
-use App\Http\Requests\UpdateRevendaUserProfileRequest;
+use App\Http\Requests\Revenda\UpdateRevendaUserProfileRequest;
 
-use App\Services\RevendaUserService;
+use App\Services\UserService;
 use App\Services\RevendaUserProfileService;
 
 use Exception;
 
 class RevendaUserProfileController extends Controller {
 
-  protected $revendaUserService;
+  protected $userService;
   protected $revendaUserProfileService;
 
-  public function __construct(RevendaUserProfileService $revendaUserProfileService, RevendaUserService $revendaUserService) {
-    $this->revendaUserService = $revendaUserService;
-    $this->revendaUserProfileService = $revendaUserProfileService;
+  public function __construct(UserService $userService) {
+    $this->userService = $userService;
   }
 
   public function index() {
     try {
-      $user = $this->revendaUserService->getRevendaUserById(Auth::guard('web')->user()->id);
+      $user = $this->userService->getUserById(Auth::guard('web')->user()->id);
 
       return view('revenda.userProfile.index', compact('user'));
     } catch (Exception $e) {
@@ -35,7 +34,7 @@ class RevendaUserProfileController extends Controller {
 
   public function update(UpdateRevendaUserProfileRequest $request) {
     try {
-      $user = $this->revendaUserProfileService->updateRevendaUserProfile($request->except('_method', '_token'));
+      $user = $this->userService->updateUserProfile('revenda/users', $request->except('_method', '_token'));
 
       return redirect()->route('revenda.userProfiles.index')->with([
         'successMessage' => '<strong>'.$user->name.'</strong> seu perfil foi atualizado com sucesso!'

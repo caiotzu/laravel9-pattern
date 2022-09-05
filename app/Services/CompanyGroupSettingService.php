@@ -9,8 +9,8 @@ use App\Models\CompanyGroupSetting;
 
 use Exception;
 
-class RevendaCompanyGroupSettingService {
-  public function listAllRevendaCompanyGroupSettingsInArrayFormat(): Array {
+class CompanyGroupSettingService {
+  public function listAllCompanyGroupSettingsInArrayFormat(): Array {
     $companyGroupId = Auth::guard('web')->user()->role->company->companyGroup->id;
     $settings =  CompanyGroupSetting::where('company_group_id', $companyGroupId)->get()->toArray();
     $arr = [];
@@ -22,7 +22,7 @@ class RevendaCompanyGroupSettingService {
     return $arr;
   }
 
-  public function createOrUpdateRevendaSettings(Array $dto) {
+  public function createOrUpdateSettings(Array $dto) {
     try {
       $companyGroupId = Auth::guard('web')->user()->role->company->companyGroup->id;
 

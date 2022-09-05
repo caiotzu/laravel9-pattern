@@ -34,6 +34,7 @@ use App\Http\Controllers\Admin\ {
 use App\Http\Controllers\Revenda\ {
   RevendaHomeController,
   RevendaSystemController,
+  RevendaPermissionController,
   RevendaUserProfileController,
 };
 
@@ -118,20 +119,20 @@ use App\Http\Controllers\Revenda\ {
         //---
 
         // settings routes
-          // Route::get('/users/create', [AdminUserController::class, 'create'])->name('admin.users.create')->middleware('check.admin.permission:USER_CREATE');
-          // Route::get('/users/{id}/edit', [AdminUserController::class, 'edit'])->name('admin.users.edit')->middleware('check.admin.permission:USER_EDIT');
-          // Route::put('/users/{id}', [AdminUserController::class, 'update'])->name('admin.users.update')->middleware('check.admin.permission:USER_EDIT');
-          // Route::post('/users', [AdminUserController::class, 'store'])->name('admin.users.store')->middleware('check.admin.permission:USER_CREATE');
-          // Route::get('/users', [AdminUserController::class, 'index'])->name('admin.users.index')->middleware('check.admin.permission:USER_INDEX');
+          // Route::get('/users/create', [AdminUserController::class, 'create'])->name('admin.users.create')->middleware('check.revenda.permission:USER_CREATE');
+          // Route::get('/users/{id}/edit', [AdminUserController::class, 'edit'])->name('admin.users.edit')->middleware('check.revenda.permission:USER_EDIT');
+          // Route::put('/users/{id}', [AdminUserController::class, 'update'])->name('admin.users.update')->middleware('check.revenda.permission:USER_EDIT');
+          // Route::post('/users', [AdminUserController::class, 'store'])->name('admin.users.store')->middleware('check.revenda.permission:USER_CREATE');
+          // Route::get('/users', [AdminUserController::class, 'index'])->name('admin.users.index')->middleware('check.revenda.permission:USER_INDEX');
 
-          // Route::get('/permissions/create', [AdminPermissionController::class, 'create'])->name('admin.permissions.create')->middleware('check.admin.permission:PERMISSION_CREATE');
-          // Route::get('/permissions/{id}/edit', [AdminPermissionController::class, 'edit'])->name('admin.permissions.edit')->middleware('check.admin.permission:PERMISSION_EDIT');
-          // Route::put('/permissions/{id}', [AdminPermissionController::class, 'update'])->name('admin.permissions.update')->middleware('check.admin.permission:PERMISSION_EDIT');
-          // Route::post('/permissions', [AdminPermissionController::class, 'store'])->name('admin.permissions.store')->middleware('check.admin.permission:PERMISSION_CREATE');
-          // Route::get('/permissions', [AdminPermissionController::class, 'index'])->name('admin.permissions.index')->middleware('check.admin.permission:PERMISSION_INDEX');
+          Route::get('/permissions/create', [RevendaPermissionController::class, 'create'])->name('revenda.permissions.create')->middleware('check.revenda.permission:PERMISSION_CREATE');
+          Route::get('/permissions/{id}/edit', [RevendaPermissionController::class, 'edit'])->name('revenda.permissions.edit')->middleware('check.revenda.permission:PERMISSION_EDIT');
+          Route::put('/permissions/{id}', [RevendaPermissionController::class, 'update'])->name('revenda.permissions.update')->middleware('check.revenda.permission:PERMISSION_EDIT');
+          Route::post('/permissions', [RevendaPermissionController::class, 'store'])->name('revenda.permissions.store')->middleware('check.revenda.permission:PERMISSION_CREATE');
+          Route::get('/permissions', [RevendaPermissionController::class, 'index'])->name('revenda.permissions.index')->middleware('check.revenda.permission:PERMISSION_INDEX');
 
-          Route::put('/systems', [RevendaSystemController::class, 'update'])->name('revenda.systems.update')->middleware('check.admin.permission:SYSTEM_EDIT');
-          Route::get('/systems', [RevendaSystemController::class, 'index'])->name('revenda.systems.index')->middleware('check.admin.permission:SYSTEM_INDEX');
+          Route::put('/systems', [RevendaSystemController::class, 'update'])->name('revenda.systems.update')->middleware('check.revenda.permission:SYSTEM_EDIT');
+          Route::get('/systems', [RevendaSystemController::class, 'index'])->name('revenda.systems.index')->middleware('check.revenda.permission:SYSTEM_INDEX');
         //---
       });
     //---

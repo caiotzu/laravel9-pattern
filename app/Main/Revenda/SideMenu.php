@@ -63,19 +63,19 @@ class SideMenu {
           //     'USER_MENU'
           //   ]
           // ],
-          // 'permissions' => [
-          //   'icon' => 'unlock',
-          //   'route_name' => 'revenda.permissions.index',
-          //   'other_route' => [
-          //     'revenda.permissions.create',
-          //     'revenda.permissions.edit',
-          //   ],
-          //   'params' => [],
-          //   'title' => 'Permissões',
-          //   'permissions' => [
-          //     'PERMISSION_MENU'
-          //   ]
-          // ],
+          'permissions' => [
+            'icon' => 'unlock',
+            'route_name' => 'revenda.permissions.index',
+            'other_route' => [
+              'revenda.permissions.create',
+              'revenda.permissions.edit',
+            ],
+            'params' => [],
+            'title' => 'Permissões',
+            'permissions' => [
+              'PERMISSION_MENU'
+            ]
+          ],
           'system' => [
             'icon' => 'monitor',
             'route_name' => 'revenda.systems.index',

@@ -1,19 +1,19 @@
-@extends('../admin/layouts/main')
+@extends('../revenda/layouts/main')
 
-@section('adminHead')
+@section('revendaHead')
     <title>Permission - Pattern Laravel 9</title>
 @endsection
 
-@section('adminBreadcrumb')
+@section('revendaBreadcrumb')
   <li class="breadcrumb-item active">
-    <a href="{{ route('admin.home.index') }}">Home</a>
+    <a href="{{ route('revenda.home.index') }}">Home</a>
   </li>
   <li class="breadcrumb-item" aria-current="page">
-    <a href="{{ route('admin.permissions.index') }}">Permissões</a>
+    <a href="{{ route('revenda.permissions.index') }}">Permissões</a>
   </li>
 @endsection
 
-@section('adminContent')
+@section('revendaContent')
 @if($errors->any())
   <div id="errorMessage" class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mt-4 relative" role="alert">
     <p class="font-bold text-lg mb-2 relative">Erro</p>
@@ -55,7 +55,7 @@
         </p>
 
         @if(in_array('PERMISSION_CREATE',Session::get('userPermission')))
-          <a href="{{ route('admin.permissions.create') }}" class="btn btn-primary w-32 mr-2 mb-2 ">
+          <a href="{{ route('revenda.permissions.create') }}" class="btn btn-primary w-32 mr-2 mb-2 ">
             Adicionar
           </a>
         @endif
@@ -82,7 +82,7 @@
                         <ul class="dropdown-content">
                           @if(in_array('PERMISSION_EDIT',Session::get('userPermission')))
                             <li>
-                              <a href="{{route('admin.permissions.edit', $role->id)}}" class="dropdown-item">
+                              <a href="{{route('revenda.permissions.edit', $role->id)}}" class="dropdown-item">
                                 <i data-lucide="edit-2" class="w-4 h-4 mr-2"></i> Editar
                               </a>
                             </li>
@@ -106,5 +106,5 @@
 </div>
 @endsection
 
-@section('adminJs')
+@section('revendaJs')
 @endsection

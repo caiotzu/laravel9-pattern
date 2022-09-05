@@ -7,6 +7,11 @@ use App\Http\Controllers\DarkModeController;
 use App\Http\Controllers\LayoutSchemeController;
 use App\Http\Controllers\ColorSchemeController;
 
+// imports auth
+use App\Http\Controllers\Auth\ {
+  AuthController,
+};
+
 // imports general controllers
 use App\Http\Controllers\ {
   CountyController,
@@ -25,6 +30,14 @@ use App\Http\Controllers\Admin\ {
   AdminCompanyGroupController,
 };
 
+// imports revenda
+use App\Http\Controllers\Revenda\ {
+  RevendaHomeController,
+};
+
+
+
+
 // themes route
   Route::get('dark-mode-switcher', [DarkModeController::class, 'switch'])->name('dark-mode-switcher');
   Route::get('color-scheme-switcher/{color_scheme}', [ColorSchemeController::class, 'switch'])->name('color-scheme-switcher');
@@ -32,8 +45,15 @@ use App\Http\Controllers\Admin\ {
 //---
 
 // admin authentication routes
-  Route::get('admin', [AdminAuthController::class, 'index'])->name('admin.auth.index');
-  Route::post('admin/login', [AdminAuthController::class, 'login'])->name('admin.auth.login');
+  // admin
+    Route::get('admin', [AdminAuthController::class, 'index'])->name('admin.auth.index');
+    Route::post('admin/login', [AdminAuthController::class, 'login'])->name('admin.auth.login');
+  //---
+
+  // system
+    Route::get('/', [AuthController::class, 'index'])->name('auth.index');
+    Route::post('login', [AuthController::class, 'login'])->name('auth.login');
+  //---
 //---
 
 // authenticated routes
@@ -79,6 +99,15 @@ use App\Http\Controllers\Admin\ {
 
           Route::put('/systems', [AdminSystemController::class, 'update'])->name('admin.systems.update')->middleware('check.admin.permission:SYSTEM_EDIT');
           Route::get('/systems', [AdminSystemController::class, 'index'])->name('admin.systems.index')->middleware('check.admin.permission:SYSTEM_INDEX');
+        //---
+      });
+    //---
+
+    // revenda routes
+      Route::prefix('revenda')->group(function() {
+        // routes without permission
+          Route::post('/logout', [AdminAuthController::class, 'logout'])->name('revenda.auth.logout');
+          Route::get('/home', [RevendaHomeController::class, 'index'])->name('revenda.home.index');
         //---
       });
     //---

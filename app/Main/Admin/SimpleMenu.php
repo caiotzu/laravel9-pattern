@@ -23,6 +23,7 @@ class SimpleMenu {
         'other_route' => [],
         'permissions' => [
           'COMPANY_MENU',
+          'COMPANYGROUP_MENU',
         ],
         'sub_menu' => [
           'companyGroups' => [

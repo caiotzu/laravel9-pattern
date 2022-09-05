@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Main\Admin;
+namespace App\Main\Revenda;
 
 class TopMenu {
   /**
@@ -23,28 +23,14 @@ class TopMenu {
         'other_route' => [],
         'permissions' => [
           'COMPANY_MENU',
-          'COMPANYGROUP_MENU',
         ],
         'sub_menu' => [
-          'companyGroups' => [
-            'icon' => 'layers',
-            'route_name' => 'admin.companyGroups.index',
-            'other_route' => [
-              'admin.companyGroups.create',
-              'admin.companyGroups.edit',
-            ],
-            'params' => [],
-            'title' => 'Grupos Empresas',
-            'permissions' => [
-              'COMPANYGROUP_MENU',
-            ]
-          ],
           'companies' => [
             'icon' => 'building',
-            'route_name' => 'admin.companies.index',
+            'route_name' => 'revenda.companies.index',
             'other_route' => [
-              'admin.companies.create',
-              'admin.companies.edit',
+              'revenda.companies.create',
+              'revenda.companies.edit',
             ],
             'params' => [],
             'title' => 'Empresas',
@@ -66,10 +52,10 @@ class TopMenu {
         'sub_menu' => [
           'users' => [
             'icon' => 'users',
-            'route_name' => 'admin.users.index',
+            'route_name' => 'revenda.users.index',
             'other_route' => [
-              'admin.users.create',
-              'admin.users.edit',
+              'revenda.users.create',
+              'revenda.users.edit',
             ],
             'params' => [],
             'title' => 'Usuários',
@@ -79,10 +65,10 @@ class TopMenu {
           ],
           'permissions' => [
             'icon' => 'unlock',
-            'route_name' => 'admin.permissions.index',
+            'route_name' => 'revenda.permissions.index',
             'other_route' => [
-              'admin.permissions.create',
-              'admin.permissions.edit',
+              'revenda.permissions.create',
+              'revenda.permissions.edit',
             ],
             'params' => [],
             'title' => 'Permissões',
@@ -92,10 +78,10 @@ class TopMenu {
           ],
           'system' => [
             'icon' => 'monitor',
-            'route_name' => 'admin.systems.index',
+            'route_name' => 'revenda.systems.index',
             'other_route' => [
-              'admin.systems.create',
-              'admin.systems.edit',
+              'revenda.systems.create',
+              'revenda.systems.edit',
             ],
             'params' => [],
             'title' => 'Sistema',

@@ -147,7 +147,6 @@ class StoreAdminCompanyRequest extends FormRequest {
         'email',
         "unique:users,email"
       ],
-
       'user_cpf' => [
         'required',
         'min:11',

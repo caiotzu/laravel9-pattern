@@ -5,13 +5,19 @@ namespace App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateAdminUserProfileRequest extends FormRequest {
+class UpdateRevendaUserProfileRequest extends FormRequest {
   public function authorize() {
     return true;
   }
 
+  protected function prepareForValidation() {
+    $this->merge([
+      'cpf' => preg_replace('/\D+/', '', request()->cpf),
+    ]);
+  }
+
   public function rules() {
-    $id = Auth::guard('admin')->user()->id;
+    $id = Auth::guard('web')->user()->id;
 
     return [
       'avatar' => [
@@ -28,7 +34,12 @@ class UpdateAdminUserProfileRequest extends FormRequest {
       'email' => [
         'required',
         'email',
-        "unique:admin_users,email,{$id},id"
+        "unique:users,email,{$id},id"
+      ],
+      'cpf' => [
+        'required',
+        'min:11',
+        'max:11',
       ],
       'password' => [
         'nullable',
@@ -51,6 +62,10 @@ class UpdateAdminUserProfileRequest extends FormRequest {
       'email.max' => 'O campo e-mail não pode conter mais de 100 caracteres',
       'email.email' => 'O campo e-mail não está no formato correto',
       'email.unique' => 'Este e-mail já está cadastrado para outro usuário',
+
+      'cpf.required' => 'O campo cpf é obrigatório',
+      'cpf.min' => 'O campo cpf não pode conter menos de 11 caracteres',
+      'cpf.max' => 'O campo cpf não pode conter mais de 11 caracteres',
 
       'password.min' => 'O campo senha não pode conter menos de 06 caracteres',
       'password.confirmed' => 'A confirmação do campo senha não corresponde',

@@ -5,17 +5,17 @@ namespace App\Services;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-use App\Models\AdminUser;
+use App\Models\User;
 
-class AdminUserProfileService {
-  public function updateAdminUserProfile(Array $dto) {
-    $user = AdminUser::findOrFail(Auth::guard('admin')->user()->id);
+class RevendaUserProfileService {
+  public function updateRevendaUserProfile(Array $dto) {
+    $user = User::findOrFail(Auth::guard('web')->user()->id);
 
     if(isset($dto['avatar'])) {
       if(!is_null($user->avatar) && Storage::exists($user->avatar))
         Storage::delete($user->avatar);
 
-      $path = $dto['avatar']->store('admin/users');
+      $path = $dto['avatar']->store('revenda/users');
       $dto['avatar'] = $path;
     }
 

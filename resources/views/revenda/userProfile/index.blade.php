@@ -1,9 +1,9 @@
-@extends('../admin/layouts/main')
+@extends('../revenda/layouts/main')
 
-@section('adminHead')
+@section('revendaHead')
     <title>User Profile - Pattern Laravel 9</title>
 @endsection
-@section('adminCss')
+@section('revendaCss')
   <style>
     .label-upload-photo {
       cursor: pointer;
@@ -14,16 +14,16 @@
   </style>
 @endsection
 
-@section('adminBreadcrumb')
+@section('revendaBreadcrumb')
   <li class="breadcrumb-item active">
-    <a href="{{ route('admin.home.index') }}">Home</a>
+    <a href="{{ route('revenda.home.index') }}">Home</a>
   </li>
   <li class="breadcrumb-item" aria-current="page">
-    <a href="{{ route('admin.userProfiles.index') }}">Perfil</a>
+    <a href="{{ route('revenda.userProfiles.index') }}">Perfil</a>
   </li>
 @endsection
 
-@section('adminContent')
+@section('revendaContent')
 @if($errors->any())
   <div id="errorMessage" class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mt-4 relative" role="alert">
     <p class="font-bold text-lg mb-2 relative">Erro</p>
@@ -59,7 +59,7 @@
 <div class="grid grid-cols-12">
   <div class="col-span-12 mt-8">
     <div class="intro-y box px-5 pt-5 mt-5">
-      <form action="{{ route('admin.userProfiles.update') }}" method="post" enctype="multipart/form-data" class="mt-3">
+      <form action="{{ route('revenda.userProfiles.update') }}" method="post" enctype="multipart/form-data" class="mt-3">
         @csrf
         @method('PUT')
 
@@ -79,7 +79,7 @@
             </div>
             <div class="ml-5">
                 <div class="w-24 sm:w-40 truncate sm:whitespace-normal font-medium text-lg">{{ $user->name }}</div>
-                <div class="text-slate-500">{{ $user->adminRole->description }}</div>
+                <div class="text-slate-500">{{ $user->role->description }}</div>
             </div>
           </div>
           <div class="mt-6 lg:mt-0 flex-1 px-5 border-l border-r border-slate-200/60 dark:border-darkmode-400 border-t lg:border-t-0 pt-5 lg:pt-0">
@@ -93,21 +93,37 @@
                   {{ $user->email }}
                 </div>
               </div>
+              <div class="flex flex-col justify-center items-center lg:items-start mt-4">
+                <div class="truncate sm:whitespace-normal flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" icon-name="credit-card" data-lucide="credit-card" class="lucide lucide-credit-card w-4 h-4 mr-2">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <polyline points="22,6 12,13 2,6"></polyline>
+                  </svg>
+                  {{ FormatCpfCnpj($user->cpf) }}
+                </div>
+              </div>
           </div>
         </div>
 
         <div class="grid grid-cols-12 my-5">
-          <div class="col-span-12 md:col-span-3 p-2">
+          <div class="col-span-12 md:col-span-4 p-2">
             <label for="name" class="form-label">Nome <span class="text-red-500">*</span></label>
             <input id="name" name="name" type="text" class="form-control w-full py-2.5" value="{{ old('name', $user->name ?? '') }}">
           </div>
 
-          <div class="col-span-12 md:col-span-3 p-2">
+          <div class="col-span-12 md:col-span-4 p-2">
             <label for="email" class="form-label">E-mail <span class="text-red-500">*</span></label>
             <input id="email" name="email" type="email" class="form-control w-full py-2.5" value="{{ old('email', $user->email ?? '') }}">
           </div>
 
-          <div class="col-span-12 md:col-span-3 p-2">
+          <div class="col-span-12 md:col-span-4 p-2">
+            <label for="cpf" class="form-label">CPF <span class="text-red-500">*</span></label>
+            <input id="cpf" name="cpf" type="text" class="form-control w-full py-2.5 cpf" value="{{ old('cpf', $user->cpf ?? '') }}">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-12 my-5">
+          <div class="col-span-12 md:col-span-4 p-2">
             <label for="password" class="form-label">Senha
               <a
                 href="javascript:;"
@@ -120,7 +136,7 @@
             <input id="password" name="password" type="password" class="form-control w-full py-2.5" value="{{ old('password') }}">
           </div>
 
-          <div class="col-span-12 md:col-span-3 p-2">
+          <div class="col-span-12 md:col-span-4 p-2">
             <label for="password_confirmation" class="form-label">Confirmação da senha</label>
             <input id="password_confirmation" name="password_confirmation" type="password" class="form-control w-full py-2.5" value="{{ old('password_confirmation') }}">
           </div>
@@ -137,5 +153,5 @@
 </div>
 @endsection
 
-@section('adminJs')
+@section('revendaJs')
 @endsection

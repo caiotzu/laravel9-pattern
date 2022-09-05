@@ -41,7 +41,6 @@ class AdminUserProfileController extends Controller {
         'successMessage' => '<strong>'.$user->name.'</strong> seu perfil foi atualizado com sucesso!'
       ]);
     } catch (Exception $e) {
-      dd($e->getMessage());
       return back()->withErrors('Ocorreu um erro ao atualizar os dados do usuário')->withInput();
     }
   }

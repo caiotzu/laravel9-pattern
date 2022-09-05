@@ -11,6 +11,7 @@ class User extends Authenticatable {
     'name',
     'email',
     'password',
+    'avatar',
   ];
 
   protected $hidden = [
@@ -24,13 +25,5 @@ class User extends Authenticatable {
 
   public function userAccessCompanies() {
     return $this->hasMany(UserAccessCompany::class, 'user_id', 'id');
-  }
-
-  public function getPhotoUrlAttribute() {
-    if ($this->foto !== null) {
-      return url('media/user/' . $this->id . '/' . $this->foto);
-    } else {
-      return url('media-example/no-image.png');
-    }
   }
 }

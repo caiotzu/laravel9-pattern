@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -36,6 +38,29 @@ class AdminUserService {
     $dto['active'] = isset($dto['active']) ? true : false;
 
     $user = AdminUser::findOrFail($id);
+    $user->update($dto);
+    return $user;
+  }
+
+  public function updateAdminUserProfile(Array $dto) {
+    $user = AdminUser::findOrFail(Auth::guard('admin')->user()->id);
+
+    if(isset($dto['avatar'])) {
+      if(!is_null($user->avatar) && Storage::exists($user->avatar))
+        Storage::delete($user->avatar);
+
+      $path = $dto['avatar']->store('admin/users');
+      $dto['avatar'] = $path;
+    }
+
+    if($dto['password'] != '' && $dto['password'] != null) {
+      $passwordHash = bcrypt($dto['password']);
+      $dto['password'] = $passwordHash;
+    } else {
+      unset($dto['password']);
+      unset($dto['password_confirmation']);
+    }
+
     $user->update($dto);
     return $user;
   }

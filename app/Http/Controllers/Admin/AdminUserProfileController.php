@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests\Admin\UpdateAdminUserProfileRequest;
 
-use App\Services\AdminUserProfileService;
 use App\Services\AdminUserService;
 
 use Exception;
@@ -16,11 +15,9 @@ use Exception;
 class AdminUserProfileController extends Controller {
 
   protected $adminUserService;
-  protected $adminUserProfileService;
 
-  public function __construct(AdminUserProfileService $adminUserProfileService, AdminUserService $adminUserService) {
+  public function __construct(AdminUserService $adminUserService) {
     $this->adminUserService = $adminUserService;
-    $this->adminUserProfileService = $adminUserProfileService;
   }
 
   public function index() {
@@ -35,7 +32,7 @@ class AdminUserProfileController extends Controller {
 
   public function update(UpdateAdminUserProfileRequest $request) {
     try {
-      $user = $this->adminUserProfileService->updateAdminUserProfile($request->except('_method', '_token'));
+      $user = $this->adminUserService->updateAdminUserProfile($request->except('_method', '_token'));
 
       return redirect()->route('admin.userProfiles.index')->with([
         'successMessage' => '<strong>'.$user->name.'</strong> seu perfil foi atualizado com sucesso!'

@@ -1,19 +1,19 @@
-@extends('../admin/layouts/main')
+@extends('../revenda/layouts/main')
 
-@section('adminHead')
+@section('revendaHead')
     <title>Sistema - Pattern Laravel 9</title>
 @endsection
 
-@section('adminBreadcrumb')
+@section('revendaBreadcrumb')
   <li class="breadcrumb-item active">
-    <a href="{{ route('admin.home.index') }}">Home</a>
+    <a href="{{ route('revenda.home.index') }}">Home</a>
   </li>
   <li class="breadcrumb-item" aria-current="page">
-    <a href="{{ route('admin.systems.index') }}">Sistema</a>
+    <a href="{{ route('revenda.systems.index') }}">Sistema</a>
   </li>
 @endsection
 
-@section('adminContent')
+@section('revendaContent')
 @if($errors->any())
   <div id="errorMessage" class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mt-4 relative" role="alert">
     <p class="font-bold text-lg mb-2 relative">Erro</p>
@@ -55,7 +55,7 @@
         </p>
       </div>
       <div class="overflow-x-auto overflow-y-hidden">
-        <form action="{{ route('admin.systems.update') }}" method="post" class="mt-3">
+        <form action="{{ route('revenda.systems.update') }}" method="post" class="mt-3">
           @method('PUT')
           @csrf
 
@@ -106,5 +106,5 @@
 </div>
 @endsection
 
-@section('adminJs')
+@section('revendaJs')
 @endsection

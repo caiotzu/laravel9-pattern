@@ -33,6 +33,7 @@ use App\Http\Controllers\Admin\ {
 // imports revenda
 use App\Http\Controllers\Revenda\ {
   RevendaHomeController,
+  RevendaSystemController,
   RevendaUserProfileController,
 };
 
@@ -129,8 +130,8 @@ use App\Http\Controllers\Revenda\ {
           // Route::post('/permissions', [AdminPermissionController::class, 'store'])->name('admin.permissions.store')->middleware('check.admin.permission:PERMISSION_CREATE');
           // Route::get('/permissions', [AdminPermissionController::class, 'index'])->name('admin.permissions.index')->middleware('check.admin.permission:PERMISSION_INDEX');
 
-          Route::put('/systems', [AdminSystemController::class, 'update'])->name('revenda.systems.update')->middleware('check.admin.permission:SYSTEM_EDIT');
-          Route::get('/systems', [AdminSystemController::class, 'index'])->name('revenda.systems.index')->middleware('check.admin.permission:SYSTEM_INDEX');
+          Route::put('/systems', [RevendaSystemController::class, 'update'])->name('revenda.systems.update')->middleware('check.admin.permission:SYSTEM_EDIT');
+          Route::get('/systems', [RevendaSystemController::class, 'index'])->name('revenda.systems.index')->middleware('check.admin.permission:SYSTEM_INDEX');
         //---
       });
     //---

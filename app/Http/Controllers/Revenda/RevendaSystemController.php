@@ -1,38 +1,40 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Revenda;
 
 use App\Http\Controllers\Controller;
 
-use App\Http\Requests\UpdateAdminSystemRequest;
+use Illuminate\Support\Facades\Auth;
 
-use App\Services\AdminSettingService;
+use App\Http\Requests\UpdateRevendaSystemRequest;
+
+use App\Services\RevendaCompanyGroupSettingService;
 
 use Exception;
 
-class AdminSystemController extends Controller {
+class RevendaSystemController extends Controller {
 
-  protected $adminSettingService;
+  protected $revendaCompanyGroupSettingService;
 
-  public function __construct(AdminSettingService $adminSettingService) {
-    $this->adminSettingService = $adminSettingService;
+  public function __construct(RevendaCompanyGroupSettingService $revendaCompanyGroupSettingService) {
+    $this->revendaCompanyGroupSettingService = $revendaCompanyGroupSettingService;
   }
 
   public function index() {
     try {
-      $settings = $this->adminSettingService->listAllAdminSettingsInArrayFormat();
+      $settings = $this->revendaCompanyGroupSettingService->listAllRevendaCompanyGroupSettingsInArrayFormat();
 
-      return view('admin.system.index', compact('settings'));
+      return view('revenda.system.index', compact('settings'));
     } catch (Exception $e) {
-      return redirect()->route('admin.home.index')->withErrors('Não foi possível carregar as configurações do sistema');
+      return redirect()->route('revenda.home.index')->withErrors('Não foi possível carregar as configurações do sistema');
     }
   }
 
-  public function update(UpdateAdminSystemRequest $request) {
+  public function update(UpdateRevendaSystemRequest $request) {
     try {
-      $this->adminSettingService->createOrUpdateAdminSettings($request->except('_method', '_token'));
+      $this->revendaCompanyGroupSettingService->createOrUpdateRevendaSettings($request->except('_method', '_token'));
 
-      return redirect()->route('admin.systems.index')->with([
+      return redirect()->route('revenda.systems.index')->with([
         'successMessage' => 'As configurações do <strong>sistema</strong> foram atualizadas com sucesso!'
       ]);
 

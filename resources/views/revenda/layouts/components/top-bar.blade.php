@@ -10,7 +10,7 @@
     <!-- BEGIN: Breadcrumb -->
     <nav aria-label="breadcrumb" class="-intro-x h-[45px] mr-auto">
       <ol class="breadcrumb breadcrumb-light">
-        @yield('adminBreadcrumb')
+        @yield('revendaBreadcrumb')
         {{-- <li class="breadcrumb-item"><a href="#">Application</a></li>
         <li class="breadcrumb-item active" aria-current="page">Home</li> --}}
       </ol>

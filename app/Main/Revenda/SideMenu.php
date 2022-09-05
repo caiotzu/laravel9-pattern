@@ -40,57 +40,57 @@ class SideMenu {
       //     ],
       //   ],
       // ],
-      // 'settings' => [
-      //   'icon' => 'settings',
-      //   'title' => 'Configurações',
-      //   'other_route' => [],
-      //   'permissions' => [
-      //     'USER_MENU',
-      //     'PERMISSION_MENU',
-      //     'SYSTEM_MENU'
-      //   ],
-      //   'sub_menu' => [
-      //     'users' => [
-      //       'icon' => 'users',
-      //       'route_name' => 'revenda.users.index',
-      //       'other_route' => [
-      //         'revenda.users.create',
-      //         'revenda.users.edit',
-      //       ],
-      //       'params' => [],
-      //       'title' => 'Usuários',
-      //       'permissions' => [
-      //         'USER_MENU'
-      //       ]
-      //     ],
-      //     'permissions' => [
-      //       'icon' => 'unlock',
-      //       'route_name' => 'revenda.permissions.index',
-      //       'other_route' => [
-      //         'revenda.permissions.create',
-      //         'revenda.permissions.edit',
-      //       ],
-      //       'params' => [],
-      //       'title' => 'Permissões',
-      //       'permissions' => [
-      //         'PERMISSION_MENU'
-      //       ]
-      //     ],
-      //     'system' => [
-      //       'icon' => 'monitor',
-      //       'route_name' => 'revenda.systems.index',
-      //       'other_route' => [
-      //         'revenda.systems.create',
-      //         'revenda.systems.edit',
-      //       ],
-      //       'params' => [],
-      //       'title' => 'Sistema',
-      //       'permissions' => [
-      //         'SYSTEM_MENU'
-      //       ]
-      //     ],
-      //   ],
-      // ],
+      'settings' => [
+        'icon' => 'settings',
+        'title' => 'Configurações',
+        'other_route' => [],
+        'permissions' => [
+          'USER_MENU',
+          'PERMISSION_MENU',
+          'SYSTEM_MENU'
+        ],
+        'sub_menu' => [
+          // 'users' => [
+          //   'icon' => 'users',
+          //   'route_name' => 'revenda.users.index',
+          //   'other_route' => [
+          //     'revenda.users.create',
+          //     'revenda.users.edit',
+          //   ],
+          //   'params' => [],
+          //   'title' => 'Usuários',
+          //   'permissions' => [
+          //     'USER_MENU'
+          //   ]
+          // ],
+          // 'permissions' => [
+          //   'icon' => 'unlock',
+          //   'route_name' => 'revenda.permissions.index',
+          //   'other_route' => [
+          //     'revenda.permissions.create',
+          //     'revenda.permissions.edit',
+          //   ],
+          //   'params' => [],
+          //   'title' => 'Permissões',
+          //   'permissions' => [
+          //     'PERMISSION_MENU'
+          //   ]
+          // ],
+          'system' => [
+            'icon' => 'monitor',
+            'route_name' => 'revenda.systems.index',
+            'other_route' => [
+              'revenda.systems.create',
+              'revenda.systems.edit',
+            ],
+            'params' => [],
+            'title' => 'Sistema',
+            'permissions' => [
+              'SYSTEM_MENU'
+            ]
+          ],
+        ],
+      ],
     ];
   }
 }

@@ -35,6 +35,7 @@ use App\Http\Controllers\Revenda\ {
   RevendaHomeController,
   RevendaUserController,
   RevendaSystemController,
+  RevendaCompanyController,
   RevendaPermissionController,
   RevendaUserProfileController,
 };
@@ -114,6 +115,14 @@ use App\Http\Controllers\Revenda\ {
         // user profile
           Route::get('/userProfile', [RevendaUserProfileController::class, 'index'])->name('revenda.userProfiles.index');
           Route::put('/userProfile', [RevendaUserProfileController::class, 'update'])->name('revenda.userProfiles.update');
+        //---
+
+        // records route
+          Route::get('/companies/create', [RevendaCompanyController::class, 'create'])->name('revenda.companies.create')->middleware('check.revenda.permission:COMPANY_CREATE');
+          Route::get('/companies/{id}/edit', [RevendaCompanyController::class, 'edit'])->name('revenda.companies.edit')->middleware('check.revenda.permission:COMPANY_EDIT');
+          Route::put('/companies/{id}', [RevendaCompanyController::class, 'update'])->name('revenda.companies.update')->middleware('check.revenda.permission:COMPANY_EDIT');
+          Route::post('/companies', [RevendaCompanyController::class, 'store'])->name('revenda.companies.store')->middleware('check.revenda.permission:COMPANY_CREATE');
+          Route::get('/companies', [RevendaCompanyController::class, 'index'])->name('revenda.companies.index')->middleware('check.revenda.permission:COMPANY_INDEX');
         //---
 
         // settings routes

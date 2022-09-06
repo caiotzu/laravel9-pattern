@@ -1,22 +1,22 @@
-@extends('../admin/layouts/main')
+@extends('../revenda/layouts/main')
 
-@section('adminHead')
+@section('revendaHead')
     <title>Company Group - Pattern Laravel 9</title>
 @endsection
 
-@section('adminBreadcrumb')
+@section('revendaBreadcrumb')
   <li class="breadcrumb-item active">
-    <a href="{{ route('admin.home.index') }}">Home</a>
+    <a href="{{ route('revenda.home.index') }}">Home</a>
   </li>
   <li class="breadcrumb-item" aria-current="page">
-    <a href="{{ route('admin.companies.index') }}">Empresas</a>
+    <a href="{{ route('revenda.companies.index') }}">Empresas</a>
   </li>
   <li class="breadcrumb-item" aria-current="page">
-    <a href="{{route('admin.companies.edit', $company->id) }}">Edição</a>
+    <a href="{{route('revenda.companies.edit', $company->id) }}">Edição</a>
   </li>
 @endsection
 
-@section('adminContent')
+@section('revendaContent')
 <div id="divMessage"></div>
 @if($errors->any())
   <div id="errorMessage" class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mt-4 relative" role="alert">
@@ -38,10 +38,10 @@
           Edição da empresa - {{ $company->trade_name }}
         </p>
       </div>
-      <form action="{{ route('admin.companies.update', $company->id) }}" method="post" class="mt-3">
+      <form action="{{ route('revenda.companies.update', $company->id) }}" method="post" class="mt-3">
         @method('PUT')
         <div class="grid grid-cols-12 mt-3 mb-3">
-          @include('admin.company._partials.form')
+          @include('revenda.company._partials.form')
         </div>
         <div class="flex justify-center	pt-5 border-t border-slate-200/60 dark:border-darkmode-400">
           @if(in_array('COMPANY_EDIT',Session::get('userPermission')))
@@ -49,7 +49,7 @@
               Salvar
             </button>
           @endif
-          <a href="{{ route('admin.companies.index') }}" class="btn btn-secondary w-32 mr-2 mb-2 ">
+          <a href="{{ route('revenda.companies.index') }}" class="btn btn-secondary w-32 mr-2 mb-2 ">
             Cancelar
           </a>
         </div>
@@ -59,6 +59,6 @@
 </div>
 @endsection
 
-@section('adminJs')
-  <script type="text/javascript" src="{{ URL::asset('js/admin/company/index.js') }}"></script>
+@section('revendaJs')
+  <script type="text/javascript" src="{{ URL::asset('js/revenda/company/index.js') }}"></script>
 @endsection

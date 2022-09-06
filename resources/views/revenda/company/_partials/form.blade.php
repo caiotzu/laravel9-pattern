@@ -61,31 +61,6 @@
 
         <div class="grid grid-cols-12">
           <div class="col-span-12 md:col-span-4 p-2">
-            <label for="company_group_id" class="form-label">Grupo empresa <span class="text-red-500">*</span></label>
-            <select class="tom-select w-full" id="company_group_id" name="company_group_id">
-              @if(isset($company) && $company->company_group_id == '')
-                <option value="" selected>Selecione o grupo</option>
-              @else
-                <option value="">Selecione o grupo</option>
-              @endif
-
-              @foreach($companyGroups as $cp)
-                @if(!!old())
-                  @if(old('company_group_id') == $cp->id)
-                    <option value="{{ $cp->id }}" selected>{{ $cp->group_name }}</option>
-                  @else
-                    <option value="{{ $cp->id }}">{{ $cp->group_name }}</option>
-                  @endif
-                @elseif(isset($company) && $company->company_group_id == $cp->id)
-                  <option value="{{ $cp->id }}" selected>{{ $cp->group_name }}</option>
-                @else
-                  <option value="{{ $cp->id }}" >{{ $cp->group_name }}</option>
-                @endif
-              @endforeach
-            </select>
-          </div>
-
-          <div class="col-span-12 md:col-span-4 p-2">
             <label for="company_type" class="form-label">Tipo empresa <span class="text-red-500">*</span></label>
             <select class="form-select py-2.5" id="company_type" name="company_type">
               @if(!!old())

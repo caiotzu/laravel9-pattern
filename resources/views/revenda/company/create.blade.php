@@ -1,22 +1,22 @@
-@extends('../admin/layouts/main')
+@extends('../revenda/layouts/main')
 
-@section('adminHead')
+@section('revendaHead')
     <title>Company - Pattern Laravel 9</title>
 @endsection
 
-@section('adminBreadcrumb')
+@section('revendaBreadcrumb')
   <li class="breadcrumb-item active">
-    <a href="{{ route('admin.home.index') }}">Home</a>
+    <a href="{{ route('revenda.home.index') }}">Home</a>
   </li>
   <li class="breadcrumb-item" aria-current="page">
-    <a href="{{ route('admin.companies.index') }}">Empresas</a>
+    <a href="{{ route('revenda.companies.index') }}">Empresas</a>
   </li>
   <li class="breadcrumb-item" aria-current="page">
-    <a href="{{ route('admin.companies.create') }}">Cadastro</a>
+    <a href="{{ route('revenda.companies.create') }}">Cadastro</a>
   </li>
 @endsection
 
-@section('adminContent')
+@section('revendaContent')
 <div id="divMessage"></div>
 
 @if($errors->any())
@@ -39,9 +39,9 @@
           Cadastro de empresa
         </p>
       </div>
-      <form action="{{ route('admin.companies.store') }}" method="post" class="mt-3">
+      <form action="{{ route('revenda.companies.store') }}" method="post" class="mt-3">
         <div class="grid grid-cols-12 mt-3 mb-3">
-          @include('admin.company._partials.form')
+          @include('revenda.company._partials.form')
         </div>
         <div class="flex justify-center	pt-5 border-t border-slate-200/60 dark:border-darkmode-400">
           @if(in_array('COMPANY_CREATE',Session::get('userPermission')))
@@ -49,7 +49,7 @@
               Salvar
             </button>
           @endif
-          <a href="{{ route('admin.companies.index') }}" class="btn btn-secondary w-32 mr-2 mb-2 ">
+          <a href="{{ route('revenda.companies.index') }}" class="btn btn-secondary w-32 mr-2 mb-2 ">
             Cancelar
           </a>
         </div>
@@ -59,6 +59,6 @@
 </div>
 @endsection
 
-@section('adminJs')
-  <script type="text/javascript" src="{{ URL::asset('js/admin/company/index.js') }}"></script>
+@section('revendaJs')
+  <script type="text/javascript" src="{{ URL::asset('js/revenda/company/index.js') }}"></script>
 @endsection

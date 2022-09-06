@@ -1,19 +1,19 @@
-@extends('../admin/layouts/main')
+@extends('../revenda/layouts/main')
 
-@section('adminHead')
+@section('revendaHead')
     <title>Company - Pattern Laravel 9</title>
 @endsection
 
-@section('adminBreadcrumb')
+@section('revendaBreadcrumb')
   <li class="breadcrumb-item active">
-    <a href="{{ route('admin.home.index') }}">Home</a>
+    <a href="{{ route('revenda.home.index') }}">Home</a>
   </li>
   <li class="breadcrumb-item" aria-current="page">
-    <a href="{{ route('admin.companies.index') }}">Empresas</a>
+    <a href="{{ route('revenda.companies.index') }}">Empresas</a>
   </li>
 @endsection
 
-@section('adminContent')
+@section('revendaContent')
 <div id="divMessage"></div>
 
 @if($errors->any())
@@ -56,7 +56,7 @@
           Filtro
         </p>
       </div>
-      <form action="{{ route('admin.companies.index') }}" method="get" class="mt-3 grid grid-cols-12">
+      <form action="{{ route('revenda.companies.index') }}" method="get" class="mt-3 grid grid-cols-12">
         <div class="col-span-12 md:col-span-4 p-2">
           <label for="company_id" class="form-label">Empresa</label>
           <select class="tom-select w-full" id="company_id" name="company_id">
@@ -67,13 +67,13 @@
             @endif
 
             @foreach($companies as $company)
-            @if(!!old())
-              @if(old('id') == $company->id)
-                <option value="{{ $company->id }}" selected>{{ $company->trade_name }}</option>
-              @else
-                <option value="{{ $company->id }}">{{ $company->trade_name }}</option>
-              @endif
-            @elseif(isset($data['company_id']) && $data['company_id'] == $company->id)
+              @if(!!old())
+                @if(old('id') == $company->id)
+                  <option value="{{ $company->id }}" selected>{{ $company->trade_name }}</option>
+                @else
+                  <option value="{{ $company->id }}">{{ $company->trade_name }}</option>
+                @endif
+              @elseif(isset($data['company_id']) && $data['company_id'] == $company->id)
                 <option value="{{ $company->id }}" selected>{{ $company->trade_name }}</option>
               @else
                 <option value="{{ $company->id }}" >{{ $company->trade_name }}</option>
@@ -81,26 +81,6 @@
             @endforeach
           </select>
         </div>
-
-        <div class="col-span-12 md:col-span-4 p-2">
-          <label for="profile_id" class="form-label">Perfil <span class="text-red-500">*</span></label>
-          <select class="form-select py-2.5" id="profile_id" name="profile_id">
-            @foreach($profiles as $profile)
-            @if(!!old())
-              @if(old('profile_id') == $profile->id)
-                <option value="{{ $profile->id }}" selected>{{ $profile->description }}</option>
-              @else
-                <option value="{{ $profile->id }}">{{ $profile->description }}</option>
-              @endif
-            @elseif(isset($data['profile_id']) && $data['profile_id'] == $profile->id)
-                <option value="{{ $profile->id }}" selected>{{ $profile->description }}</option>
-              @else
-                <option value="{{ $profile->id }}" >{{ $profile->description }}</option>
-              @endif
-            @endforeach
-          </select>
-        </div>
-
         <div class="col-span-12 pt-5 mt-3 border-t border-slate-200/60 dark:border-darkmode-400">
           @if(in_array('COMPANY_FILTER',Session::get('userPermission')))
             <button class="btn btn-primary w-32 mr-2 mb-2 w-full">
@@ -118,7 +98,7 @@
         </p>
 
         @if(in_array('COMPANY_CREATE',Session::get('userPermission')))
-          <a href="{{ route('admin.companies.create') }}" class="btn btn-primary w-32 mr-2 mb-2 ">
+          <a href="{{ route('revenda.companies.create') }}" class="btn btn-primary w-32 mr-2 mb-2 ">
             Adicionar
           </a>
         @endif
@@ -174,7 +154,7 @@
                           <ul class="dropdown-content">
                             @if(in_array('COMPANY_EDIT',Session::get('userPermission')))
                               <li>
-                                <a href="{{route('admin.companies.edit', $company->id)}}" class="dropdown-item">
+                                <a href="{{route('revenda.companies.edit', $company->id)}}" class="dropdown-item">
                                   <i data-lucide="edit-2" class="w-4 h-4 mr-2"></i> Editar
                                 </a>
                               </li>
@@ -196,10 +176,9 @@
       </div>
 
       <div class="pt-5 border-t border-slate-200/60 dark:border-darkmode-400">
-        @if(request()->company_id || request()->profile_id)
+        @if(request()->company_id)
           {{ $filteredList->appends([
             'company_id' => request()->get('company_id', ''),
-            'profile_id' => request()->get('profile_id', '')
           ])->links() }}
         @else
           {{ $filteredList->links() }}
@@ -210,5 +189,5 @@
 </div>
 @endsection
 
-@section('adminJs')
+@section('revendaJs')
 @endsection

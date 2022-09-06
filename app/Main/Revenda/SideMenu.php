@@ -17,29 +17,29 @@ class SideMenu {
         'other_route' => [],
         'permissions' => [],
       ],
-      // 'records' => [
-      //   'icon' => 'edit',
-      //   'title' => 'Cadastros',
-      //   'other_route' => [],
-      //   'permissions' => [
-      //     'COMPANY_MENU',
-      //   ],
-      //   'sub_menu' => [
-      //     'companies' => [
-      //       'icon' => 'building',
-      //       'route_name' => 'revenda.companies.index',
-      //       'other_route' => [
-      //         'revenda.companies.create',
-      //         'revenda.companies.edit',
-      //       ],
-      //       'params' => [],
-      //       'title' => 'Empresas',
-      //       'permissions' => [
-      //         'COMPANY_MENU',
-      //       ]
-      //     ],
-      //   ],
-      // ],
+      'records' => [
+        'icon' => 'edit',
+        'title' => 'Cadastros',
+        'other_route' => [],
+        'permissions' => [
+          'COMPANY_MENU',
+        ],
+        'sub_menu' => [
+          'companies' => [
+            'icon' => 'building',
+            'route_name' => 'revenda.companies.index',
+            'other_route' => [
+              'revenda.companies.create',
+              'revenda.companies.edit',
+            ],
+            'params' => [],
+            'title' => 'Empresas',
+            'permissions' => [
+              'COMPANY_MENU',
+            ]
+          ],
+        ],
+      ],
       'settings' => [
         'icon' => 'settings',
         'title' => 'Configurações',

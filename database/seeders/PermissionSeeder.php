@@ -109,6 +109,11 @@ class PermissionSeeder extends Seeder
               "description" => "Permite atualizar uma empresa já cadastrada",
               "created_at" => date("Y-m-d H:i:s")
             ],
+            [
+              'key' => "COMPANY_FILTER",
+              "description" => "Permite filtrar a listagem das empresas",
+              "created_at" => date("Y-m-d H:i:s")
+            ],
           ]);
         }
     }

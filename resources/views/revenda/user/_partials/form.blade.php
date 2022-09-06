@@ -101,11 +101,9 @@
                 @else
                   <option value="{{ $company->id }}">{{ $company->trade_name }}</option>
                 @endif
-              @elseif(isset($data['company_id']) && $data['company_id'] == $company->id)
-                  <option value="{{ $company->id }}" selected>{{ $company->trade_name }}</option>
-                @else
-                  <option value="{{ $company->id }}" >{{ $company->trade_name }}</option>
-                @endif
+              @else
+                <option value="{{ $company->id }}" >{{ $company->trade_name }}</option>
+              @endif
               @endforeach
             </select>
           </div>

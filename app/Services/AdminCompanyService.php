@@ -17,7 +17,6 @@ use App\Models\CompanyAddress;
 use App\Models\RolePermission;
 use App\Models\UserAccessCompany;
 
-
 use Exception;
 
 class AdminCompanyService {
@@ -188,7 +187,6 @@ class AdminCompanyService {
       return true;
     } catch (Exception $e) {
       DB::rollBack();
-      dd($e->getMessage());
       return throw new Exception($e->getMessage());
     }
   }

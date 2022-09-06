@@ -92,6 +92,11 @@ class AdminPermissionSeeder extends Seeder
             "created_at" => date("Y-m-d H:i:s")
           ],
           [
+            'key' => "COMPANY_FILTER",
+            "description" => "Permite filtrar a listagem das empresas",
+            "created_at" => date("Y-m-d H:i:s")
+          ],
+          [
             'key' => "COMPANYGROUP_MENU",
             "description" => "Permite visualizar o menu de grupos de empresas",
             "created_at" => date("Y-m-d H:i:s")

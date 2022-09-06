@@ -67,13 +67,13 @@
             @endif
 
             @foreach($companies as $company)
-            @if(!!old())
-              @if(old('id') == $company->id)
-                <option value="{{ $company->id }}" selected>{{ $company->trade_name }}</option>
-              @else
-                <option value="{{ $company->id }}">{{ $company->trade_name }}</option>
-              @endif
-            @elseif(isset($data['company_id']) && $data['company_id'] == $company->id)
+              @if(!!old())
+                @if(old('id') == $company->id)
+                  <option value="{{ $company->id }}" selected>{{ $company->trade_name }}</option>
+                @else
+                  <option value="{{ $company->id }}">{{ $company->trade_name }}</option>
+                @endif
+              @elseif(isset($data['company_id']) && $data['company_id'] == $company->id)
                 <option value="{{ $company->id }}" selected>{{ $company->trade_name }}</option>
               @else
                 <option value="{{ $company->id }}" >{{ $company->trade_name }}</option>

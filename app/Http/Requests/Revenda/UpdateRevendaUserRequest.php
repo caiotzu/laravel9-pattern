@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Revenda;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRevendaUserRequest extends FormRequest {
@@ -32,7 +33,35 @@ class UpdateRevendaUserRequest extends FormRequest {
       ],
       'role_id' => [
         'required',
-      ]
+      ],
+      'arrUserAccessCompany' => [
+        function ($attribute, $value, $fail) {
+          $accessCompanies = json_decode($value);
+          $existAccess = false;
+          $existCompanyMain = false;
+
+          foreach($accessCompanies as $access) {
+            if($access->insert == 'S') {
+              $existAccess = true;
+
+              if($access->companyId == Auth::guard('web')->user()->role->company->id)
+                $existCompanyMain = true;
+
+              foreach($access as $key => $field) {
+                if(($field === '' || $field === null))
+                  $fail('Todos os campos do acesso a empresa devem ser preenchidos');
+              }
+            }
+          }
+
+          if($existAccess) {
+            if(!$existCompanyMain)
+              $fail('O usuário deve ter acesso a empresa para a qual está sendo registrado');
+          } else {
+            $fail('Obrigatório definir ao menos acesso a empresa para a qual está sendo registrado');
+          }
+        },
+      ],
     ];
   }
 

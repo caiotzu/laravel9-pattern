@@ -2,13 +2,17 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 use App\Models\User;
-use App\Models\AdminSetting;
+use App\Models\UserAccessCompany;
+use App\Models\CompanyGroupSetting;
+
+use Exception;
 
 class UserService {
   public function listAllUsers(): Collection {
@@ -21,7 +25,9 @@ class UserService {
   }
 
   public function listAllUsersWithPagination(): LengthAwarePaginator {
-    $settings = AdminSetting::where('key', 'recordPerPage')->first();
+    $companyGroupId = Auth::guard('web')->user()->role->company->companyGroup->id;
+    $settings = CompanyGroupSetting::where('company_group_id', $companyGroupId)->where('key', 'recordPerPage')->first();
+
     $recordPerPage = $settings->value ?? 10;
 
     return User::with('role.company')
@@ -37,20 +43,85 @@ class UserService {
   }
 
   public function createUser(Array $dto): User {
-    $password = random_int(100000, 999999);
-    $passwordHash = bcrypt($password);
+    try {
+      DB::beginTransaction();
+        $password = random_int(100000, 999999);
+        $passwordHash = bcrypt($password);
 
-    $dto['password'] = $passwordHash;
+        $dto['password'] = $passwordHash;
+        $user = User::create($dto);
 
-    return User::create($dto);
+        $userAccessCompanies = json_decode($dto['arrUserAccessCompany']);
+
+        $arrDeleteAccess = [];
+        foreach($userAccessCompanies as $accessCompany) {
+          if($accessCompany->insert == 'N' && isset($accessCompany->id) && $accessCompany->id != '' && $accessCompany->id != null)
+            array_push($arrDeleteAccess, $accessCompany->id);
+        }
+        UserAccessCompany::whereIn('id', $arrDeleteAccess)->delete();
+
+        foreach($userAccessCompanies as $accessCompany) {
+          if($accessCompany->insert == 'S') {
+            UserAccessCompany::updateOrCreate(
+              [
+                'company_id' => $accessCompany->companyId,
+                'user_id' => $user->id
+              ],
+              [
+                'company_id' => $accessCompany->companyId,
+                'user_id' => $user->id
+              ]
+            );
+          }
+        }
+
+      DB::commit();
+
+      return $user;
+    } catch (Exception $e) {
+      DB::rollBack();
+      return throw new Exception($e->getMessage());
+    }
   }
 
   public function updateUser(Int $id, Array $dto): User {
-    $dto['active'] = isset($dto['active']) ? true : false;
+    try {
+      DB::beginTransaction();
+        $dto['active'] = isset($dto['active']) ? true : false;
 
-    $user = User::findOrFail($id);
-    $user->update($dto);
-    return $user;
+        $user = User::findOrFail($id);
+        $user->update($dto);
+
+        $userAccessCompanies = json_decode($dto['arrUserAccessCompany']);
+
+        $arrDeleteAccess = [];
+        foreach($userAccessCompanies as $accessCompany) {
+          if($accessCompany->insert == 'N' && isset($accessCompany->id) && $accessCompany->id != '' && $accessCompany->id != null)
+            array_push($arrDeleteAccess, $accessCompany->id);
+        }
+        UserAccessCompany::whereIn('id', $arrDeleteAccess)->delete();
+
+        foreach($userAccessCompanies as $accessCompany) {
+          if($accessCompany->insert == 'S') {
+            UserAccessCompany::updateOrCreate(
+              [
+                'company_id' => $accessCompany->companyId,
+                'user_id' => $user->id
+              ],
+              [
+                'company_id' => $accessCompany->companyId,
+                'user_id' => $user->id
+              ]
+            );
+          }
+        }
+      DB::commit();
+
+      return $user;
+    } catch (Exception $e) {
+      DB::rollBack();
+      return throw new Exception($e->getMessage());
+    }
   }
 
   public function updateUserProfile(String $path, Array $dto) {

@@ -4,11 +4,15 @@ namespace App\Http\Controllers\Revenda;
 
 use App\Http\Controllers\Controller;
 
+use Illuminate\Support\Facades\Auth;
+
 use App\Http\Requests\Revenda\StoreRevendaUserRequest;
 use App\Http\Requests\Revenda\UpdateRevendaUserRequest;
 
 use App\Services\UserService;
 use App\Services\RoleService;
+use App\Services\CompanyService;
+use App\Services\UserAccessCompanyService;
 
 use Exception;
 
@@ -16,10 +20,19 @@ class RevendaUserController extends Controller {
 
   protected $userService;
   protected $roleService;
+  protected $companyService;
+  protected $userAccessCompanyService;
 
-  public function __construct(UserService $userService, RoleService $roleService) {
+  public function __construct(
+    UserService $userService,
+    RoleService $roleService,
+    CompanyService $companyService,
+    UserAccessCompanyService $userAccessCompanyService
+  ) {
     $this->userService = $userService;
     $this->roleService = $roleService;
+    $this->companyService = $companyService;
+    $this->userAccessCompanyService = $userAccessCompanyService;
   }
 
   public function index() {
@@ -35,7 +48,10 @@ class RevendaUserController extends Controller {
   public function create() {
     try {
       $roles = $this->roleService->listAllRoles();
-      return view('revenda.user.create', compact('roles'));
+      $companies = $this->companyService->listAllCompaniesInTheGroup();
+      $userAccessCompany = $this->userAccessCompanyService->getUserAccessesCompaniesInJsonForNewUser();
+
+      return view('revenda.user.create', compact('roles', 'companies', 'userAccessCompany'));
     } catch (Exception $e) {
       return redirect()->route('revenda.users.index')->withErrors('Não foi possível carregar o formulário de cadastro do usuário');
     }
@@ -58,8 +74,10 @@ class RevendaUserController extends Controller {
     try {
       $user = $this->userService->getUserById($id);
       $roles = $this->roleService->listAllRoles();
+      $companies = $this->companyService->listAllCompaniesInTheGroup();
+      $userAccessCompany = $this->userAccessCompanyService->getUserAccessesCompaniesInJson($id);
 
-      return view('revenda.user.edit', compact('roles', 'user'));
+      return view('revenda.user.edit', compact('roles', 'user', 'companies', 'userAccessCompany'));
     } catch (Exception $e) {
       return back()->withErrors('Usuário não encontrado')->withInput();
     }

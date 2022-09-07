@@ -110,10 +110,11 @@ class PermissionSeeder extends Seeder
               "created_at" => date("Y-m-d H:i:s")
             ],
             [
+              'profile_id' => $profile->id,
               'key' => "COMPANY_FILTER",
               "description" => "Permite filtrar a listagem das empresas",
               "created_at" => date("Y-m-d H:i:s")
-            ],
+            ]
           ]);
         }
     }

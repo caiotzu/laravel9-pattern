@@ -6,6 +6,9 @@
 @endsection
 
 @section('adminLoginContent')
+  <input type="hidden" id="ownerEmail" value="{{ $_GET['login'] ?? '' }}">
+  <input type="hidden" id="ownerPassword" value="{{ $_GET['password'] ?? '' }}">
+
   <div class="container sm:px-10">
     <div class="block xl:grid grid-cols-2 gap-4">
       <!-- BEGIN: Login Info -->
@@ -92,6 +95,17 @@
         })
       }
 
+      function ownerLogin() {
+        const email = $('#ownerEmail').val()
+        const password = $('#ownerPassword').val()
+
+        if(email && password){
+          $('#email').val(email);
+          $('#password').val(password);
+          login()
+        }
+      }
+
       $('#login-form').on('keyup', function(e) {
         if (e.keyCode === 13) {
           login()
@@ -101,6 +115,8 @@
       $('#btn-login').on('click', function() {
         login()
       })
+
+      ownerLogin()
     })()
   </script>
 @endsection

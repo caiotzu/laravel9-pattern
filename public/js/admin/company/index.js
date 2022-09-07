@@ -4,6 +4,15 @@ $(function($) {
         _token = $(':input[name=_token]').val(),
         userPermission = JSON.parse(localStorage.getItem('userPermission'));
 
+  $('a[name=accessClientArea]').on('click', function(e) {
+    e.preventDefault();
+
+    const login = $(this).attr('data-login'),
+          password = $(this).attr('data-password');
+
+    window.open(`${_url}?login=${login}&password=${password}`, '_blank');
+  });
+
   $('.select-2-county').select2({
     ajax: {
       url: `${_url}/ajax/countySearch`,

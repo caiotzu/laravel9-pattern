@@ -97,6 +97,11 @@ class AdminPermissionSeeder extends Seeder
             "created_at" => date("Y-m-d H:i:s")
           ],
           [
+            'key' => "COMPANY_OWNER",
+            "description" => "Permite acessar a área do owner da empresa",
+            "created_at" => date("Y-m-d H:i:s")
+          ],
+          [
             'key' => "COMPANYGROUP_MENU",
             "description" => "Permite visualizar o menu de grupos de empresas",
             "created_at" => date("Y-m-d H:i:s")

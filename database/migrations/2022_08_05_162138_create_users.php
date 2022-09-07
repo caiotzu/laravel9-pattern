@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('email', 100)->unique();
             $table->string('password', 255);
             $table->boolean('active')->default(true);
+            $table->boolean('owner')->default(false);
             $table->string('remember_token', 100)->nullable(true);
             $table->string('avatar')->nullable(true);
             $table->timestamps($precision = 0);

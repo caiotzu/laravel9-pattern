@@ -83,6 +83,31 @@
         </div>
 
         <div class="col-span-12 md:col-span-4 p-2">
+          <label for="company_group_id" class="form-label">Grupo empresa</label>
+          <select class="tom-select w-full" id="company_group_id" name="company_group_id">
+            @if(isset($data['company_group_id']) && $data['company_group_id'] == '')
+              <option value="" selected>Selecione o grupo</option>
+            @else
+              <option value="">Selecione o grupo</option>
+            @endif
+
+            @foreach($companyGroups as $companyGroup)
+            @if(!!old())
+              @if(old('id') == $companyGroup->id)
+                <option value="{{ $companyGroup->id }}" selected>{{ $companyGroup->group_name }}</option>
+              @else
+                <option value="{{ $companyGroup->id }}">{{ $companyGroup->group_name }}</option>
+              @endif
+            @elseif(isset($data['company_group_id']) && $data['company_group_id'] == $companyGroup->id)
+                <option value="{{ $companyGroup->id }}" selected>{{ $companyGroup->group_name }}</option>
+              @else
+                <option value="{{ $companyGroup->id }}" >{{ $companyGroup->group_name }}</option>
+              @endif
+            @endforeach
+          </select>
+        </div>
+
+        <div class="col-span-12 md:col-span-4 p-2">
           <label for="profile_id" class="form-label">Perfil <span class="text-red-500">*</span></label>
           <select class="form-select py-2.5" id="profile_id" name="profile_id">
             @foreach($profiles as $profile)
@@ -138,6 +163,7 @@
           <tbody>
             @if(count($filteredList) > 0)
               @foreach($filteredList as $company)
+              {{-- {{ dd($company->userAccessCompanies) }} --}}
                 <tr>
                   <td data-title="Nome fantasia">{{ $company->trade_name }}</td>
                   <td data-title="CNPJ">{{ formatCpfCnpj($company->cnpj) }}</td>
@@ -179,6 +205,28 @@
                                 </a>
                               </li>
                             @endif
+
+                            <li>
+                              @foreach($company->roles as $r)
+                                @foreach($r->users as $u)
+                                  @if($u->owner)
+                                    @if(in_array('COMPANY_OWNER',Session::get('userPermission')))
+                                      <a
+                                        style="cursor: pointer"
+                                        name="accessClientArea"
+                                        class="dropdown-item"
+                                        title="Clique aqui para acessar a área do(a) {{ $company->trade_name }}"
+                                        data-login="{{ $u->email }}"
+                                        data-password="{{ $u->password }}"
+                                      >
+                                        <i data-lucide="user" class="w-4 h-4 mr-2"></i> Acessar cliente
+                                      </a>
+                                    @endif
+                                    @break
+                                  @endif
+                                @endforeach
+                              @endforeach
+                            </li>
                           </ul>
                         </div>
                       </div>
@@ -211,4 +259,5 @@
 @endsection
 
 @section('adminJs')
+  <script type="text/javascript" src="{{ URL::asset('js/admin/company/index.js') }}"></script>
 @endsection

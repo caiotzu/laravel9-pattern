@@ -32,16 +32,23 @@ class AdminCompanyService {
     $settings = AdminSetting::where('key', 'recordPerPage')->first();
     $recordPerPage = $settings->value ?? 10;
 
-    return Company::with('companyGroup.profile')
-    ->where(function ($query) use ($filters) {
-      if(isset($filters['id']))
-        return $query->where('id', $filters['id']);
-    })
-    ->whereHas('companyGroup.profile', function ($query) use ($filters) {
-      if(isset($filters['profile_id']))
-        return $query->where('id', $filters['profile_id']);
-    })
-    ->paginate($recordPerPage);
+    return Company::with('companyGroup.profile', 'roles.users')
+      ->where(function ($query) use ($filters) {
+        if(isset($filters['id']) && isset($filters['company_group_id']))
+          return $query->where('id', $filters['id'])->where('company_group_id', $filters['company_group_id']);
+        else if(isset($filters['id']))
+          return $query->where('id', $filters['id']);
+        else if(isset($filters['company_group_id']))
+          return $query->where('company_group_id', $filters['company_group_id']);
+      })
+      ->whereHas('companyGroup.profile', function ($query) use ($filters) {
+        if(isset($filters['profile_id']))
+          return $query->where('id', $filters['profile_id']);
+      })
+       ->whereHas('roles.users', function ($query) {
+        return $query->where('owner', true)->take(1);
+      })
+      ->paginate($recordPerPage);
   }
 
   public function getCompanyById(Int $id): Company {
@@ -108,7 +115,8 @@ class AdminCompanyService {
           'name' => $dto['user_name'],
           'email' => $dto['user_email'],
           'password' => $passwordHash,
-          'active' => true
+          'active' => true,
+          'owner' => true
         ]);
 
         UserAccessCompany::create([

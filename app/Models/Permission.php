@@ -10,7 +10,7 @@ class Permission extends Model {
     return $this->belongsTo(Profile::class, 'permission_id', 'id');
   }
 
-  public function RolePermissions() {
+  public function rolePermissions() {
     return $this->hasMany(RolePermission::class, 'permission_id', 'id');
   }
 }

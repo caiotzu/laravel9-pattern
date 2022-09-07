@@ -42,6 +42,10 @@ class UserService {
     return User::findOrFail($id);
   }
 
+  public function getUserByEmail(String $email): User {
+    return User::where('email', $email)->first();
+  }
+
   public function createUser(Array $dto): User {
     try {
       DB::beginTransaction();

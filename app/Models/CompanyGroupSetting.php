@@ -13,7 +13,7 @@ class CompanyGroupSetting extends Model {
     'description'
   ];
 
-  public function Profile() {
+  public function profile() {
     return $this->belongsTo(Profile::class, 'profile_id', 'id');
   }
 }

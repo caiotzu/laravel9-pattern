@@ -127,7 +127,8 @@ class CompanyService {
           'name' => $dto['user_name'],
           'email' => $dto['user_email'],
           'password' => $passwordHash,
-          'active' => true
+          'active' => true,
+          'owner' => true
         ]);
 
         UserAccessCompany::create([

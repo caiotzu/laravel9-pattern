@@ -42,11 +42,15 @@ class AdminCompanyController extends Controller {
       if($request->profile_id)
         $filters['profile_id'] = $request->profile_id;
 
+      if($request->profile_id)
+        $filters['company_group_id'] = $request->company_group_id;
+
       $companies = $this->adminCompanyService->listAllCompanies();
       $profiles = $this->profile->listAllProfiles();
+      $companyGroups = $this->adminCompanyGroupService->listAllCompanyGroups();
       $filteredList = $this->adminCompanyService->listAllCompaniesWithPagination($filters);
 
-      return view('admin.company.index', compact('companies', 'profiles', 'data', 'filteredList'));
+      return view('admin.company.index', compact('companies', 'companyGroups', 'profiles', 'data', 'filteredList'));
     } catch (Exception $e) {
       return redirect()->route('admin.home.index')->withErrors('Não foi possível carregar a lista de empresas');
     }

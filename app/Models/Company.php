@@ -15,6 +15,7 @@ class Company extends Model {
     'state_registration',
     'municipal_registration',
     'active',
+    'owner',
   ];
 
   public function companyGroup() {
@@ -33,7 +34,7 @@ class Company extends Model {
     return $this->hasMany(CompanyContact::class, 'company_id', 'id');
   }
 
-  public function Roles() {
+  public function roles() {
     return $this->hasMany(Role::class, 'company_id', 'id');
   }
 }

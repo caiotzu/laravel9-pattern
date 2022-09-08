@@ -1,64 +1,83 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# PATTERN LARAVEL 9
+> Projeto construído com laravel 9 - e template Enigma v1.0.5
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+<img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" alt="Pattern laravel 9"/>
 
-## About Laravel
+# :rocket: Tecnologias
+> Tecnologias usadas no desenvolvimento
+- Laravel
+- PHP
+- JQuery
+- Js
+- Vite
+- CSS
+- PostgreSQL
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+# :link: *Dependências* 
+> Dependências para poder executar o projeto.
+- NodeJs
+- Yarn
+- PostgreSQL
+- Composer
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+# :hammer_and_wrench: Instalação
+> Download e configuração do projeto.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Clone o projeto para o seu ambiente de desenvolvimento
+- Acesse a pasta do repositório clonado
+- Altere o arquivo env.example para .env
+- Coloque suas variáveis de ambiente no arquivo .env
+- Execute o comando: yarn install
+- Execute o comando: composer install
+- Execute o comando: php artisan migrate:fresh --seed
 
-## Learning Laravel
+# :computer: Inicialização
+> Execute os comandos abaixo em sequência no repositório clonado.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- php artisan serve
+- npm run dev
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# :earth_americas:	Acesso
+> Configure a URL base da API. Ex:  _baseURl -> http://127.0.0.1:8000
 
-## Laravel Sponsors
+- _baseURL
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+# :books: Padronização
+> Padrões de criação e desenvolvimento do sistema.
 
-### Premium Partners
+### :blue_book: Tables
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+- Sempre colocar o nome das tabelas no plural, em minúsculo e o nome em inglês. Ex: (users)
+- Quando o nome da tabela for composto, o primeiro nome sempre no singular e o segundo no plural. Ex: (company_groups)
 
-## Contributing
+### :blue_book: Model
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Os models devem sempre ficar dentro da pasta app/Models
+- Colocar sempre no singular, com a primeira letra em maiúsculo e em inglês. Ex: ( User )
+- Quando o nome for composto, manter no singular. Ex: (CompanyGroup)
 
-## Code of Conduct
+### :blue_book: Services
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- Um serviço deve sempre receber o nome do model ao qual está representando, adicionando o sufixo "Service". Ex: (UserService)
+### :blue_book: Controllers
 
-## Security Vulnerabilities
+- Colocar sempre no singular, com a primeira letra em maiúsculo e o nome em inglês. Ex: ( UserController )
+- Quando o nome for composto, manter no singular. Ex: (CompanyGroupController)
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### :blue_book: Requests
 
-## License
+- Deve ser criada seguindo o padrão (nome da função que irá utilizar o request + nome da subdivisão se tiver + nome do controller + sufixo Request)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+#  :desktop_computer: Comandos
+
+> Comandos utilizados para manutenção/instalação do sistema.
+
+- php artisan make:migration create_admin_settings :hash: Cria uma nova migration
+- php artisan migrate:fresh --seed :hash: Apaga todo o banco de dados e cria novamente já rodando os seeders
+- php artisan make:model AdminUser :hash: Criar um novo model
+- php artisan make:request StoreAdminUserRequest :hash: Cria uma nova request
+- php artisan make:service AdminRoleService :hash: Cria um novo service
+<hr>
+
+#### :nerd_face: Ser desenvolvedor é uma viagem onde a próxima parada é a solução de um problema. :rocket:

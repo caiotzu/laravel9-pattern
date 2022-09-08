@@ -15,7 +15,7 @@
         </a>
         <div class="my-auto">
           <img alt="Icewall Tailwind HTML Admin Template" class="-intro-x w-3/5 -mt-16" src="{{ asset('build/assets/images/webrenave-car.svg') }}">
-          <div class="-intro-x text-white font-medium text-4xl leading-tight mt-10">Faça o Login para acessar <br>a área administrativa</div>
+          <div class="-intro-x text-white font-medium text-4xl leading-tight mt-10">Faça o login para acessar <br>a área administrativa</div>
           <div class="-intro-x mt-5 text-lg text-white text-opacity-70 dark:text-slate-400">Área restrita a administradores do sistema</div>
         </div>
       </div>

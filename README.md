@@ -29,6 +29,7 @@
 - Coloque suas variáveis de ambiente no arquivo .env
 - Execute o comando: yarn install
 - Execute o comando: composer install
+- Execute o comando: php artisan key:generate
 - Execute o comando: php artisan migrate:fresh --seed
 
 # :computer: Inicialização

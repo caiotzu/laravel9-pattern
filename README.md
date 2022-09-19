@@ -27,6 +27,10 @@
 - Acesse a pasta do repositório clonado
 - Altere o arquivo env.example para .env
 - Coloque suas variáveis de ambiente no arquivo .env
+- Acesse a pasta public dentro do projeto
+- Execute o comando: rm storage
+- Execute o comando: cd ..
+- Execute o comando: php artisan storage:link
 - Execute o comando: yarn install
 - Execute o comando: composer install
 - Execute o comando: php artisan key:generate

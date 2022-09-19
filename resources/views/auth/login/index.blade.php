@@ -14,10 +14,10 @@
       <!-- BEGIN: Login Info -->
       <div class="hidden xl:flex flex-col min-h-screen">
         <a href="" class="-intro-x flex items-center pt-5">
-          <img alt="Icewall Tailwind HTML Admin Template" class="w-64" src="{{ asset('build/assets/images/logo.svg') }}">
+          <img alt="Pattern Laravel 9" class="w-64" src="{{ asset('build/assets/images/logo.png') }}">
         </a>
         <div class="my-auto">
-          <img alt="Icewall Tailwind HTML Admin Template" class="-intro-x w-3/5 -mt-16" src="{{ asset('build/assets/images/webrenave-car.svg') }}">
+          <img alt="Pattern Laravel 9" class="-intro-x w-3/5 -mt-16" src="{{ asset('build/assets/images/illustration.svg') }}">
           <div class="-intro-x text-white font-medium text-4xl leading-tight mt-10">Faça o login para acessar <br>o sistema</div>
           <div class="-intro-x mt-5 text-lg text-white text-opacity-70 dark:text-slate-400">Área restrita a usuários do sistema</div>
         </div>

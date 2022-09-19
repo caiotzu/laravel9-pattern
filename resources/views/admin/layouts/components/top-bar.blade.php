@@ -3,7 +3,7 @@
   <div class="h-full flex items-center">
     <!-- BEGIN: Logo -->
     <a href="{{ route('admin.home.index') }}" class="logo -intro-x hidden md:flex xl:w-[180px] block">
-      <img alt="Pattern Laravel 9" class="logo__image w-48" src="{{ asset('build/assets/images/logo.svg') }}">
+      <img alt="Pattern Laravel 9" class="logo__image w-48" src="{{ asset('build/assets/images/logo.png') }}">
     </a>
     <!-- END: Logo -->
 

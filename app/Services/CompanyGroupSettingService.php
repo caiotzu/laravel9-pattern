@@ -28,7 +28,10 @@ class CompanyGroupSettingService {
 
       DB::beginTransaction();
         foreach($dto as $key => $value) {
-          CompanyGroupSetting::updateOrCreate(['key' => $key], [
+          CompanyGroupSetting::updateOrCreate([
+            'company_group_id' => $companyGroupId,
+            'key' => $key,
+          ], [
             'company_group_id' => $companyGroupId,
             'key' => $key,
             'value' => $value

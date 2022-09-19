@@ -15,7 +15,6 @@ class Company extends Model {
     'state_registration',
     'municipal_registration',
     'active',
-    'owner',
   ];
 
   public function companyGroup() {

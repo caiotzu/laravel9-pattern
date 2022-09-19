@@ -5,7 +5,7 @@
 >
   <head>
     <meta charset="utf-8">
-    <link href="{{ asset('build/assets/images/logo-mini.png') }}" rel="shortcut icon">
+    <link href="{{ asset('build/assets/images/github.png') }}" rel="shortcut icon">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Design pattern with laravel 9">
@@ -41,9 +41,11 @@
     {{-- </div> --}}
     @vite('resources/js/app.js')
 
+    <script type="text/javascript" src="{{ URL::asset('js/plugins/tailwind/tailwind.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/plugins/jquery-3.6.1.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/plugins/jquery.mask.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/plugins/select2/select2.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/plugins/sweet-alert-2/sweet-alert-2.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/layouts/index.js') }}"></script>
 
     @yield('revendaJs')

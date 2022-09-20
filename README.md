@@ -1,5 +1,5 @@
 # PATTERN LARAVEL 9
-> Projeto construído com laravel 9 - e template Enigma v1.0.5
+> Projeto construído com laravel 9 - template Enigma v1.0.5
 
 <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" alt="Pattern laravel 9"/>
 
@@ -12,6 +12,7 @@
 - Vite
 - CSS
 - PostgreSQL
+- Docker
 
 # :link: *Dependências* 
 > Dependências para poder executar o projeto.

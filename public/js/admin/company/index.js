@@ -329,6 +329,16 @@ $(function($) {
         `);
       }
     }
+
+    const tr = tableContact.find(`tr[data-id=${controlId}]`);
+    tr.css('background-color', '#fcf0a8');
+    tr.css('transition', 'background-color 1000ms linear');
+
+    setTimeout(function() {
+        tr.css('background-color', '#FFF');
+        tr.css('transition', 'background-color 1000ms linear');
+    }, 1800);
+
     $('a[name=btnSaveEditContact]').attr('data-id', '');
     $('a[name=btnSaveEditContact]').addClass('hidden');
     $('a[name=btnCancelEditContact]').addClass('hidden');
@@ -894,6 +904,16 @@ $(function($) {
         `);
       }
     }
+
+    const tr = tableAddress.find(`tr[data-id=${controlId}]`);
+    tr.css('background-color', '#fcf0a8');
+    tr.css('transition', 'background-color 1000ms linear');
+
+    setTimeout(function() {
+        tr.css('background-color', '#FFF');
+        tr.css('transition', 'background-color 1000ms linear');
+    }, 1800);
+
     $('a[name=btnSaveEditAddress]').attr('data-id', '');
     $('a[name=btnSaveEditAddress]').addClass('hidden');
     $('a[name=btnCancelEditAddress]').addClass('hidden');

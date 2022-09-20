@@ -896,6 +896,16 @@ $(function($) {
         `);
       }
     }
+
+    const tr = tableAddress.find(`tr[data-id=${controlId}]`);
+    tr.css('background-color', '#fcf0a8');
+    tr.css('transition', 'background-color 1000ms linear');
+
+    setTimeout(function() {
+        tr.css('background-color', '#FFF');
+        tr.css('transition', 'background-color 1000ms linear');
+    }, 1800);
+
     $('a[name=btnSaveEditAddress]').attr('data-id', '');
     $('a[name=btnSaveEditAddress]').addClass('hidden');
     $('a[name=btnCancelEditAddress]').addClass('hidden');

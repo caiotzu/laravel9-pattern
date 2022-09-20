@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->string('description', 50)->unique();
+            $table->string('identifier', 30)->unique();
             $table->timestamps($precision = 0);
         });
     }

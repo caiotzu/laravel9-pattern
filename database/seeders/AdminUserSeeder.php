@@ -19,9 +19,9 @@ class AdminUserSeeder extends Seeder
 
         DB::table("admin_users")->insert([
             "role_id" => $role->id,
-            "name"  => "Caio Costa",
-            "email" => "caio@tdex.com.br",
-            "password" => bcrypt("Tdex@dev1"),
+            "name"  => "Administrador",
+            "email" => "admin@admin.com",
+            "password" => bcrypt("administrador"),
             "created_at" => date("Y-m-d H:i:s")
         ]);
     }

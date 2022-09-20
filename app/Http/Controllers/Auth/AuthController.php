@@ -52,7 +52,7 @@ class AuthController extends Controller {
     Session::put('userPermission', $arrPermissions);
 
     return [
-      'profile' => strtolower(Auth::guard('web')->user()->role->company->companyGroup->profile->description),
+      'profile' => Auth::guard('web')->user()->role->company->companyGroup->profile->identifier,
       'permissions' => $arrPermissions
     ];
   }

@@ -17,15 +17,8 @@ class ProfileSeeder extends Seeder
     {
         DB::table("profiles")->insert([
           [
-            "description" => 'REVENDA',
-            "created_at" => date("Y-m-d H:i:s")
-          ],
-          [
-            "description" => 'ITE',
-            "created_at" => date("Y-m-d H:i:s")
-          ],
-          [
-            "description" => 'MONTADORA',
+            "description" => 'Revenda',
+            "identifier" => 'revenda',
             "created_at" => date("Y-m-d H:i:s")
           ],
         ]);

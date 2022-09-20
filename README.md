@@ -43,9 +43,17 @@
 - npm run dev
 
 # :earth_americas:	Acesso
-> Configure a URL base da API. Ex:  _baseURl -> http://127.0.0.1:8000
+> Acesse os links abaixo para ter acesso ao sistema 
 
-- _baseURL
+### :man_technologist: Acesso a área administrativa: 
+
+- Url: http://127.0.0.1:8000/admin
+- E-mail: admin@admin.com
+- Senha: administrador
+
+### :raising_hand_man: Acesso a área dos perfis:
+- Url: http://127.0.0.1:8000
+
 
 # :books: Padronização
 > Padrões de criação e desenvolvimento do sistema.

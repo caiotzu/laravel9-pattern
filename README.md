@@ -50,7 +50,7 @@ cd ..
 ```
 - Execute o comando para instalar as dependências 
 ```sh
-yarn install
+yarn install && yarn run dev
 ```
 - Execute o comando para inicializar o container do docker
 ```sh

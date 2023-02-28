@@ -19,6 +19,18 @@
   </head>
 
   <body class="py-5 md:py-0">
+    <div class="wrapper-loading" style="display: none">
+      <div class="loading">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="shadow"></div>
+        <div class="shadow"></div>
+        <div class="shadow"></div>
+        <span class="loading-text">Carregando</span>
+      </div>
+    </div>
+
     @switch($layout_scheme)
       @case('top-menu')
         @include('revenda.layouts.top-menu')

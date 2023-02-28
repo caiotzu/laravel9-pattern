@@ -1,21 +1,7 @@
-// vars
-  const MoneyOpts = {
-    reverse:true,
-    maxlength: false,
-    placeholder: '0,00',
-    onKeyPress: function(v, ev, curField, opts) {
-      var mask = curField.data('mask').mask,
-          decimalSep = (/0(.)00/gi).exec(mask)[1] || ',';
-      if (curField.data('mask-isZero') && curField.data('mask-keycode') == 8)
-        $(curField).val('');
-      else if (v) {
-        // remove previously added stuff at start of string
-        v = v.replace(new RegExp('^0*\\'+decimalSep+'?0*'), ''); //v = v.replace(/^0*,?0*/, '');
-        v = v.length == 0 ? '0'+decimalSep+'00' : (v.length == 1 ? '0'+decimalSep+'0'+v : (v.length == 2 ? '0'+decimalSep+v : v));
-        $(curField).val(v).data('mask-isZero', (v=='0'+decimalSep+'00'));
-      }
-    }
-  };
+// loadings page
+$( document ).ajaxStop(function() {
+  RemoveLoading();
+});
 //---
 
 // behavior
@@ -37,20 +23,12 @@
 //---
 
 // functions
-  const formatCpfCnpj = function (val, removeMask) {
-    removeMask = (removeMask == undefined ? false : removeMask);
-
-    if (!removeMask) {
-      if (val.length == 11)
-        val = val.substring(0, 3)+'.'+val.substring(3, 6)+'.'+val.substring(6, 9)+'-'+val.substring(9, 11);
-      else if (val.length == 14)
-        val = val.substring(0, 2)+'.'+val.substring(2, 5)+'.'+val.substring(5, 8)+'/'+val.substring(8, 12)+'-'+val.substring(12, 14);
-
-    } else {
-      val = val.replace(/\D/g, '');
+  const formatDate = (date, formatIn = 'YYYY-MM-DD', formatOut = 'DD/MM/YYYY') => {
+    const momentDate = moment(date, formatIn);
+    if(!momentDate.isValid()) {
+      return date;
     }
-
-    return val;
+    return momentDate.format(formatOut);
   }
 
   const formatPhone = function (val) {
@@ -73,6 +51,44 @@
         return '';
     } else
       return '';
+  }
+
+  const formatMoney = (value, locale = 'pt-BR', currencySign = false) => {
+
+    const currentValue = value.replace(/\D/gim, '');
+    let options = {};
+    let currency = '';
+    let style = 'currency';
+
+    // Get currency with locale
+    switch (locale) {
+      case 'en-US':
+        currency = 'USD';
+        break;
+      default:
+        currency = 'BRL';
+        break;
+    }
+
+    // Verify with currencySign
+    if(!currencySign)
+      options = {minimumFractionDigits: 2};
+    else
+      options = {style, currency};
+
+    if(currentValue.length >= 3){
+      const position = parseInt(currentValue.length) - 2;
+      const formattedValue = `${currentValue.substr(0,position)}.${currentValue.substr(-2)}`;
+      return parseFloat(formattedValue).toLocaleString(locale, options);
+    } else {
+      return `${currentValue},00`;
+    }
+  }
+
+  const formatZipCode = (value) => {
+    const currentValue = value.replace(/\D/gim, '');
+
+    return `${currentValue.substring(0, 5)}-${currentValue.substring(5, 8)}`;
   }
 
   const showMessageBox = function (msg, type, elm_ins, ins_place) {
@@ -114,7 +130,7 @@
           `
           break;
         case 'D':
-           boxMessage = `
+          boxMessage = `
             <div id="errorMessage" class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mt-4 relative" role="alert">
               <p class="font-bold text-lg mb-2 relative">Erro</p>
               <p> ${
@@ -134,7 +150,7 @@
           `
           break;
         case 'W':
-           boxMessage = `
+          boxMessage = `
             <div id="warningMessage" class="border-l-4 p-4 mt-4 relative" role="alert" style="background-color: #fef3c7; border-color: #f59e0b; color: #b45309">
               <p class="font-bold text-lg mb-2 relative">Aviso</p>
               <p> ${
@@ -154,7 +170,7 @@
           `
           break;
         case 'I':
-           boxMessage = `
+          boxMessage = `
             <div id="infoMessage" class="border-l-4 p-4 mt-4 relative" role="alert" style="background-color: #e0e7ff; border-color: #6366f1; color: #1d4ed8">
               <p class="font-bold text-lg mb-2 relative">Informação</p>
               <p> ${
@@ -193,6 +209,14 @@
       console.log(e);
       return false;
     }
+  };
+
+  const CreateLoading = function () {
+    $('.wrapper-loading').show();
+  };
+
+  const RemoveLoading = function () {
+    $('.wrapper-loading').hide();
   };
 //---
 
@@ -260,12 +284,17 @@
   }
 //---
 
-$('.money').mask('#.##0,00', MoneyOpts);
+$('.money').mask('#.##0,00', {reverse: true});
 $('.cpfCnpj').mask(cpfCnpjMaskBehavior, CpfCnpjOptions);
 $('.celPhone').mask(spMaskBehavior, spOptions);
 $('.cpf').mask('000.000.000-00');
 $('.cnpj').mask('00.000.000/0000-00');
 $('.cep').mask('00000-000');
+$('.placa').mask('SSS0A00');
+$('.placa').css("text-transform", "uppercase");
+$('.chassi').mask('AAAAAAAAAAAAAAAAA');
+$('.chassi').css("text-transform", "uppercase");
+$('.renavam').mask('00000000000');
 
 
 $('.select-2').select2({
@@ -273,3 +302,11 @@ $('.select-2').select2({
   allowClear: true
 });
 
+// Pega o nome do arquivo selecionado no input file da tela atual
+$('.selected-file').on('change', function(e) {
+  e.preventDefault();
+
+  $('.selected-file-name').html('');
+  $('.selected-file-name').text(this.files[0].name);
+});
+//---

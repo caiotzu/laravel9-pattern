@@ -10,6 +10,7 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
+        "predis/predis": "^2.1",
         "timwassenburg/laravel-service-generator": "^1.0"
     },
     "require-dev": {

@@ -13,12 +13,26 @@
     <meta name="author" content="Caio Costa">
 
     @yield('adminHead')
+    <link rel="stylesheet" href='{{ URL::asset('js/plugins/sweet-alert/custom-styles.css') }}'/>
+    <link rel="stylesheet" href='{{ URL::asset('js/plugins/loading-caio/loading-caio.css') }}'/>
     @yield('adminCss')
 
     @vite('resources/css/app.css')
   </head>
 
   <body class="py-5 md:py-0">
+    <div class="wrapper-loading" style="display: none">
+      <div class="loading">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="shadow"></div>
+        <div class="shadow"></div>
+        <div class="shadow"></div>
+        <span class="loading-text">Carregando</span>
+      </div>
+    </div>
+
     @switch($layout_scheme)
       @case('top-menu')
         @include('admin.layouts.top-menu')
@@ -44,6 +58,8 @@
     <script type="text/javascript" src="{{ URL::asset('js/plugins/jquery-3.6.1.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/plugins/jquery.mask.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/plugins/select2/select2.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/plugins/sweet-alert/sweet-alert.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/plugins/momentJs/momentJs.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/layouts/index.js') }}"></script>
 
     @yield('adminJs')

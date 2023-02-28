@@ -32,7 +32,7 @@ git clone https://github.com/caiotzu/laravel9-pattern.git
 ```sh
 cd laravel9-pattern/
 ```
-- Altere o arquivo env.example para .env e coloque suas variáveis de ambiente no arquivo .env
+- Copie o arquivo env.example para .env e coloque suas variáveis de ambiente no arquivo .env
 ```sh
 cp .env.example .env
 ```
@@ -40,44 +40,61 @@ cp .env.example .env
 ```sh
 cd public/
 ```
-- Execute o comandos
+- Execute o comando, para remover o link simbólico se ele existir
 ```sh
 rm storage
+```
+- Execute o comando para retornar a raiz do projeto
+```sh
 cd ..
-php artisan storage:link
+```
+- Execute o comando para instalar as dependências 
+```sh
 yarn install
+```
+- Execute o comando para inicializar o container do docker
+```sh
+docker-compose up
+```
+- Execute o comando em seu terminar para acessar o projeto dentro do docker
+```sh
+docker exec -it php-laravel9-pattern /bin/bash
+```
+- Execute o comando para instalar as dependências do projeto
+```sh
 composer install
+```
+- Execute o comando para criar um link simbólico para a pasta storage
+```sh
+php artisan storage:link
+```
+- Execute o comando para gerar a key do projeto
+```sh
 php artisan key:generate
+```
+- Execute o comando para gerar as tabelas e os dados iniciais
+```sh
 php artisan migrate:fresh --seed
 ```
-
-
-
-- Execute o comando: rm storage
-- Execute o comando: cd ..
-- Execute o comando: php artisan storage:link
-- Execute o comando: yarn install
-- Execute o comando: composer install
-- Execute o comando: php artisan key:generate
-- Execute o comando: php artisan migrate:fresh --seed
-
 # :computer: Inicialização
-> Execute os comandos abaixo em sequência no repositório clonado.
+> Execute os comandos abaixo no repositório clonado, para inicializar o docker.
 
-- php artisan serve
-- npm run dev
+- Inicializar o docker
+```sh
+docker-compose up
+```
 
 # :earth_americas:	Acesso
 > Acesse os links abaixo para ter acesso ao sistema 
 
 ### :man_technologist: Acesso a área administrativa: 
 
-- Url: http://127.0.0.1:8000/admin
+- Url: http://127.0.0.1:8989/admin
 - E-mail: admin@admin.com
 - Senha: administrador
 
 ### :raising_hand_man: Acesso a área dos perfis:
-- Url: http://127.0.0.1:8000
+- Url: http://127.0.0.1:8989
 
 
 # :books: Padronização

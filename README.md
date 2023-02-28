@@ -25,10 +25,34 @@
 > Download e configuração do projeto.
 
 - Clone o projeto para o seu ambiente de desenvolvimento
+```sh
+git clone https://github.com/caiotzu/laravel9-pattern.git
+```
 - Acesse a pasta do repositório clonado
-- Altere o arquivo env.example para .env
-- Coloque suas variáveis de ambiente no arquivo .env
+```sh
+cd laravel9-pattern/
+```
+- Altere o arquivo env.example para .env e coloque suas variáveis de ambiente no arquivo .env
+```sh
+cp .env.example .env
+```
 - Acesse a pasta public dentro do projeto
+```sh
+cd public/
+```
+- Execute o comandos
+```sh
+rm storage
+cd ..
+php artisan storage:link
+yarn install
+composer install
+php artisan key:generate
+php artisan migrate:fresh --seed
+```
+
+
+
 - Execute o comando: rm storage
 - Execute o comando: cd ..
 - Execute o comando: php artisan storage:link

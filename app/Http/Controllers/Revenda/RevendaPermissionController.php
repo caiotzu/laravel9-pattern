@@ -44,7 +44,7 @@ class RevendaPermissionController extends Controller {
 
   public function store(StoreRevendaPermissionRequest $request) {
     try {
-      $this->permissionService->createRolePermission($request->except('_method', '_token'));
+      $this->permissionService->createRolePermission($request->except('_method', '_token', 'btnSave'));
 
       return redirect()->route('revenda.permissions.index')->with([
         'successMessage' => 'As permissões para a função <strong>'.$request->description.'</strong> foram cadastradas com sucesso!'
@@ -67,7 +67,7 @@ class RevendaPermissionController extends Controller {
 
   public function update(UpdateRevendaPermissionRequest $request, $id) {
     try {
-      $this->permissionService->updateRolePermission($id, $request->except('_method', '_token'));
+      $this->permissionService->updateRolePermission($id, $request->except('_method', '_token', 'btnSave'));
 
       return redirect()->route('revenda.permissions.index')->with([
         'successMessage' => 'As permissões para a função <strong>'.$request->description.'</strong> foram atualizadas com sucesso!'

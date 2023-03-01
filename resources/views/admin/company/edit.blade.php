@@ -45,7 +45,7 @@
         </div>
         <div class="flex justify-center	pt-5 border-t border-slate-200/60 dark:border-darkmode-400">
           @if(in_array('COMPANY_EDIT',Session::get('userPermission')))
-            <button class="btn btn-primary w-32 mr-2 mb-2">
+            <button class="btn btn-primary w-32 mr-2 mb-2" name="btnSave">
               Salvar
             </button>
           @endif

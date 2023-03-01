@@ -30,7 +30,7 @@ class RevendaSystemController extends Controller {
 
   public function update(UpdateRevendaSystemRequest $request) {
     try {
-      $this->companyGroupSettingService->createOrUpdateSettings($request->except('_method', '_token'));
+      $this->companyGroupSettingService->createOrUpdateSettings($request->except('_method', '_token', 'btnSave'));
 
       return redirect()->route('revenda.systems.index')->with([
         'successMessage' => 'As configurações do <strong>sistema</strong> foram atualizadas com sucesso!'

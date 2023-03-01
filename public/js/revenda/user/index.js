@@ -97,4 +97,8 @@ $(function($) {
     $(':input[name=arrUserAccessCompany]').val(JSON.stringify(itens));
     tableUserAccessCompanies.find(`tr[data-id=${controlId}]`).html('');
   });
+
+  $('button[name=btnSave]').on('click', function(e) {
+    CreateLoading();
+  });
 });

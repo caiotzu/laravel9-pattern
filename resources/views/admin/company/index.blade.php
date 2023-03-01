@@ -128,7 +128,7 @@
 
         <div class="col-span-12 pt-5 mt-3 border-t border-slate-200/60 dark:border-darkmode-400">
           @if(in_array('COMPANY_FILTER',Session::get('userPermission')))
-            <button class="btn btn-primary w-32 mr-2 mb-2 w-full">
+            <button class="btn btn-primary w-32 mr-2 mb-2 w-full" name="btnFilter">
               Filtrar
             </button>
           @endif

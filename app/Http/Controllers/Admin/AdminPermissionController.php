@@ -44,7 +44,7 @@ class AdminPermissionController extends Controller {
 
   public function store(StoreAdminPermissionRequest $request) {
     try {
-      $this->adminPermissionService->createAdminRolePermission($request->except('_method', '_token'));
+      $this->adminPermissionService->createAdminRolePermission($request->except('_method', '_token', 'btnSave'));
 
       return redirect()->route('admin.permissions.index')->with([
         'successMessage' => 'As permissões para a função <strong>'.$request->description.'</strong> foram cadastradas com sucesso!'
@@ -67,7 +67,7 @@ class AdminPermissionController extends Controller {
 
   public function update(UpdateAdminPermissionRequest $request, $id) {
     try {
-      $this->adminPermissionService->updateAdminRolePermission($id, $request->except('_method', '_token'));
+      $this->adminPermissionService->updateAdminRolePermission($id, $request->except('_method', '_token', 'btnSave'));
 
       return redirect()->route('admin.permissions.index')->with([
         'successMessage' => 'As permissões para a função <strong>'.$request->description.'</strong> foram atualizadas com sucesso!'

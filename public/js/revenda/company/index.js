@@ -1066,4 +1066,8 @@ $(function($) {
       `);
     }
   });
+
+  $('button[name=btnFilter], button[name=btnSave]').on('click', function(e) {
+    CreateLoading();
+  });
 });

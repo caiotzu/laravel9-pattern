@@ -1074,4 +1074,8 @@ $(function($) {
       `);
     }
   });
+
+  $('button[name=btnSave], button[name=btnFilter]').on('click', function(e) {
+    CreateLoading();
+  });
 });

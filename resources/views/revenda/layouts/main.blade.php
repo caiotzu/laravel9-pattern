@@ -13,6 +13,8 @@
     <meta name="author" content="Caio Costa">
 
     @yield('revendaHead')
+    <link rel="stylesheet" href='{{ URL::asset('js/plugins/sweet-alert/custom-styles.css') }}'/>
+    <link rel="stylesheet" href='{{ URL::asset('js/plugins/loading-caio/loading-caio.css') }}'/>
     @yield('revendaCss')
 
     @vite('resources/css/app.css')
@@ -53,11 +55,11 @@
     {{-- </div> --}}
     @vite('resources/js/app.js')
 
-    <script type="text/javascript" src="{{ URL::asset('js/plugins/tailwind/tailwind.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/plugins/jquery-3.6.1.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/plugins/jquery.mask.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/plugins/select2/select2.js') }}"></script>
-    <script type="text/javascript" src="{{ URL::asset('js/plugins/sweet-alert-2/sweet-alert-2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/plugins/sweet-alert/sweet-alert.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/plugins/momentJs/momentJs.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/layouts/index.js') }}"></script>
 
     @yield('revendaJs')

@@ -30,7 +30,7 @@ class AdminSystemController extends Controller {
 
   public function update(UpdateAdminSystemRequest $request) {
     try {
-      $this->adminSettingService->createOrUpdateAdminSettings($request->except('_method', '_token'));
+      $this->adminSettingService->createOrUpdateAdminSettings($request->except('_method', '_token', 'btnSave'));
 
       return redirect()->route('admin.systems.index')->with([
         'successMessage' => 'As configurações do <strong>sistema</strong> foram atualizadas com sucesso!'

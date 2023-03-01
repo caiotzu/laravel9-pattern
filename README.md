@@ -56,7 +56,7 @@ yarn install
 ```sh
 yarn run dev
 ```
-- Execute o comando para inicializar o container do docker
+- Execute o comando dentro da pasta do projeto para inicializar o container do docker
 ```sh
 docker-compose up
 ```

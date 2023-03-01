@@ -50,9 +50,13 @@ cd ..
 ```
 - Execute o comando para instalar as dependências 
 ```sh
-yarn install && yarn run dev
+yarn install
 ```
-- Execute o comando para inicializar o container do docker
+- Execute o comando para dar o build nos arquivos js
+```sh
+yarn run dev
+```
+- Execute o comando dentro da pasta do projeto para inicializar o container do docker
 ```sh
 docker-compose up
 ```

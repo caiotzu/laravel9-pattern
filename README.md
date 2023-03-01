@@ -13,6 +13,8 @@
 - CSS
 - PostgreSQL
 - Docker
+- Redis
+- Tailwind
 
 # :link: *Dependências* 
 > Dependências para poder executar o projeto.

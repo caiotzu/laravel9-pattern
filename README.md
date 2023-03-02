@@ -136,9 +136,16 @@ docker-compose up
 
 - php artisan make:migration create_admin_settings :hash: Cria uma nova migration
 - php artisan migrate:fresh --seed :hash: Apaga todo o banco de dados e cria novamente já rodando os seeders
+- php artisan migrate :hash: Faz a criação das tabelas que ainda não foram criadas pelas migrations
+- php artisan db:seed :hash: Faz a criação dos dados padrões nas tabelas
 - php artisan make:model AdminUser :hash: Criar um novo model
 - php artisan make:request StoreAdminUserRequest :hash: Cria uma nova request
 - php artisan make:service AdminRoleService :hash: Cria um novo service
+
+# :stopwatch:	Sessões do sistema
+> Lista de todas as sessões que existem no sistema
+
+- userPermission - Contem todas as permissões de acesso do usuário logado
 <hr>
 
 #### :nerd_face: Ser desenvolvedor é uma viagem onde a próxima parada é a solução de um problema. :rocket:
